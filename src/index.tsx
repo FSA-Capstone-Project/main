@@ -1,18 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// import store from './app/store.js';
+import { BrowserRouter } from 'react-router-dom';
+import store from './app/store.ts';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import AppRoutes from './AppRoutes';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
-  <>
-  <Router>
-      <App />
-  </Router>
-  </>
+  <BrowserRouter>
+    <Provider store={store}>
+    <AppRoutes />
+    </Provider>
+  </BrowserRouter>
 );
 
 export default root;
