@@ -4,10 +4,12 @@ import 'firebase/compat/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+require('dotenv').config();
+
 // Your web app's Firebase configuration
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBrm2kGPbSJTZHvojguqkPoOtd14le5fIQ",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "capstone-52b3b.firebaseapp.com",
   projectId: "capstone-52b3b",
   storageBucket: "capstone-52b3b.appspot.com",
