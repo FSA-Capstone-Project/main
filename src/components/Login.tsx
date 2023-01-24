@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase'
 import { useNavigate } from 'react-router-dom'
-
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
 const Login = () => {
 
-  // const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
   const [input, setInput] = useState({ email: "", password: "" });
 
  const navigate = useNavigate();
+ const provider = new GoogleAuthProvider();
 
  const handleSignUp = (e) => {
   e.preventDefault()
@@ -31,7 +30,10 @@ const handleChange = (e) => {
   }));
 };
 
-  // const handleLogin = () => {
+  // const handleLogin = (e) => {
+  //   e.preventDefault()
+  //   let email = input.email.toLowerCase().trim();
+  //   let password = input.password;
   //   auth
   //   .signInWithEmailAndPassword(email, password)
   //   .then(userCredentials => {
@@ -40,6 +42,28 @@ const handleChange = (e) => {
   // })
   //   .catch(error => alert(error.message))
   // }
+  const signInWithGoogle = () => {
+  const Auth = getAuth();
+  signInWithPopup(Auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+}
+
 
   return (
     <>
@@ -67,10 +91,9 @@ const handleChange = (e) => {
             Sign Up
           </button>
       </form>
+      <button onClick={signInWithGoogle}>Sign In With Google</button>
     </>
   )
-
-
 }
 
 export default Login
