@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { auth, db } from "../firebase";
+import { auth, db } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
@@ -8,6 +8,7 @@ import { Button, Input, TextField, Box} from "@mui/material/";
 const Login = () => {
   const [input, setInput] = useState({ email: "", password: "" });
   const collectionRef = collection(db, "users");
+  const navigate = useNavigate();
 
   const provider = new GoogleAuthProvider();
 
@@ -38,17 +39,18 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    alert("login");
-    
-    //   let email = input.email.toLowerCase().trim();
-    //   let password = input.password;
-    //   auth
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then(userCredentials => {
-    //     const user = userCredentials.user;
-    //     console.log(`Logged in with: ${user.email}`)
-    // })
-    //   .catch(error => alert(error.message))
+    // alert("login");
+
+    let email = input.email.toLowerCase().trim();
+    let password = input.password;
+    auth
+    .signInWithEmailAndPassword(email, password)
+    .then(userCredentials => {
+      const user = userCredentials.user;
+      console.log(`Logged in with: ${user.email}`)
+      navigate('/home')
+    })
+    .catch(error => alert(error.message))
   };
 
   const signInWithGoogle = () => {
