@@ -3,7 +3,14 @@ import { auth, db } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-import { Button, Input, TextField, Box} from "@mui/material/";
+import { Button, Input, TextField, Box } from "@mui/material/";
+
+
+
+const styles = {
+  paragraph: '#94a1b2',
+  button: '#7f5af0'
+}
 
 const Login = () => {
   const [input, setInput] = useState({ email: "", password: "" });
@@ -44,13 +51,13 @@ const Login = () => {
     let email = input.email.toLowerCase().trim();
     let password = input.password;
     auth
-    .signInWithEmailAndPassword(email, password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log(`Logged in with: ${user.email}`)
-      navigate('/home')
-    })
-    .catch(error => alert(error.message))
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log(`Logged in with: ${user.email}`);
+        navigate("/home");
+      })
+      .catch((error) => alert(error.message));
   };
 
   const signInWithGoogle = () => {
@@ -80,64 +87,76 @@ const Login = () => {
   // be colored to give contrast
 
   return (
-    <>
-      <Box
+    <Box // login-card
+      display="flex"
+      // flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      height="100vh"
+    >
+      <Box // this is the login form
         display="flex"
         flexDirection="column"
-        bgcolor="red"
+        bgcolor="#010101"
+        borderRadius="15px"
         alignItems="center"
+        justifyContent="center"
         height="400px"
-        width="250px"
+        width="300px"
       >
-        {/* <form onSubmit={handleSignUp}> */}
-        <h1>Sign In</h1>
-        <div>
-          <TextField
-            color="primary"
-            variant="outlined"
-            size="small"
-            name="email"
-            placeholder="Email"
-            type="text"
-            onChange={handleChange}
-            value={input.email}
-          />
-        </div>
-        <div>
-          <TextField
-            color="primary"
-            variant="outlined"
-            size="small"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-            value={input.password}
-            type="password"
-          />
-        </div>
+        <Box component='p' sx={{ color: styles.paragraph, fontSize:'25px', margin:'0'}}>logo</Box>
+        <Box component='p' sx={{ color: styles.paragraph, fontSize:'25px' }}>Sign In</Box>
 
-        <Link to="/home" style={{ textDecoration: "none" }}>
-          <Button size="small" variant="contained" onClick={handleLogin}>
-            Sign In
-          </Button>
-        </Link>
-        <Link to="/home" style={{ textDecoration: "none" }}>
+        <TextField //email
+          variant="outlined"
+          size="small"
+          name="email"
+          placeholder="Email"
+          type="text"
+          onChange={handleChange}
+          value={input.email}
+        />
+
+        <TextField //password
+          // color="primary"
+          variant="outlined"
+          size="small"
+          sx={{ margin: 1, }}
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+          value={input.password}
+          type="password"
+        />
+
+        <Button
+          size="small"
+          variant="contained"
+          sx={{ margin: 2 }}
+          onClick={handleLogin}
+        >
+          Sign In
+        </Button>
+        <Box
+          // bgcolor='red'
+          display="flex"
+        >
+          <Box component='p' sx={{ color: styles.paragraph, fontSize:'15px' }}>Need an Account?
+
           <Button
-            sx={{ margin: 3 }}
+            sx={{ margin: 0.4, color: styles.button}}
             size="small"
-            variant="contained"
+            variant="text"
             onClick={handleSignUp}
           >
             Sign Up
           </Button>
-        </Link>
-        {/* <Button title="signUp" variant='contained' type="submit">
-            Sign Up
-          </Button> */}
-        {/* </form> */}
-        {/* <button onClick={signInWithGoogle}>Sign In With Google</button> */}
+          </Box>
+
+
+        </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
