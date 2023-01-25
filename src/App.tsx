@@ -4,9 +4,10 @@ import { Navbar } from './components';
 import Login from './components/Login/Login';
 import AppRoutes from './AppRoutes';
 
+//sx={{display: 'flex' justifyContent: 'center'}}
 const App = () => {
   return (
-    <Box bgcolor='grey' >
+    <Box bgcolor='#16161a' height='100vh' width='100%' >
       <AppRoutes />
     </Box>
   );

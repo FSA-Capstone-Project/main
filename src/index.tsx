@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Router>
     <Provider store={store}>
-      <CssBaseline enableColorScheme/>
+      <CssBaseline />
       <App  />
     </Provider>
   </Router>
