@@ -48,6 +48,7 @@ const Login = () => {
     e.preventDefault();
     // alert("login");
 
+
     let email = input.email.toLowerCase().trim();
     let password = input.password;
     auth
@@ -58,6 +59,8 @@ const Login = () => {
         navigate("/home");
       })
       .catch((error) => alert(error.message));
+
+
   };
 
   const signInWithGoogle = () => {
@@ -83,6 +86,11 @@ const Login = () => {
       });
   };
 
+  useEffect(()=>{
+
+  },[])
+
+
   //for styling.. the whole dom needs a bg color and each componentent will
   // be colored to give contrast
 
@@ -97,7 +105,7 @@ const Login = () => {
       <Box // this is the login form
         display="flex"
         flexDirection="column"
-        bgcolor="#010101"
+        bgcolor="#16161a"
         borderRadius="15px"
         alignItems="center"
         justifyContent="center"
@@ -112,6 +120,7 @@ const Login = () => {
           size="small"
           name="email"
           placeholder="Email"
+          sx={{ margin: 1, bgcolor: '#fffffe', borderRadius: '9px'}}
           type="text"
           onChange={handleChange}
           value={input.email}
@@ -121,7 +130,8 @@ const Login = () => {
           // color="primary"
           variant="outlined"
           size="small"
-          sx={{ margin: 1, }}
+
+          sx={{ margin: 1, bgcolor: '#fffffe', borderRadius: '9px'}}
           name="password"
           placeholder="Password"
           onChange={handleChange}
