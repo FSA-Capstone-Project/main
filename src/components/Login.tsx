@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
 import { useNavigate } from 'react-router-dom'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
 
 const Login = () => {
 
   const [input, setInput] = useState({ email: "", password: "" });
+  const collectionRef = collection(db, 'users')
 
- const navigate = useNavigate();
  const provider = new GoogleAuthProvider();
 
  const handleSignUp = (e) => {
@@ -20,8 +21,14 @@ const Login = () => {
     const user = userCredentials.user;
     console.log(`Registered with: ${user.email}`)
 })
+.then(() => {
+  addDoc(collectionRef,{
+    email: input.email
+  })
+  })
   .catch(error => alert(error.message))
 }
+
 
 const handleChange = (e) => {
   setInput((prevState) => ({
@@ -42,6 +49,7 @@ const handleChange = (e) => {
   // })
   //   .catch(error => alert(error.message))
   // }
+
   const signInWithGoogle = () => {
   const Auth = getAuth();
   signInWithPopup(Auth, provider)
