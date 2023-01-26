@@ -6,6 +6,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 //this gives a css starter for mui
 import { CssBaseline } from "@mui/material";
+import { ProSidebarProvider } from "react-pro-sidebar";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,7 +16,9 @@ root.render(
   <Router>
     <Provider store={store}>
       <CssBaseline />
+      <ProSidebarProvider>
       <App  />
+      </ProSidebarProvider>
     </Provider>
   </Router>
 );
