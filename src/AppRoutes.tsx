@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Routes, Route, Router } from "react-router-dom";
-import { Home } from "./components";
+import { Home, AddHabit } from "./components";
 import Login from "./components/LoginForm/LoginForm";
 import { CssBaseline } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
@@ -15,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/*" element={<Login />} />
+          <Route path="/addHabit" element={<AddHabit />} />
         </Routes>
       </AuthProvider>
     </div>
