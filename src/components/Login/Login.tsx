@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
+<<<<<<< HEAD
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { collection, addDoc,  } from "firebase/firestore";
+=======
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+>>>>>>> d91fd5391458807cf4d538535a767c17f019dd02
 import { Button, Input, TextField, Box } from "@mui/material/";
 
 import SignUp from "../SignUp/SignUp";
@@ -19,18 +23,40 @@ const styles = {
 const Login = ({switchForm})=>{
 
   const [input, setInput] = useState({ email: "", password: "" });
+<<<<<<< HEAD
   const collectionRef = collection(db, "users");
 
   const navigate = useNavigate();
 
+=======
+
+  const navigate = useNavigate();
+>>>>>>> d91fd5391458807cf4d538535a767c17f019dd02
 
 
   // SIGN UP ==========
   const handleSignUp = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     console.log('form switched')
     switchForm()
 
+=======
+    let email = input.email.toLowerCase().trim();
+    let password = input.password;
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log(`Registered with: ${user.email}`);
+      })
+      .then(() => {
+        setDoc(doc(db, 'users', `${input.email}`), {
+          email: input.email,
+        });
+      })
+      .catch((error) => alert(error.message));
+>>>>>>> d91fd5391458807cf4d538535a767c17f019dd02
   };
 
   const handleChange = (e) => {
@@ -42,8 +68,6 @@ const Login = ({switchForm})=>{
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // alert("login");
-
 
     let email = input.email.toLowerCase().trim();
     let password = input.password;
@@ -59,12 +83,15 @@ const Login = ({switchForm})=>{
 
   };
 
+<<<<<<< HEAD
 
 
   useEffect(()=>{
 
   },[])
 
+=======
+>>>>>>> d91fd5391458807cf4d538535a767c17f019dd02
   return (
 
 <Box // login-card
@@ -115,9 +142,17 @@ const Login = ({switchForm})=>{
           size="small"
           variant="contained"
           sx={{ margin: 2 }}
+          onClick={handleSignUp}
+        >
+          Sign Up
+        </Button>
+        <Button
+          size="small"
+          variant="contained"
+          sx={{ margin: 2 }}
           onClick={handleLogin}
         >
-          Sign In
+          Login
         </Button>
         <Box
           // bgcolor='red'
