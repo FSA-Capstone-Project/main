@@ -2,36 +2,21 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { collection, addDoc,  } from "firebase/firestore";
+import { collection, addDoc,doc, setDoc } from "firebase/firestore";
 import { Button, Input, TextField, Box } from "@mui/material/";
 
-import SignUp from "../SignUp/SignUp";
 
-const styles = {
-  paragraph: '#94a1b2',
-  button: '#7f5af0'
-}
+const SignUp = ({switchForm}) =>{
 
-
-
-
-
-const Login = ({switchForm})=>{
-
-  const [input, setInput] = useState({ email: "", password: "" });
+  const [input, setInput] = useState({ email: "", password: "", name: "", age: '' });
   const collectionRef = collection(db, "users");
 
-  const navigate = useNavigate();
 
+  const styles = {
+    paragraph: '#94a1b2',
+    button: '#7f5af0'
+  }
 
-
-  // SIGN UP ==========
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    console.log('form switched')
-    switchForm()
-
-  };
 
   const handleChange = (e) => {
     setInput((prevState) => ({
@@ -40,30 +25,37 @@ const Login = ({switchForm})=>{
     }));
   };
 
+
   const handleLogin = (e) => {
     e.preventDefault();
     // alert("login");
-
-
-    let email = input.email.toLowerCase().trim();
-    let password = input.password;
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log(`Logged in with: ${user.email}`);
-        navigate("/home");
-      })
-      .catch((error) => alert(error.message));
+    switchForm()
 
 
   };
 
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    let email = input.email.toLowerCase().trim();
+    let password = input.password;
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log(`Registered with: ${user.email}`);
+      })
+      .then(() => {
+        setDoc(doc(db, 'users', `${input.email}`), {
+          name: input.name,
+          email: input.email,
+          age: input.age
+        });
+      })
+      .catch((error) => alert(error.message));
+      switchForm()
+      alert("Account has been created. You can now Login!")
+  };
 
-
-  useEffect(()=>{
-
-  },[])
 
   return (
 
@@ -81,11 +73,34 @@ const Login = ({switchForm})=>{
         borderRadius="15px"
         alignItems="center"
         justifyContent="center"
-        height="400px"
+        height="500px"
         width="300px"
       >
         <Box component='p' sx={{ color: styles.paragraph, fontSize:'25px', margin:'0'}}>logo</Box>
-        <Box component='p' sx={{ color: styles.paragraph, fontSize:'25px' }}>Sign In</Box>
+        <Box component='p' sx={{ color: styles.paragraph, fontSize:'25px' }}>Sign Up</Box>
+
+        <TextField //Name
+          variant="outlined"
+          size="small"
+          name="name"
+          placeholder="Name"
+          sx={{ margin: 1, bgcolor: '#fffffe', borderRadius: '9px'}}
+          type="text"
+          onChange={handleChange}
+          value={input.name}
+        />
+
+
+        <TextField //Age
+          variant="outlined"
+          size="small"
+          name="age"
+          placeholder="Age"
+          sx={{ margin: 1, bgcolor: '#fffffe', borderRadius: '9px'}}
+          type="text"
+          onChange={handleChange}
+          value={input.age}
+        />
 
         <TextField //email
           variant="outlined"
@@ -111,27 +126,28 @@ const Login = ({switchForm})=>{
           type="password"
         />
 
+
         <Button
           size="small"
           variant="contained"
           sx={{ margin: 2 }}
-          onClick={handleLogin}
+          onClick={handleSignUp}
         >
-          Sign In
+          Sign Up
         </Button>
         <Box
           // bgcolor='red'
           display="flex"
         >
-          <Box component='p' sx={{ color: styles.paragraph, fontSize:'15px' }}>Need an Account?
+          <Box component='p' sx={{ color: styles.paragraph, fontSize:'15px' }}>Have an Account?
 
           <Button
             sx={{ margin: 0.4, color: styles.button}}
             size="small"
             variant="text"
-            onClick={handleSignUp}
+            onClick={handleLogin}
           >
-            Sign Up
+            Sign In
           </Button>
           </Box>
 
@@ -143,4 +159,4 @@ const Login = ({switchForm})=>{
   )
 }
 
-export default Login
+export default SignUp
