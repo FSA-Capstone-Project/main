@@ -6,7 +6,6 @@ const Home = () => {
   return (
     <Box sx={{height: '100vh'}}>
       <Navbar/>
-      <h1>Home</h1>
     </Box>
   );
 };
