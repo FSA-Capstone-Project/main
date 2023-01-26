@@ -1,19 +1,24 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { Home } from "./components"
+import React, { useEffect } from "react";
+import { Routes, Route, Router } from "react-router-dom";
+import { Home } from "./components";
 import Login from "./components/LoginForm/LoginForm";
 import { CssBaseline } from "@mui/material";
-
+import { useNavigate, Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { app, auth, db } from "./firebase";
+import { AuthProvider } from "./components/Auth";
 
 const App = () => {
   return (
     <div>
-      <Routes>
-          <Route path="/*" element={<Login/>} />
-          <Route path="/home" element={<Home/>} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/*" element={<Login />} />
+        </Routes>
+      </AuthProvider>
     </div>
   );
-}
+};
 
 export default App;
