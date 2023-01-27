@@ -6,11 +6,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app, auth, db } from "./firebase";
 import { AuthProvider } from "./components/Auth";
+import AllHabits from "./components/AllHabits/AllHabits";
 
 const AppRoutes = () => {
-  
+
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -21,8 +22,8 @@ const AppRoutes = () => {
       }
     });
   }, [navigate]);
-  
-  
+
+
   return (
     <div>
       <AuthProvider>
@@ -33,6 +34,7 @@ const AppRoutes = () => {
         ) : (
           <Routes>
             <Route path="/*" element={<LoginForm />} />
+            <Route path="allhabits" element={<AllHabits />} />
           </Routes>
         )}
       </AuthProvider>
