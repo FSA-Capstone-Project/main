@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box } from "@mui/material/";
 import { Navbar } from '../../components'
 import { app, auth, db } from "../../firebase";
-import { collection, doc } from "firebase/firestore";
+import { collection, doc, setDoc, addDoc} from "firebase/firestore";
 
 const AddHabit = () => {
   const addHabitOnClick = (e) => {
@@ -12,7 +12,7 @@ const AddHabit = () => {
       .collection("users")
       .doc(`${auth.currentUser.email}`) //user instance
       .collection("habits")
-      .add({
+      .addDoc({
         habit: e.target.value,
       });
   };
@@ -23,7 +23,7 @@ const AddHabit = () => {
       <Box>
         <form>
           <input type="text" placeholder="Add a habit" />
-          <button type="submit" onClick={addHabitOnClick}>
+          <button type="submit" onClick={addHabitOnClick}>Submit
           </button>
         </form>
       </Box>
