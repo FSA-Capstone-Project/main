@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box } from "@mui/material/";
-import Navbar from "../Navbar/Navbar";
+import { Navbar } from '../../components'
 import { app, auth, db } from "../../firebase";
 import { collection, doc } from "firebase/firestore";
 
