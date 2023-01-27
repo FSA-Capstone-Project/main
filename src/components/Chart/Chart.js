@@ -4,7 +4,7 @@ import { collection, doc, getDoc } from "firebase/firestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material/";
 
-const RunGuage = () => {
+const Chart = () => {
 
   
     const [progress, setProgress] = useState(0)
@@ -26,7 +26,7 @@ const RunGuage = () => {
     getData();
 
     return (
-        <Box sx={{ height:'7rem', display: "flex", bgcolor: 'lightgrey'}}>
+        <Box sx={{ height:'25rem', width:'45rem', display: "flex", bgcolor: 'lightgrey'}}>
           <CircularProgress variant="determinate" value={percentDone} />
           <p style={{color:'white'}}>RUN PROGRESS</p>
         </Box>
@@ -34,4 +34,4 @@ const RunGuage = () => {
     )
 }
 
-export default RunGuage;
+export default Chart;
