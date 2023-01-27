@@ -30,8 +30,6 @@ const SignUp = ({switchForm}) =>{
     e.preventDefault();
     // alert("login");
     switchForm()
-
-
   };
 
   const handleSignUp = (e) => {

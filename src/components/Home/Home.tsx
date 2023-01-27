@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box } from "@mui/material/";
-import Navbar from "../Navbar/Navbar";
+import { Navbar } from '../../components'
 import { app, auth, db } from "../../firebase";
 import { collection, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ const Home = () => {
       .collection("users").doc(`${auth.currentUser.email}`) //user instance
       .collection("habits")
       .get()
-      .then((querySnapshot) => {
+      .then((querySnapshot : Array<any>) => {
         querySnapshot.forEach((snapshot) => {
           let data = snapshot.data();
           console.log(data)
