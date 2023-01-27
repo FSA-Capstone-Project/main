@@ -29,7 +29,6 @@ const AppRoutes = () => {
         {auth && auth.currentUser ? (
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route path="/addHabit" element={<AddHabit />} />
           </Routes>
         ) : (
           <Routes>

@@ -13,9 +13,11 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
+import { Opacity } from "@mui/icons-material";
 
 const Navbar = () => {
 
@@ -35,32 +37,56 @@ const Navbar = () => {
   };
 
   return (
-    <div style={{ position: "fixed", display: "flex", height: "100vh" }}>
+    <div style={{ position: "fixed", display: "flex", height: "100vh"}}>
       <Sidebar
-      //  defaultCollapsed={true}
+          backgroundColor='#72757e'
       //  onMouseOver={() => collapseSidebar()}
       //  onMouseOut={() => collapseSidebar()}
       >
-        <Menu style={{display: "flex", alignContent:'space-between'}}>
-          <MenuItem style={{display: "flex", justifyContent:'center' }}>
-            <AccountCircleIcon fontSize="large" />
+        <Menu>
+
+            <Box sx={{background: 'linear-gradient(20deg, #7f6af5 0%, #7f3af0 80%)'}}// login-card'
+            marginTop='1rem'
+            marginBottom='2rem'
+            marginLeft='auto'
+            marginRight='auto'
+            borderRadius='50px'
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            height="12rem"
+            width='80%'
+            bgcolor="#0001"
+            boxShadow='0px 0px 12px #94a1b2'
+            >
+              <AccountCircleIcon fontSize="large"/>
+            </Box>
+
+          <MenuItem
+            icon={<AccountCircleIcon fontSize="large"/>}>
             Profile
           </MenuItem>
 
-          <MenuItem>
-            <HomeRoundedIcon fontSize="large"/>
+          <MenuItem
+            icon ={<HomeRoundedIcon fontSize="large"/>}>
             Home
           </MenuItem>
 
-          <MenuItem>
-            <RocketRoundedIcon fontSize="large" />
+          <MenuItem
+            icon = {<RocketRoundedIcon fontSize="large" />}>
             Dashboard
           </MenuItem>
 
-          <MenuItem onClick={handleSignOut}>
-            <LogoutIcon fontSize="large" />
+          <MenuItem
+            icon = {<CalendarMonthIcon fontSize="large" />}>
+            Calendar
+          </MenuItem>
+
+          <MenuItem onClick={handleSignOut}
+            icon = {<LogoutIcon fontSize="large" />}>
             Sign Out
           </MenuItem>
+
         </Menu>
       </Sidebar>
     </div>
