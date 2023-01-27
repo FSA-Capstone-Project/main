@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { app } from "../firebase";
+import { CircularProgress, Box } from "@mui/material";
 
 export const AuthContext = React.createContext(undefined);
 
@@ -8,14 +9,18 @@ export const AuthProvider = ({ children }) => {
   const [pending, setPending] = useState(true);
 
   useEffect(() => {
-    app.auth().onAuthStateChanged((user : object) => {
+    app.auth().onAuthStateChanged((user: object) => {
       setCurrentUser(user);
       setPending(false);
     });
   }, []);
 
   if (pending) {
-    return <>Loading...</>;
+    return (
+      <Box display='flex' height='100vh'  justifyContent='center'>
+        <CircularProgress sx={{justifySelf: 'center', alignSelf:"center"}} />
+      </Box>
+    );
   }
 
   return (
