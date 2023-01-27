@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { collection, addDoc,doc, setDoc } from "firebase/firestore";
 import { Button, Input, TextField, Box, Typography } from "@mui/material/";
+import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 
 
 const SignUp = ({switchForm}) =>{
@@ -74,8 +75,10 @@ const SignUp = ({switchForm}) =>{
         height="500px"
         width="300px"
       >
-        <Box component='p' sx={{ color: styles.paragraph, fontSize:'25px', margin:'0'}}>logo</Box>
-        <Typography  sx={{ color: styles.paragraph, fontSize:'25px' }}>Sign Up</Typography>
+         <Typography variant="darktext" sx={{ fontSize: "25px" }}>
+          <AccessibleForwardIcon sx={{ fontSize: "2em" }} />
+        </Typography>
+        <Typography variant="purple"  sx={{ fontSize:'2em', margin:'5px'}}>Sign Up</Typography>
 
         <TextField //Name
           variant="outlined"
