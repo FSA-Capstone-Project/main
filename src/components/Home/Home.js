@@ -19,7 +19,7 @@ const Home = () => {
       .doc(`${auth.currentUser.email}`) //user instance
       .collection("habits")
       .get()
-      .then((querySnapshot : Array<any>) => {
+      .then((querySnapshot) => {
         querySnapshot.forEach((snapshot) => {
           let data = snapshot.data();
           console.log(data);

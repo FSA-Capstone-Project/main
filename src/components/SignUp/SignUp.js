@@ -140,7 +140,7 @@ const SignUp = ({switchForm}) =>{
           // bgcolor='red'
           display="flex"
         >
-          <Typography component='p' sx={{ color: styles.paragraph, fontSize:'15px' }}>Have an Account?
+          <Typography variant="darktext" sx={{fontSize:'15px' }}>Have an Account?
 
           <Button
 
