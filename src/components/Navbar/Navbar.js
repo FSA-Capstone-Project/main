@@ -21,7 +21,7 @@ import { Opacity } from "@mui/icons-material";
 
 const Navbar = () => {
 
-  const { collapseSidebar, collapsed } = useProSidebar();
+  const { collapseSidebar, collapsed, defaultCollapsed } = useProSidebar();
 
   const navigate = useNavigate();
 
@@ -37,11 +37,11 @@ const Navbar = () => {
   };
 
   return (
-    <div style={{ position: "fixed", display: "flex", height: "100vh"}}>
-      <Sidebar
+    <div style={{ display: "flex", height: "100vh"}}>
+      <Sidebar defaultCollapsed='true'
           backgroundColor='#72757e'
-      //  onMouseOver={() => collapseSidebar()}
-      //  onMouseOut={() => collapseSidebar()}
+       onMouseOver={() => collapseSidebar()}
+       onMouseOut={() => collapseSidebar()}
       >
         <Menu>
 
@@ -50,7 +50,7 @@ const Navbar = () => {
             marginBottom='2rem'
             marginLeft='auto'
             marginRight='auto'
-            borderRadius='50px'
+            borderRadius='100px'
             display="flex"
             alignItems="center"
             justifyContent="center"
