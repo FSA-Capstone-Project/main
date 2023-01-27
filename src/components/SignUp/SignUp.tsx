@@ -3,7 +3,7 @@ import { auth, db } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { collection, addDoc,doc, setDoc } from "firebase/firestore";
-import { Button, Input, TextField, Box } from "@mui/material/";
+import { Button, Input, TextField, Box, Typography } from "@mui/material/";
 
 
 const SignUp = ({switchForm}) =>{
@@ -14,7 +14,7 @@ const SignUp = ({switchForm}) =>{
 
   const styles = {
     paragraph: '#94a1b2',
-    button: '#7f5af0'
+
   }
 
 
@@ -37,7 +37,7 @@ const SignUp = ({switchForm}) =>{
   const handleSignUp = (e) => {
     e.preventDefault();
     let email = input.email.toLowerCase().trim();
-    let password = input.password;
+    let password= input.password;
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
@@ -77,7 +77,7 @@ const SignUp = ({switchForm}) =>{
         width="300px"
       >
         <Box component='p' sx={{ color: styles.paragraph, fontSize:'25px', margin:'0'}}>logo</Box>
-        <Box component='p' sx={{ color: styles.paragraph, fontSize:'25px' }}>Sign Up</Box>
+        <Typography  sx={{ color: styles.paragraph, fontSize:'25px' }}>Sign Up</Typography>
 
         <TextField //Name
           variant="outlined"
@@ -139,17 +139,18 @@ const SignUp = ({switchForm}) =>{
           // bgcolor='red'
           display="flex"
         >
-          <Box component='p' sx={{ color: styles.paragraph, fontSize:'15px' }}>Have an Account?
+          <Typography component='p' sx={{ color: styles.paragraph, fontSize:'15px' }}>Have an Account?
 
           <Button
-            sx={{ margin: 0.4, color: styles.button}}
+
+            sx={{ margin: 0.4}}
             size="small"
             variant="text"
             onClick={handleLogin}
           >
             Sign In
           </Button>
-          </Box>
+          </Typography>
 
 
         </Box>
