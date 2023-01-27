@@ -19,7 +19,7 @@ const AddHabit = () => {
 
   return (
     <Box sx={{ height: "100vh" }}>
-      <Navbar />
+
       <Box>
         <form>
           <input type="text" placeholder="Add a habit" />

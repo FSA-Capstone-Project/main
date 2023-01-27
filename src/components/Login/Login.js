@@ -3,7 +3,8 @@ import { auth, db } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
-import { Button, Input, TextField, Box } from "@mui/material/";
+import { Button, Input, TextField, Box, Typography } from "@mui/material/";
+import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 
 const styles = {
   paragraph: "#94a1b2",
@@ -11,7 +12,6 @@ const styles = {
 };
 
 const Login = ({ switchForm }) => {
-
   const [input, setInput] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
@@ -34,12 +34,13 @@ const Login = ({ switchForm }) => {
     e.preventDefault();
     let email = input.email.toLowerCase().trim();
     let password = input.password;
-      auth.signInWithEmailAndPassword(email, password)
+    auth
+      .signInWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log(`Logged in with: ${user.email}`);
         navigate("/home");
-    })
+      })
       .catch((error) => alert(error.message));
   };
 
@@ -61,15 +62,12 @@ const Login = ({ switchForm }) => {
         height="400px"
         width="300px"
       >
-        <Box
-          component="p"
-          sx={{ color: styles.paragraph, fontSize: "25px", margin: "0" }}
-        >
-          logo
-        </Box>
-        <Box component="p" sx={{ color: styles.paragraph, fontSize: "25px" }}>
+        <Typography variant="darktext" sx={{ fontSize: "25px" }}>
+          <AccessibleForwardIcon sx={{ fontSize: "2em" }} />
+        </Typography>
+        <Typography variant="purple" sx={{ margin: "5px", fontSize: '2em'}}>
           Sign In
-        </Box>
+        </Typography>
 
         <TextField //email
           variant="outlined"
@@ -106,17 +104,17 @@ const Login = ({ switchForm }) => {
           // bgcolor='red'
           display="flex"
         >
-          <Box component="p" sx={{ color: styles.paragraph, fontSize: "15px" }}>
+          <Typography variant='darktext' sx={{ fontSize: "15px" }}>
             Need an Account?
             <Button
-              sx={{ margin: 0.4, color: styles.button }}
+              sx={{ margin: 0.4 }}
               size="small"
               variant="text"
               onClick={handleSignUp}
             >
               Sign Up
             </Button>
-          </Box>
+          </Typography>
         </Box>
       </Box>
     </Box>

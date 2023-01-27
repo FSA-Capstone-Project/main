@@ -10,6 +10,7 @@ import { ProSidebarProvider } from "react-pro-sidebar";
 import { Theme, ThemeOptions } from '@mui/material/styles';
 
 
+
 const root = ReactDOM.createRoot(
   document.getElementById("root")
 );
@@ -20,11 +21,15 @@ const theme = createTheme({
           main: "#7f5af0",
         },
       },
-      Typography: {
-        testVariant: {
-          fontSize: "3em"
+      typography: {
+        darktext: { //
+          color: '#94a1b2'
+        },
+        purple: {
+          color: "#7f5af0"
         }
-      }
+      },
+
 });
 
 
