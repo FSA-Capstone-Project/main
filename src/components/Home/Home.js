@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Box } from "@mui/material/";
-import { Navbar } from '../../components'
+import { Box, Grid, Paper } from "@mui/material/";
+import { Navbar } from "../../components";
 import { app, auth, db } from "../../firebase";
 import { collection, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -30,16 +30,37 @@ const Home = () => {
 
   return (
     <>
-    <Box sx={{ height: "100vh", display:'flex', justifyContent:"space-between"}} >
-      <Box sx={{ display: "inline-flex" }}>
-        <Navbar />
-      </Box>
-      <Box sx={{ display: "inline-flex" }} >
-        <AddHabit />
-      </Box>
-    </Box>
-      <div className="test">YOOOOO</div>
+      <Grid container spacing={0} height="20px">
+        <Grid item sm={4} md={3}>
+          {/* <Paper sx={{ bgcolor: "green" }}> */}
+
+            <Navbar />
+          {/* </Paper> */}
+        </Grid>
+        <Grid item sm={8} md={6}>
+          <Paper sx={{ bgcolor: "blue" }}>
+            <AddHabit />
+          </Paper>
+        </Grid>
+        <Grid item md={3}>
+          <Paper sx={{height: '100vh', bgcolor:'purple'}}>Extra Info area</Paper>
+        </Grid>
+
+      </Grid>
     </>
+
+    // before grid
+    // <>
+    // <Box sx={{ height: "100vh", display:'flex', justifyContent:"space-between"}} >
+    //   <Box sx={{ display: "inline-flex" }}>
+    //     <Navbar />
+    //   </Box>
+    //   <Box sx={{ display: "inline-flex" }} >
+    //     <AddHabit />
+    //   </Box>
+    // </Box>
+    //   <div className="test">YOOOOO</div>
+    // </>
   );
 };
 

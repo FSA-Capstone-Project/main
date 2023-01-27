@@ -37,7 +37,7 @@ const Navbar = () => {
   };
 
   return (
-    <div style={{ position: "fixed", display: "flex", height: "100vh"}}>
+    <div style={{ display: "flex", height: "100vh"}}>
       <Sidebar
           backgroundColor='#72757e'
       //  onMouseOver={() => collapseSidebar()}
@@ -50,7 +50,7 @@ const Navbar = () => {
             marginBottom='2rem'
             marginLeft='auto'
             marginRight='auto'
-            borderRadius='50px'
+            borderRadius='100px'
             display="flex"
             alignItems="center"
             justifyContent="center"
