@@ -9,41 +9,42 @@ import { AddHabit } from "../../components";
 import { bgcolor, display } from "@mui/system";
 import CircularProgress from "@mui/material/CircularProgress";
 import RunGuage from "../RunGuage/RunGuage";
+import {  Grid, Paper } from "@mui/material/";
 
-const Home = () => {
+// const Home = () => {
 
-  return (
-    <>
-      <Box
-        sx={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Box sx={{ display: "inline-flex" }}>
-          <Navbar />
-        </Box>
-        <Box sx={{ display: "inline-flex" }}>
-          <AddHabit />
-        </Box>
-        <RunGuage/>
-      </Box>
-    </>
-  );
+//   return (
+//     <>
+//       <Box
+//         sx={{
+//           height: "100vh",
+//           display: "flex",
+//           justifyContent: "space-between",
+//         }}
+//       >
+//         <Box sx={{ display: "inline-flex" }}>
+//           <Navbar />
+//         </Box>
+//         <Box sx={{ display: "inline-flex" }}>
+//           <AddHabit />
+//         </Box>
+//         <RunGuage/>
+//       </Box>
+//     </>
+//   );
 
-}
+// }
 
-import React, { useEffect } from "react";
-import { Box, Grid, Paper } from "@mui/material/";
-import { Navbar } from "../../components";
-import { app, auth, db } from "../../firebase";
-import { collection, doc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+// import React, { useEffect } from "react";
+// import { Box, Grid, Paper } from "@mui/material/";
+// import { Navbar } from "../../components";
+// import { app, auth, db } from "../../firebase";
+// import { collection, doc } from "firebase/firestore";
+// import { useNavigate } from "react-router-dom";
+// import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import AddHabit from "../AddHabit/AddHabit";
-import { bgcolor, display } from "@mui/system";
+// import AddHabit from "../AddHabit/AddHabit";
+// import { bgcolor, display } from "@mui/system";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -79,7 +80,10 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid item md={3}>
-          <Paper sx={{height: '100vh', bgcolor:'purple'}}>Extra Info area</Paper>
+          <RunGuage/>
+          <Paper sx={{height: '100vh', }}>
+            *calender*
+          </Paper>
         </Grid>
 
       </Grid>
