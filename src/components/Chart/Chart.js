@@ -28,7 +28,7 @@ const Chart = (props) => {
     return (
         <Box sx={{ height:'25rem', width:'45rem', display: "flex", bgcolor: 'lightgrey', borderRadius:'12px'}}>
           <CircularProgress variant="determinate" value={percentDone} />
-          <p style={{color:'white'}}>RUN PROGRESS</p>
+          <p style={{color:'white'}}>{props.title}</p>
         </Box>
 
     )

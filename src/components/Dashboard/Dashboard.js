@@ -19,15 +19,15 @@ const Dashboard = () => {
   return (
     <>
       <Grid container spacing={6} margin={2} borderRadius={'10px'} s>
+
         <Grid>
-            <Chart habit = "water" />
-        </Grid>
-        <Grid>
-            <Guage habit = "running"/>
+            <Guage habit="water" title="Water Intake"/>
         </Grid>
 
+        <Grid>
+            <Guage habit = "running" title="Run Progress"/>
+        </Grid>
 
-        
       </Grid>
     </>
   );
