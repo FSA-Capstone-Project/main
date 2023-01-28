@@ -22,8 +22,6 @@ const AllHabits = () => {
   // }, []);
   // const username = useSelector((state) => state.auth.me.username);
 
-
-
   return (
     <Box sx={{ height: "100vh" }}>
       <Navbar />

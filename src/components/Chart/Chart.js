@@ -4,7 +4,7 @@ import { collection, doc, getDoc } from "firebase/firestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material/";
 
-const Chart = () => {
+const Chart = (props) => {
 
   
     const [progress, setProgress] = useState(0)
@@ -12,7 +12,7 @@ const Chart = () => {
     const [percentDone, setPercentDone] = useState(0)
   
     const getData = async () => {
-      const docRef = doc(db, "users", `${auth.currentUser.email}`, "habits", "running");
+      const docRef = doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         let runProgress = docSnap.data().progress;
@@ -26,7 +26,7 @@ const Chart = () => {
     getData();
 
     return (
-        <Box sx={{ height:'25rem', width:'45rem', display: "flex", bgcolor: 'lightgrey'}}>
+        <Box sx={{ height:'25rem', width:'45rem', display: "flex", bgcolor: 'lightgrey', borderRadius:'12px'}}>
           <CircularProgress variant="determinate" value={percentDone} />
           <p style={{color:'white'}}>RUN PROGRESS</p>
         </Box>

@@ -4,7 +4,7 @@ import { collection, doc, getDoc } from "firebase/firestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material/";
 
-const RunGuage = () => {
+const Guage = (props) => {
 
   
     const [progress, setProgress] = useState(0)
@@ -12,7 +12,7 @@ const RunGuage = () => {
     const [percentDone, setPercentDone] = useState(0)
   
     const getData = async () => {
-      const docRef = doc(db, "users", `${auth.currentUser.email}`, "habits", "running");
+      const docRef = doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         let runProgress = docSnap.data().progress;
@@ -26,12 +26,11 @@ const RunGuage = () => {
     getData();
 
     return (
-        <Box sx={{ height:'7rem', display: "flex", bgcolor: 'lightgrey'}}>
+        <Box sx={{ height:'7rem', display: "flex", bgcolor: 'lightgrey', borderRadius:'12px'}}>
           <CircularProgress variant="determinate" value={percentDone} />
           <p style={{color:'white'}}>RUN PROGRESS</p>
         </Box>
-
     )
 }
 
-export default RunGuage;
+export default Guage;
