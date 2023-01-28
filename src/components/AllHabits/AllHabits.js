@@ -12,7 +12,7 @@ const AllHabits = () => {
   //     .collection("users").doc(`${auth.currentUser.uid}`)
   //     .collection("habits")
   //     .get()
-  //     .then((querySnapshot: Array<any>) => {
+  //     .then((querySnapshot) => {
   //       querySnapshot.forEach((snapshot) => {
   //         let data = snapshot.data();
   //         console.log(data)
@@ -21,8 +21,6 @@ const AllHabits = () => {
   //     });
   // }, []);
   // const username = useSelector((state) => state.auth.me.username);
-
-
 
   return (
     <Box sx={{ height: "100vh" }}>
