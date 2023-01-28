@@ -5,6 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Box, Typography } from "@mui/material/";
 
 const Guage = (props) => {
+
   const [progress, setProgress] = useState(0);
   const [goal, setGoal] = useState(0);
   const [percentDone, setPercentDone] = useState(0);
@@ -19,9 +20,9 @@ const Guage = (props) => {
     );
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      let runProgress = docSnap.data().progress;
+      let habitProgress = docSnap.data().progress;
       let goal = docSnap.data().goal;
-      setProgress(runProgress);
+      setProgress(habitProgress);
       setGoal(goal);
       setPercentDone(Math.round((progress / goal) * 100));
     }

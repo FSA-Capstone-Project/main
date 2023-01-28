@@ -12,7 +12,7 @@ const AllHabits = () => {
   //     .collection("users").doc(`${auth.currentUser.uid}`)
   //     .collection("habits")
   //     .get()
-  //     .then((querySnapshot: Array<any>) => {
+  //     .then((querySnapshot) => {
   //       querySnapshot.forEach((snapshot) => {
   //         let data = snapshot.data();
   //         console.log(data)
