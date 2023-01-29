@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Button,
   Input,
@@ -22,6 +22,8 @@ import { Opacity } from "@mui/icons-material";
 const Navbar = () => {
 
   const { collapseSidebar, collapsed, defaultCollapsed } = useProSidebar();
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
+  console.log(sidebarIsOpen, '=================')
 
   const navigate = useNavigate();
 
@@ -36,17 +38,21 @@ const Navbar = () => {
       });
   };
 
+  const test = ()=>{
+    console.log('test$$$$$$$4')
+  }
+
   return (
     <div style={{ display: "flex", height: "100vh"}}>
       <Sidebar defaultCollapsed='true'
           backgroundColor='#72757e'
-       onMouseOver={() => collapseSidebar()}
-       onMouseOut={() => collapseSidebar()}
+       onMouseOver={() => collapseSidebar(setSidebarIsOpen(true))}
+       onMouseOut={() => collapseSidebar(setSidebarIsOpen(false))}
       >
         <Menu>
 
             <Box sx={{background: 'linear-gradient(20deg, #7f6af5 0%, #7f3af0 80%)'}}// login-card'
-            marginTop='1rem'
+            marginTop='2rem'
             marginBottom='2rem'
             marginLeft='auto'
             marginRight='auto'
@@ -54,7 +60,9 @@ const Navbar = () => {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            height="12rem"
+            // do a media query based on the sidebar being collapsed??
+            height= {sidebarIsOpen === true ? '12rem' : '4rem'}
+            // height="4rem"
             width='80%'
             bgcolor="#0001"
             boxShadow='0px 0px 12px #94a1b2'
