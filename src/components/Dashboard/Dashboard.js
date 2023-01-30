@@ -61,7 +61,6 @@ const Dashboard = () => {
 
   return (
     <>
-<<<<<<< HEAD
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={8} direction={"column"}>
           <Grid item xs={6} md={12}>
@@ -95,7 +94,6 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Box>
-=======
      <Box sx={{ flexGrow: 1}}>
       <Grid container  direction={'column'}>
         <Grid  item xs={6} md={12}>
@@ -114,7 +112,6 @@ const Dashboard = () => {
         </Grid>
       </Grid>
     </Box>
->>>>>>> 8f3b8298aa8c06e2a456e2c7eff169f496434db6
     </>
   );
 };
