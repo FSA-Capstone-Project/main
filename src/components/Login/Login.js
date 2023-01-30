@@ -12,6 +12,7 @@ const styles = {
 };
 
 const Login = ({ switchForm }) => {
+  
   const [input, setInput] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
