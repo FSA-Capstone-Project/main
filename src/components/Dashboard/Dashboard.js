@@ -20,6 +20,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
 import Chart from "../Chart/Chart";
 import { data } from "autoprefixer";
+import { Add } from "@mui/icons-material";
 
 const Dashboard = () => {
     
@@ -45,7 +46,7 @@ const Dashboard = () => {
           setHabits(data);
         });
       });
-  }, []);
+  }, [])
 
   console.log(habits);
 
@@ -63,6 +64,9 @@ const Dashboard = () => {
             <h3 style={{ color: "white" }}>You have no habits to display!</h3>
           </Grid>
         )}
+      </Grid>
+      <Grid>
+      <AddHabit/>
       </Grid>
     </>
   );
