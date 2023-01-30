@@ -26,7 +26,7 @@ function Header() {
   }, []);
 
   return (
-    <Grid container xs={12} md={10} margin="4rem"
+    <Grid container xs={12} md={10} margin="auto" marginTop='4rem'
     bgcolor="#16161a"
         borderRadius="15px">
       <Grid item xs={5} p='2rem'>

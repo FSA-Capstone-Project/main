@@ -61,6 +61,7 @@ const Dashboard = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={8} direction={"column"}>
           <Grid item xs={6} md={12}>
@@ -94,6 +95,26 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Box>
+=======
+     <Box sx={{ flexGrow: 1}}>
+      <Grid container  direction={'column'}>
+        <Grid  item xs={6} md={12}>
+            <Header/>
+        </Grid>
+        <Grid item xs={8} md={10} margin='auto' marginTop='5rem'>
+          <Item>xs=6 md=4</Item>
+        </Grid>
+        <Grid item xs={6} md={10} margin='auto'  marginTop='5rem'>
+          <Item>xs=6 md=4</Item>
+        </Grid>
+        <Grid item xs={6} md={8} margin='auto'>
+          {/* <Item>
+          <AddHabit/>
+          </Item> */}
+        </Grid>
+      </Grid>
+    </Box>
+>>>>>>> 8f3b8298aa8c06e2a456e2c7eff169f496434db6
     </>
   );
 };
@@ -107,12 +128,12 @@ export default Dashboard;
 //   </Box>
 // </Grid>
 // </Grid>
-// <Grid container spacing={10} margin={2} borderRadius={"10px"}>
-// {habits.length ? (
-//   habits.map((habit) => (
-//     <Grid item>
-//       <Guage habit={habit.id} title={habit.title} />
-//     </Grid>
+{/* <Grid container spacing={10} margin={2} borderRadius={"10px"}>
+{habits.length ? (
+  habits.map((habit) => (
+    <Grid item>
+      <Guage habit={habit.id} title={habit.title} />
+    </Grid> */}
 //   ))
 // ) : (
 //   <Grid>
