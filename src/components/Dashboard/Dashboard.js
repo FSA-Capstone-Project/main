@@ -22,7 +22,7 @@ import Chart from "../Chart/Chart";
 import { data } from "autoprefixer";
 
 const Dashboard = () => {
-    
+
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
