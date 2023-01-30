@@ -23,7 +23,7 @@ import { data } from "autoprefixer";
 import { Add } from "@mui/icons-material";
 
 const Dashboard = () => {
-    
+
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {

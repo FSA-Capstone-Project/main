@@ -6,11 +6,11 @@ import { Box } from "@mui/material/";
 
 const Chart = (props) => {
 
-  
+
     const [progress, setProgress] = useState(0)
     const [goal, setGoal] = useState(0)
     const [percentDone, setPercentDone] = useState(0)
-  
+
     const getData = async () => {
       const docRef = doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`);
       const docSnap = await getDoc(docRef);
@@ -22,7 +22,7 @@ const Chart = (props) => {
         setPercentDone(Math.round((progress/goal)*100))
       }
     }
-    
+
     getData();
 
     return (
