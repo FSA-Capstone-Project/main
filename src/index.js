@@ -27,6 +27,9 @@ const theme = createTheme({
         },
         purple: {
           color: "#7f5af0"
+        },
+        h3: {
+          color: '#94a1b2'
         }
       },
 

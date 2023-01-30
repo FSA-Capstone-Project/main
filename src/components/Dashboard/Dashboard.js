@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material/";
 import { Navbar } from "../../components";
+import Header from "../Header";
 import { app, auth, db } from "../../firebase";
 import {
   collection,
@@ -23,7 +24,6 @@ import { data } from "autoprefixer";
 import { Add } from "@mui/icons-material";
 
 const Dashboard = () => {
-    
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
@@ -46,30 +46,63 @@ const Dashboard = () => {
           setHabits(data);
         });
       });
-  }, [])
+  }, []);
 
   console.log(habits);
 
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
+
   return (
     <>
-      <Grid container spacing={6} margin={2} borderRadius={"10px"} s>
-        {habits.length ? (
-          habits.map((habit) => (
-            <Grid>
-              <Guage habit={habit.id} title={habit.title} />
-            </Grid>
-          ))
-        ) : (
-          <Grid>
-            <h3 style={{ color: "white" }}>You have no habits to display!</h3>
-          </Grid>
-        )}
+     <Box sx={{ flexGrow: 1}}>
+      <Grid container spacing={8} direction={'column'}>
+        <Grid item xs={6} md={12}>
+            <Header/>
+        </Grid>
+        <Grid item xs={12} md={12}>
+          <Item>xs=6 md=4</Item>
+        </Grid>
+        <Grid item xs={6} md={4}>
+          <Item>xs=6 md=4</Item>
+        </Grid>
+        <Grid item xs={6} md={8}>
+          {/* <Item> */}
+          {/* <AddHabit/> */}
+          {/* </Item> */}
+        </Grid>
       </Grid>
-      <Grid>
-      <AddHabit/>
-      </Grid>
+    </Box>
     </>
   );
 };
 
 export default Dashboard;
+
+// <Grid container spacing={2}>
+// <Grid item>
+//   <Box width="900px" height="300px" bgcolor="blue">
+//     Greeting
+//   </Box>
+// </Grid>
+// </Grid>
+// <Grid container spacing={10} margin={2} borderRadius={"10px"}>
+// {habits.length ? (
+//   habits.map((habit) => (
+//     <Grid item>
+//       <Guage habit={habit.id} title={habit.title} />
+//     </Grid>
+//   ))
+// ) : (
+//   <Grid>
+//     <h3 style={{ color: "white" }}>You have no habits to display!</h3>
+//   </Grid>
+// )}
+// </Grid>
+// <Grid>{/* <AddHabit/> */}</Grid>

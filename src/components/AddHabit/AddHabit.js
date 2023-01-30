@@ -33,9 +33,9 @@ const AddHabit = () => {
           // flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          height="100vh"
+
         >
-          <Box // this is the login form
+          <Box
             display="flex"
             flexDirection="column"
             bgcolor="#16161a"
@@ -48,7 +48,7 @@ const AddHabit = () => {
              <Typography variant="darktext" sx={{ fontSize: "25px" }}>
             </Typography>
             <Typography variant="purple"  sx={{ fontSize:'2em', margin:'5px'}}>Add New Habit</Typography>
-    
+
             <TextField //Name
               variant="outlined"
               size="small"
@@ -70,7 +70,7 @@ const AddHabit = () => {
               onChange={handleChange}
               value={input.goal}
             />
-    
+
             <TextField
               variant="outlined"
               size="small"
@@ -81,7 +81,7 @@ const AddHabit = () => {
               value={input.progress}
               type="number"
             />
-    
+
             <Button
               size="small"
               variant="contained"
@@ -92,7 +92,7 @@ const AddHabit = () => {
             </Button>
           </Box>
         </Box>
-    
+
       )
 };
 
