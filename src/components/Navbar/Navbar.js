@@ -42,6 +42,10 @@ const Navbar = () => {
     console.log('test$$$$$$$4')
   }
 
+  const GoToHabits = () => {
+    navigate("/allhabits");
+  };
+
   return (
     <div style={{ display: "flex", height: "100vh"}}>
       <Sidebar defaultCollapsed='true'
@@ -80,7 +84,7 @@ const Navbar = () => {
             Home
           </MenuItem>
 
-          <MenuItem
+          <MenuItem onClick={GoToHabits}
             icon = {<RocketRoundedIcon fontSize="large" />}>
             Dashboard
           </MenuItem>
