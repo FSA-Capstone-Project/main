@@ -31,16 +31,6 @@ import { Opacity } from "@mui/icons-material";
 import AllHabits from "../AllHabits/AllHabits";
 
 const Home = () => {
-<<<<<<< HEAD
-  return (
-    <>
-      <Grid container sp>
-        <Grid item>
-          <Navbar />
-        </Grid>
-        <Dashboard />
-      </Grid>
-=======
 
   const [view, setView] = useState("Dashboard");
 
@@ -123,7 +113,7 @@ const Home = () => {
         </Sidebar>
 
         {view === "Dashboard" ? (
-          <Box>
+          <Box width='100vw'>
             <Dashboard />
           </Box>
         ) : null}
@@ -134,7 +124,6 @@ const Home = () => {
           </Box>
         ) : null}
       </Box>
->>>>>>> 78db8dbf2b26ce7022ff7b0cb7a6d86663490701
     </>
   );
 };

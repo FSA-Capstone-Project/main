@@ -24,10 +24,6 @@ import { data } from "autoprefixer";
 import { Add } from "@mui/icons-material";
 
 const Dashboard = () => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 78db8dbf2b26ce7022ff7b0cb7a6d86663490701
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
