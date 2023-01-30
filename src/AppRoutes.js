@@ -30,7 +30,6 @@ const AppRoutes = () => {
         {auth && auth.currentUser ? (
           <Routes>
             <Route path="/home" element={<Home />} />
-            {/* <Route path="/allhabits" element={<AllHabits />} /> */}
           </Routes>
         ) : (
           <Routes>
