@@ -113,7 +113,7 @@ const Home = () => {
         </Sidebar>
 
         {view === "Dashboard" ? (
-          <Box>
+          <Box width='100vw'>
             <Dashboard />
           </Box>
         ) : null}
