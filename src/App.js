@@ -7,7 +7,7 @@ import AppRoutes from './AppRoutes';
 //sx={{display: 'flex' justifyContent: 'center'}}
 const App = () => {
   return (
-    <Box bgcolor='#242629' height='100vh' width='100%' >
+    <Box bgcolor='#242629' height='1git00vh' width='100%' >
       <AppRoutes />
     </Box>
   );
