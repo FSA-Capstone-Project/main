@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app, auth, db } from "./firebase";
 import { AuthProvider } from "./components/Auth";
-import AllHabits from "./components/AllHabits/AllHabits";
+// import AllHabits from "./components/AllHabits/AllHabits";
 
 const AppRoutes = () => {
 
@@ -30,7 +30,6 @@ const AppRoutes = () => {
         {auth && auth.currentUser ? (
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route path="/allhabits" element={<AllHabits />} />
           </Routes>
         ) : (
           <Routes>
