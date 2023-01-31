@@ -26,6 +26,7 @@ import Robot from "../../API/openAi/chatGPT";
 import TrackedApps from "./TrackedApps";
 
 const Dashboard = () => {
+
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
@@ -43,14 +44,13 @@ const Dashboard = () => {
             title: doc.data().title,
             goal: doc.data().goal,
             progress: doc.data().progress,
+            due: doc.data().due.toDate()
           };
           data.push(habit);
           setHabits(data);
         });
       });
   }, []);
-
-  console.log(habits);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -79,7 +79,7 @@ const Dashboard = () => {
               {habits.length ? (
                 habits.map((habit) => (
                   <Grid item>
-                    <Guage habit={habit.id} title={habit.title} />
+                    <Guage habit={habit.id} title={habit.title} due={habit.due}/>
                   </Grid>
                 )) */}
               ) : (
@@ -90,11 +90,6 @@ const Dashboard = () => {
                 </Grid>
               )}
             </Grid>
-          </Grid>
-          <Grid item xs={6} md={8}>
-            {/* <Item> */}
-            {/* <AddHabit/> */}
-            {/* </Item> */}
           </Grid>
         </Grid>
       </Box>
@@ -111,12 +106,14 @@ export default Dashboard;
 //   </Box>
 // </Grid>
 // </Grid>
-{/* <Grid container spacing={10} margin={2} borderRadius={"10px"}>
+{
+  /* <Grid container spacing={10} margin={2} borderRadius={"10px"}>
 {habits.length ? (
   habits.map((habit) => (
     <Grid item>
       <Guage habit={habit.id} title={habit.title} />
-    </Grid> */}
+    </Grid> */
+}
 //   ))
 // ) : (
 //   <Grid>

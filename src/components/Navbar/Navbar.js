@@ -14,6 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import MemorySharpIcon from '@mui/icons-material/MemorySharp'
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
@@ -38,7 +39,7 @@ const Navbar = ({setDisplay}) => {
   };
 
   return (
-    <Box sx={{position:'fixed',display:'flex', top:'0' , height:'100vh'}}>
+    <Box sx={{display:'flex', top:'0' , height:'100vh'}}>
     <Sidebar
         borderRadius='3rem'
       defaultCollapsed="true"
@@ -91,6 +92,12 @@ const Navbar = ({setDisplay}) => {
         <MenuItem icon={<CalendarMonthIcon fontSize="large" />}>
           Calendar
         </MenuItem>
+        
+        <MenuItem
+              onClick={()=> setDisplay("MemoryGame")}
+             icon={<MemorySharpIcon fontSize="large" />}>
+              Memory Game
+            </MenuItem>
 
         <MenuItem
           onClick={handleSignOut}

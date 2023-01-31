@@ -3,10 +3,10 @@ import { Box, Grid, Typography } from "@mui/material";
 import { auth, app, db } from "../firebase";
 import Robot from "../API/openAi/chatGPT";
 
+
 function Header() {
  
   const [name, setName] = useState("");
-  console.log(name);
 
   useEffect(() => {
     app
