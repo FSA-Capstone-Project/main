@@ -62,8 +62,12 @@ const Dashboard = () => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}  width='100vw' height='100vh'  bgcolor="#242629">
-        {/* This is for the whole page */}
+      <Box
+        sx={{ display: "flex", flexGrow: 1, contain: "content" }}
+        width="100%"
+        height="100%"
+        bgcolor="#242629"
+      >
         <Grid container spacing={8} direction={"column"}>
           {/* First Row */}
           <Grid item xs={6} md={12}>
