@@ -63,7 +63,7 @@ const Dashboard = () => {
     <>
       <Box
         sx={{ display: "flex", flexGrow: 1, contain: "content" }}
-        width="100vw"
+        width="100%"
         height="100%"
         bgcolor="#242629"
       >
