@@ -7,7 +7,7 @@ function Robot (props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3002/", {
+    fetch("http://localhost:3080/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
