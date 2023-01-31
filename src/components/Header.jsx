@@ -17,7 +17,7 @@ function Header() {
         querySnapshot.forEach((snapshot) => {
           let data = snapshot.data();
           if (
-            data.email.toLowerCase() == auth.currentUser.email.toLowerCase()
+            String(data.email).toLowerCase() === auth.currentUser.email.toLowerCase()
           ) {
             setName(data.name);
           }

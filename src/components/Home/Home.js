@@ -10,6 +10,7 @@ import { Paper } from "@mui/material/";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
 import Dashboard from "../Dashboard/Dashboard";
+import MemoryGame from "../MemoryGame/MemoryGame"
 import {
   Button,
   Input,
@@ -19,6 +20,7 @@ import {
   Typography,
 } from "@mui/material/";
 import RocketRoundedIcon from "@mui/icons-material/RocketRounded";
+import MemorySharpIcon from '@mui/icons-material/MemorySharp'
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -55,10 +57,78 @@ setView(display)
 
   return (
     <>
+<<<<<<< HEAD
     {/* App window */}
       <Box sx={{ display: "flex", height: "100vh", bgcolor: "#242629" }}>
         {/**sidebar */}
             <Navbar setDisplay={setDisplay}/>
+=======
+      <Box style={{ display: "flex", height: "100vh" }}>
+        <Sidebar
+          defaultCollapsed="true"
+          backgroundColor="#72757e"
+          onMouseOver={() => collapseSidebar(setSidebarIsOpen(true))}
+          onMouseOut={() => collapseSidebar(setSidebarIsOpen(false))}
+        >
+          <Menu>
+            <Box
+              sx={{
+                background: "linear-gradient(20deg, #7f6af5 0%, #7f3af0 80%)",
+              }} // login-card'
+              marginTop="2rem"
+              marginBottom="2rem"
+              marginLeft="auto"
+              marginRight="auto"
+              borderRadius="100px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              // do a media query based on the sidebar being collapsed??
+              height={sidebarIsOpen === true ? "12rem" : "4rem"}
+              // height="4rem"
+              width="80%"
+              bgcolor="#0001"
+              boxShadow="0px 0px 12px #94a1b2"
+            >
+              <AccountCircleIcon fontSize="large" />
+            </Box>
+
+            <MenuItem icon={<AccountCircleIcon fontSize="large" />}>
+              Profile
+            </MenuItem>
+
+            <MenuItem
+              onClick={() => setView("Allhabits")}
+              icon={<HomeRoundedIcon fontSize="large" />}
+            >
+              Home
+            </MenuItem>
+
+            <MenuItem
+              onClick={()=> setView("Dashboard")}
+             icon={<RocketRoundedIcon fontSize="large" />}>
+              Dashboard
+            </MenuItem>
+
+            <MenuItem icon={<CalendarMonthIcon fontSize="large" />}>
+              Calendar
+            </MenuItem>
+            
+            <MenuItem
+              onClick={()=> setView("MemoryGame")}
+             icon={<MemorySharpIcon fontSize="large" />}>
+              Memory Game
+            </MenuItem>
+
+            <MenuItem
+              onClick={handleSignOut}
+              icon={<LogoutIcon fontSize="large" />}
+            >
+              Sign Out
+            </MenuItem>
+          </Menu>
+        </Sidebar>
+>>>>>>> d85d57a706f9fb0d7a81b6e9c7f8bfec1e0bf6f4
 
         {view === "Dashboard" ? (
           <Box >
@@ -69,6 +139,12 @@ setView(display)
         {view === "Allhabits" ? (
           <Box>
             <AllHabits />
+          </Box>
+        ) : null}
+        
+        {view === "MemoryGame" ? (
+          <Box>
+            <MemoryGame />
           </Box>
         ) : null}
       </Box>
