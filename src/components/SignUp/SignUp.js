@@ -9,8 +9,9 @@ import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 
 const SignUp = ({switchForm}) =>{
 
-  const [input, setInput] = useState({ email: "", password: "", name: "", age: '' });
+  const [input, setInput] = useState({ email: "", password: "", name: "", age: '',  phone:''});
   const collectionRef = collection(db, "users");
+
 
 
   const styles = {
@@ -35,6 +36,8 @@ const SignUp = ({switchForm}) =>{
 
   const handleSignUp = (e) => {
     e.preventDefault();
+
+
     let email = input.email.toLowerCase().trim();
     let password= input.password;
     auth
@@ -47,7 +50,8 @@ const SignUp = ({switchForm}) =>{
         setDoc(doc(db, 'users', `${input.email}`), {
           name: input.name,
           email: input.email,
-          age: input.age
+          age: input.age,
+          phone: `+1${input.phone}`
         });
       })
       .catch((error) => alert(error.message));
@@ -102,6 +106,18 @@ const SignUp = ({switchForm}) =>{
           onChange={handleChange}
           value={input.age}
         />
+
+        <TextField //Phone
+          variant="outlined"
+          size="small"
+          name="phone"
+          placeholder="Phone Number"
+          sx={{ margin: 1, bgcolor: '#fffffe', borderRadius: '9px'}}
+          type="text"
+          onChange={handleChange}
+          value={input.phone}
+        />
+
 
         <TextField //email
           variant="outlined"
