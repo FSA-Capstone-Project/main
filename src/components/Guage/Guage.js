@@ -5,10 +5,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Box, Typography } from "@mui/material/";
 
 const Guage = (props) => {
-
   const [progress, setProgress] = useState(0);
   const [goal, setGoal] = useState(0);
   const [percentDone, setPercentDone] = useState(0);
+  const today = new Date();
 
   const getData = async () => {
     const docRef = doc(
@@ -27,7 +27,6 @@ const Guage = (props) => {
       setPercentDone(Math.round((progress / goal) * 100));
     }
   };
-
   getData();
 
   return (
@@ -68,6 +67,18 @@ const Guage = (props) => {
           color="white"
         >
           {props.title}
+        </Typography>
+        <Typography
+          sx={{ display: "flex", justifyContent: "center" }}
+          variant="caption"
+          component="div"
+          color="white"
+        >
+          {((props.due-today) / (1000 * 60 * 60 * 24)) > 0 ? 
+          `${Math.round((props.due-today) / (1000 * 60 * 60 * 24))} Day(s) Left!` 
+          : "You Failed."
+          }
+
         </Typography>
       </Box>
     </>

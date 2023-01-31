@@ -25,6 +25,7 @@ import { Add } from "@mui/icons-material";
 import Robot from "../../API/openAi/chatGPT";
 
 const Dashboard = () => {
+  
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
@@ -42,14 +43,13 @@ const Dashboard = () => {
             title: doc.data().title,
             goal: doc.data().goal,
             progress: doc.data().progress,
+            due: doc.data().due.toDate()
           };
           data.push(habit);
           setHabits(data);
         });
       });
   }, []);
-
-  console.log(habits);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -61,21 +61,29 @@ const Dashboard = () => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}  width='100vw' height='200vh' bgcolor="#242629">
+      <Box
+        sx={{ display: "flex", flexGrow: 1, contain: "content" }}
+        width="100vw"
+        height="100%"
+        bgcolor="#242629"
+      >
         <Grid container spacing={8} direction={"column"}>
           <Grid item xs={6} md={12}>
             <Header />
           </Grid>
-          <Grid item xs={12} md={12}>
-            <Robot />
-          </Grid>
+          <AddHabit />
           <Grid item xs={6} md={4}>
-            <Grid container spacing={10} margin={2} borderRadius={"10px"}>
-              {" "}
+            <Grid
+              container
+              display={"flex"}
+              spacing={10}
+              margin={2}
+              borderRadius={"10px"}
+            >
               {habits.length ? (
                 habits.map((habit) => (
                   <Grid item>
-                    <Guage habit={habit.id} title={habit.title} />
+                    <Guage habit={habit.id} title={habit.title} due={habit.due}/>
                   </Grid>
                 ))
               ) : (
@@ -86,11 +94,6 @@ const Dashboard = () => {
                 </Grid>
               )}
             </Grid>
-          </Grid>
-          <Grid item xs={6} md={8}>
-            {/* <Item> */}
-            {/* <AddHabit/> */}
-            {/* </Item> */}
           </Grid>
         </Grid>
       </Box>
@@ -107,12 +110,14 @@ export default Dashboard;
 //   </Box>
 // </Grid>
 // </Grid>
-{/* <Grid container spacing={10} margin={2} borderRadius={"10px"}>
+{
+  /* <Grid container spacing={10} margin={2} borderRadius={"10px"}>
 {habits.length ? (
   habits.map((habit) => (
     <Grid item>
       <Guage habit={habit.id} title={habit.title} />
-    </Grid> */}
+    </Grid> */
+}
 //   ))
 // ) : (
 //   <Grid>

@@ -38,7 +38,7 @@ const Navbar = ({setDisplay}) => {
   };
 
   return (
-    <Box sx={{position:'fixed',display:'flex', top:'0' , height:'100vh'}}>
+    <Box sx={{display:'flex', top:'0' , height:'100vh'}}>
     <Sidebar
         borderRadius='3rem'
       defaultCollapsed="true"
