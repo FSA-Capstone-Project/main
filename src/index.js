@@ -22,7 +22,7 @@ const theme = createTheme({
         },
       },
       typography: {
-        darktext: { //
+        darktext: { 
           color: '#94a1b2'
         },
         purple: {
