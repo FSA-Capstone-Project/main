@@ -94,24 +94,6 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Box>
-     <Box sx={{ flexGrow: 1}}>
-      <Grid container  direction={'column'}>
-        <Grid  item xs={6} md={12}>
-            <Header/>
-        </Grid>
-        <Grid item xs={8} md={10} margin='auto' marginTop='5rem'>
-          <Item>xs=6 md=4</Item>
-        </Grid>
-        <Grid item xs={6} md={10} margin='auto'  marginTop='5rem'>
-          <Item>xs=6 md=4</Item>
-        </Grid>
-        <Grid item xs={6} md={8} margin='auto'>
-          {/* <Item>
-          <AddHabit/>
-          </Item> */}
-        </Grid>
-      </Grid>
-    </Box>
     </>
   );
 };
