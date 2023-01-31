@@ -61,7 +61,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }}  width='100vw' height='200vh' bgcolor="#242629">
         <Grid container spacing={8} direction={"column"}>
           <Grid item xs={6} md={12}>
             <Header />
