@@ -10,6 +10,7 @@ import { Paper } from "@mui/material/";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
 import Dashboard from "../Dashboard/Dashboard";
+import MemoryGame from "../MemoryGame/MemoryGame"
 import {
   Button,
   Input,
@@ -19,6 +20,7 @@ import {
   Typography,
 } from "@mui/material/";
 import RocketRoundedIcon from "@mui/icons-material/RocketRounded";
+import MemorySharpIcon from '@mui/icons-material/MemorySharp'
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -102,6 +104,12 @@ const Home = () => {
             <MenuItem icon={<CalendarMonthIcon fontSize="large" />}>
               Calendar
             </MenuItem>
+            
+            <MenuItem
+              onClick={()=> setView("MemoryGame")}
+             icon={<MemorySharpIcon fontSize="large" />}>
+              Memory Game
+            </MenuItem>
 
             <MenuItem
               onClick={handleSignOut}
@@ -121,6 +129,12 @@ const Home = () => {
         {view === "Allhabits" ? (
           <Box>
             <AllHabits />
+          </Box>
+        ) : null}
+        
+        {view === "MemoryGame" ? (
+          <Box>
+            <MemoryGame />
           </Box>
         ) : null}
       </Box>
