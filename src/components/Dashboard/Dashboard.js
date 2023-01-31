@@ -22,6 +22,7 @@ import { styled } from "@mui/material/styles";
 import Chart from "../Chart/Chart";
 import { data } from "autoprefixer";
 import { Add } from "@mui/icons-material";
+import Robot from "../../API/openAi/chatGPT";
 
 const Dashboard = () => {
   const [habits, setHabits] = useState([]);
@@ -51,34 +52,48 @@ const Dashboard = () => {
   console.log(habits);
 
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(1),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   }));
 
-
   return (
     <>
-     <Box sx={{ flexGrow: 1}}>
-      <Grid container  direction={'column'}>
-        <Grid  item xs={6} md={12}>
-            <Header/>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={8} direction={"column"}>
+          <Grid item xs={6} md={12}>
+            <Header />
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Robot />
+          </Grid>
+          <Grid item xs={6} md={4}>
+            <Grid container spacing={10} margin={2} borderRadius={"10px"}>
+              {" "}
+              {habits.length ? (
+                habits.map((habit) => (
+                  <Grid item>
+                    <Guage habit={habit.id} title={habit.title} />
+                  </Grid>
+                ))
+              ) : (
+                <Grid>
+                  <h3 style={{ color: "white" }}>
+                    You have no habits to display!
+                  </h3>
+                </Grid>
+              )}
+            </Grid>
+          </Grid>
+          <Grid item xs={6} md={8}>
+            {/* <Item> */}
+            {/* <AddHabit/> */}
+            {/* </Item> */}
+          </Grid>
         </Grid>
-        <Grid item xs={8} md={10} margin='auto' marginTop='5rem'>
-          <Item>xs=6 md=4</Item>
-        </Grid>
-        <Grid item xs={6} md={10} margin='auto'  marginTop='5rem'>
-          <Item>xs=6 md=4</Item>
-        </Grid>
-        <Grid item xs={6} md={8} margin='auto'>
-          {/* <Item>
-          <AddHabit/>
-          </Item> */}
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
     </>
   );
 };

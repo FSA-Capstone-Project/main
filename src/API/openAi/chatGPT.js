@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./App.css";
 
-function App() {
+function Robot (props) {
+
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
 
@@ -25,14 +25,14 @@ function App() {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={message}
+          value={props.name}
           onChange={(e) => setMessage(e.target.value)}
         />
         <button type="submit">Submit</button>
       </form>
-      <h1>{response}</h1>
+      <h4 style={{color:'white'}}>{response}</h4>
     </div>
   );
 }
 
-export default App;
+export default Robot;
