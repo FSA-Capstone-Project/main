@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Navbar } from '../../components'
+import { Navbar } from "../../components";
 import { app, auth, db } from "../../firebase";
-import { collection, doc, setDoc, addDoc} from "firebase/firestore";
-import { Button, Input, TextField, Box, Typography} from "@mui/material/";
+import { collection, doc, setDoc, addDoc } from "firebase/firestore";
+import { Button, Input, TextField, Box, Typography } from "@mui/material/";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 import { useNavigate } from "react-router-dom";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const AddHabit = () => {
 
-  const [input, setInput] = useState({ title: "", goal: null, progress: null});
+  const [input, setInput] = useState({ title: "", goal: null, progress: null });
+  const [date, setDate] = useState(null)
 
   const addHabit = () => {
-
-     setDoc(doc(db, 'users', `${auth.currentUser.email}`, "habits", `${input.title}`), {
-          title: input.title,
-          goal: input.goal,
-          progress: input.progress
-        });
+    setDoc(
+      doc(db, "users", `${auth.currentUser.email}`, "habits", `${input.title}`),
+      {
+        title: input.title,
+        goal: input.goal,
+        progress: input.progress,
+        due: date
+      }
+    );
   };
 
   const handleChange = (e) => {
@@ -27,73 +34,82 @@ const AddHabit = () => {
   };
 
   return (
-
     <Box // login-card
-          display="flex"
-          // flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
+      display="flex"
+      // flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Box
+        display="flex"
+        flexDirection="column"
+        bgcolor="#16161a"
+        borderRadius="15px"
+        alignItems="center"
+        justifyContent="center"
+        height="300px"
+        width="300px"
+      >
+        <Typography variant="darktext" sx={{ fontSize: "25px" }}></Typography>
+        <Typography variant="purple" sx={{ fontSize: "2em", margin: "5px" }}>
+          Add New Habit
+        </Typography>
 
+        <TextField //Name
+          variant="outlined"
+          size="small"
+          name="title"
+          placeholder="Habit Name"
+          sx={{ margin: 1, bgcolor: "#fffffe", borderRadius: "9px" }}
+          type="text"
+          onChange={handleChange}
+          value={input.title}
+        />
+
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="Goal Date"
+            value={date}
+            onChange={(newValue) => {
+              setDate(newValue.$d);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+
+        <TextField //email
+          variant="outlined"
+          size="small"
+          name="goal"
+          placeholder="Goal (Number)"
+          sx={{ margin: 1, bgcolor: "#fffffe", borderRadius: "9px" }}
+          type="number"
+          onChange={handleChange}
+          value={input.goal}
+        />
+
+        <TextField
+          variant="outlined"
+          size="small"
+          sx={{ margin: 1, bgcolor: "#fffffe", borderRadius: "9px" }}
+          name="progress"
+          placeholder="Progress"
+          onChange={handleChange}
+          value={input.progress}
+          type="number"
+        />
+
+        <Button
+          size="small"
+          variant="contained"
+          sx={{ margin: 2 }}
+          onClick={addHabit}
         >
-          <Box
-            display="flex"
-            flexDirection="column"
-            bgcolor="#16161a"
-            borderRadius="15px"
-            alignItems="center"
-            justifyContent="center"
-            height="300px"
-            width="300px"
-          >
-             <Typography variant="darktext" sx={{ fontSize: "25px" }}>
-            </Typography>
-            <Typography variant="purple"  sx={{ fontSize:'2em', margin:'5px'}}>Add New Habit</Typography>
-
-            <TextField //Name
-              variant="outlined"
-              size="small"
-              name="title"
-              placeholder="Habit Name"
-              sx={{ margin: 1, bgcolor: '#fffffe', borderRadius: '9px'}}
-              type="text"
-              onChange={handleChange}
-              value={input.title}
-            />
-
-            <TextField //email
-              variant="outlined"
-              size="small"
-              name="goal"
-              placeholder="Goal (Number)"
-              sx={{ margin: 1, bgcolor: '#fffffe', borderRadius: '9px'}}
-              type="number"
-              onChange={handleChange}
-              value={input.goal}
-            />
-
-            <TextField
-              variant="outlined"
-              size="small"
-              sx={{ margin: 1, bgcolor: '#fffffe', borderRadius: '9px'}}
-              name="progress"
-              placeholder="Progress"
-              onChange={handleChange}
-              value={input.progress}
-              type="number"
-            />
-
-            <Button
-              size="small"
-              variant="contained"
-              sx={{ margin: 2 }}
-              onClick={addHabit}
-            >
-              Add
-            </Button>
-          </Box>
-        </Box>
-
-      )
+          Add
+        </Button>
+      </Box>
+    </Box>
+  );
 };
 
 export default AddHabit;
