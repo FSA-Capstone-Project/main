@@ -23,6 +23,7 @@ import Chart from "../Chart/Chart";
 import { data } from "autoprefixer";
 import { Add } from "@mui/icons-material";
 import Robot from "../../API/openAi/chatGPT";
+import TrackedApps from "./TrackedApps";
 
 const Dashboard = () => {
   const [habits, setHabits] = useState([]);
@@ -61,23 +62,26 @@ const Dashboard = () => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}  width='100vw' height='200vh' bgcolor="#242629">
+      <Box sx={{ flexGrow: 1 }}  width='100vw' height='100vh'  bgcolor="#242629">
+        {/* This is for the whole page */}
         <Grid container spacing={8} direction={"column"}>
+          {/* First Row */}
           <Grid item xs={6} md={12}>
             <Header />
           </Grid>
+          {/* Second Row */}
           <Grid item xs={12} md={12}>
-            <Robot />
+            <TrackedApps />
           </Grid>
           <Grid item xs={6} md={4}>
             <Grid container spacing={10} margin={2} borderRadius={"10px"}>
-              {" "}
+              {/* {" "}
               {habits.length ? (
                 habits.map((habit) => (
                   <Grid item>
                     <Guage habit={habit.id} title={habit.title} />
                   </Grid>
-                ))
+                )) */}
               ) : (
                 <Grid>
                   <h3 style={{ color: "white" }}>

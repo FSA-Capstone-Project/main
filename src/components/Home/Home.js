@@ -64,7 +64,7 @@ setView(display)
 
         {view === "Dashboard" ? (
           <Box >
-            <Dashboard height="200vh"/>
+            <Dashboard height="100vh" bgcolor= "#242629"/>
           </Box>
         ) : null}
 
