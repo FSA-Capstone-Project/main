@@ -4,7 +4,7 @@ import { collection, doc, getDoc } from "firebase/firestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box, Typography } from "@mui/material/";
 
-const Guage = (props) => {
+const SmallGuage = (props) => {
   const [progress, setProgress] = useState(0);
   const [goal, setGoal] = useState(0);
   const [percentDone, setPercentDone] = useState(0);
@@ -30,7 +30,7 @@ const Guage = (props) => {
   getData();
 
   return (
-    <>
+    <Box sx={{display:'flex', flexDirection:"column", justifyContent:'center', alignItems:"center"}}>
       <Box
         sx={{
           position: "relative",
@@ -81,8 +81,8 @@ const Guage = (props) => {
 
         </Typography>
       </Box>
-    </>
+    </Box>
   );
 };
 
-export default Guage;
+export default SmallGuage;

@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Grid, Box } from "@mui/material";
 import LineChart from "./LineChart/LineChart";
 import data from "./LineChart/LineChartData";
+import LiquidGuage from "../Guages/LiquidGuage";
 
 function TrackedApps() {
   return (
@@ -10,11 +11,8 @@ function TrackedApps() {
         <Grid item xs={6}   bgcolor="#16161a" borderRadius="15px" height='300px'>
           <LineChart data={data}/>
         </Grid>
-        <Grid item  xs={4}  bgcolor="#16161a" borderRadius="15px" height='300px'>
-          <Typography variant="h3">Some other Graph</Typography>
-          <Typography variant="darktext">
-            {` Damn, you still fuckin suck. ChatGpt`}
-          </Typography>
+        <Grid item  xs={4} display="flex" justifyContent="center" alignItems="center" bgcolor="#16161a" borderRadius="15px" height='300px'>
+          <LiquidGuage/>
         </Grid>
 
 
