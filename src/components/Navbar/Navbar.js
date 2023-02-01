@@ -39,11 +39,10 @@ const Navbar = ({setDisplay}) => {
   };
 
   return (
-    <Box sx={{display:'flex', top:'0' , height:'100vh'}}>
+    <Box sx={{display:'flex', top:'0' , height:'100vh', backgroundImage:"linear-gradient(20deg, #2087f7 0%, #3358f4 100%)"}}>
     <Sidebar
         borderRadius='3rem'
       defaultCollapsed="true"
-
 
       onMouseOver={() => collapseSidebar(setSidebarIsOpen(true))}
       onMouseOut={() => collapseSidebar(setSidebarIsOpen(false))}

@@ -62,7 +62,7 @@ setView(display)
             <Navbar setDisplay={setDisplay}/>
 
         {view === "Dashboard" ? (
-          <Box height="100%" width='100vw' bgcolor= "#242629" >
+          <Box height="100%" width='100vw' bgcolor= "#1e1e2b" >
             <Dashboard />
           </Box>
         ) : null}

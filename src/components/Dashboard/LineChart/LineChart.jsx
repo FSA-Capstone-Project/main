@@ -64,7 +64,7 @@ const LineChart = ({ data /* see data tab */ }) => {
             {
               on: "hover",
               style: {
-                itemBackground: "rgba(0, 0, 0, .03)",
+                itemBackground: "blue",
                 itemOpacity: 1,
               },
             },
