@@ -33,8 +33,8 @@ const LiquidGuage = () => {
     getData();
 
     
-    const startColor = '#6495ed'; // cornflowerblue
-    const endColor = '#6495ed'; // crimson
+    const startColor = '#2087f7'; // cornflowerblue
+    const endColor = '#2087f7'; // crimson
  
 
         const radius = 120;

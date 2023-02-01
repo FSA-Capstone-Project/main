@@ -67,16 +67,16 @@ const Dashboard = () => {
         width="100%"
         height="100%"
       >
-        <Grid container spacing={4} direction={"column"} bgcolor='red' width='100%'>
+        <Grid container spacing={4} direction={"column"} width='100%'>
           {/* First Row */}
             <Grid item xs={12} md={12} >
               <Header />
             </Grid>
           {/* Second Row */}
-          <Grid item xs={12} md={12} bgcolor='yellow'>
+          <Grid item xs={12} md={12}>
             <TrackedApps />
           </Grid>
-          <Grid item xs={12} md={12} bgcolor='yellow'>
+          <Grid item xs={12} md={12}>
             <GaugeContainer />
           </Grid>
           <Grid item xs={6} md={4}>

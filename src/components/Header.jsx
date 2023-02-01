@@ -25,18 +25,18 @@ function Header() {
   }, []);
 
   return (
-    <Box bgcolor='green'>
+    <Box>
       <Grid
         container
         xs={12}
         md={10}
         margin="auto"
         marginTop="4rem"
-        bgcolor="#16161a"
+        bgcolor="#26293c"
         borderRadius="15px"
       >
         <Grid item xs={5} p="2rem">
-          <Typography variant="h3">Analytics DashBoard</Typography>
+          <Typography variant="h3" color="whitesmoke">Analytics DashBoard</Typography>
           <Typography variant="darktext">
             {` Welcome back, ${name}. We've missed you! `}
           </Typography>
