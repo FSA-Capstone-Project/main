@@ -36,42 +36,53 @@ const AllHabits = () => {
     setShowForm(!showForm);
   };
 
+  const updateHabit = () => {
+    console.log("update habit");
+  };
+
   return (
-    <>
+    <Box sx={{ flexGrow: 1, contain: "content", justifyContent:"center", alignItems:"center" }}>
+    {/* Added the width in Home.js for this BOX */}
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <h1 style={{ color: "pink", margin: 10 }}>Your habits!</h1>
+        {/* This is the overall name of the page */}
+      </Box>
+      <Box style={{ display: "flex", alignItems: "center", justifyContent: "center", margin: 10 }}>
+        <Button
+          size="small"
+          variant="contained"
+          style={{ margin: 6, padding: 2 }}
+          onClick={showFormHandler}
+        >
+          Add Habit
+        </Button>
+        {showForm && <AddHabit />}
+      </Box>
       {habits.length ? (
         habits.map((habit) => (
-          <Box
-            sx={{ flexGrow: 1 }}
-            display= "flex"
-            alignItems= "center"
-            justify= "center"
-            width="100vw"
-            height="10vh"
-            bgcolor="#242629"
-          >
-            <Grid container spacing={6} margin={2} borderRadius={"10px"} justify="center" alignItems="center">
-              <Grid item xs={6} md={12}>
+            <Grid containerSpacing={6} margin={2} borderRadius={"20px"} justify="center" alignItems="center">
+              <Grid item xs={6} md={12} bgcolor='yellow'>
                 <h3 style={{ color: "red" }}>{`${habit.title}`}</h3>
+                {/* These are the individual habits */}
+                <Button
+                  size="small"
+                  variant="contained"
+                  style={{ margin: 4, padding: 2 }}
+                  onClick={updateHabit}
+                >
+                {`${habit.progress}`}
+                </Button>
               </Grid>
             </Grid>
-          </Box>
         ))
       ) : (
         <Grid>
           <h3 style={{ color: "white" }}>You have no habits to display!</h3>
         </Grid>
       )}
-      <Button
-        size="small"
-        variant="contained"
-        style={{ margin: 2 }}
-        onClick={showFormHandler}
-      >
-        Add Habit
-      </Button>
-      {showForm && <AddHabit />}
-    </>
+    </Box>
   );
 }
 
 export default AllHabits;
+

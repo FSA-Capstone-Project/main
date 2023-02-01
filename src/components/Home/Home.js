@@ -68,7 +68,7 @@ setView(display)
         ) : null}
 
         {view === "Allhabits" ? (
-          <Box>
+          <Box width= "100vh"  height= "100vh" bgcolor="purple">
             <AllHabits />
           </Box>
         ) : null}
