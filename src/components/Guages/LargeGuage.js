@@ -36,16 +36,11 @@ const LargeGuage = (props) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "white",
-        height: "14rem",
-        width: "15rem",
-        borderRadius: "12px",
       }}
     >
       <Box
         sx={{
           backgroundImage: "linear-gradient(45deg, #3358f4 0%, #379f93 100%)",
-          opacity: ".6",
           height: "18rem",
           width: "15rem",
           display: "flex",
@@ -54,7 +49,7 @@ const LargeGuage = (props) => {
           borderRadius: "12px",
         }}
       >
-        <CircularProgress variant="determinate" value={percentDone} />
+        <CircularProgress variant="determinate" value={percentDone}/>
         <Box
           sx={{
             position: "absolute",
@@ -70,7 +65,7 @@ const LargeGuage = (props) => {
           >{`${Math.round(percentDone)}%`}</Typography>
         </Box>
       </Box>
-      {/* <Box>
+      <Box>
         <Typography
           sx={{ display: "flex", justifyContent: "center" }}
           variant="caption"
@@ -91,7 +86,7 @@ const LargeGuage = (props) => {
               )} Day(s) Left!`
             : "You Failed."}
         </Typography>
-      </Box> */}
+      </Box>
     </Box>
   );
 };

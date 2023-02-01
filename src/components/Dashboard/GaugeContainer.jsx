@@ -3,7 +3,6 @@ import { Typography, Grid, Box } from "@mui/material";
 import { app, auth, db } from "../../firebase";
 import LargeGuage from "../Guages/LargeGuage";
 
-
 function GaugeContainer() {
 
   const [habits, setHabits] = useState([]);
