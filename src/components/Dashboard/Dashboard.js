@@ -24,6 +24,7 @@ import { data } from "autoprefixer";
 import { Add } from "@mui/icons-material";
 import Robot from "../../API/openAi/chatGPT";
 import TrackedApps from "./TrackedApps";
+import GaugeContainer from "./GaugeContainer";
 
 const Dashboard = () => {
   const [habits, setHabits] = useState([]);
@@ -74,6 +75,9 @@ const Dashboard = () => {
           {/* Second Row */}
           <Grid item xs={12} md={12} bgcolor='yellow'>
             <TrackedApps />
+          </Grid>
+          <Grid item xs={12} md={12} bgcolor='yellow'>
+            <GaugeContainer />
           </Grid>
           <Grid item xs={6} md={4}>
             <Grid
