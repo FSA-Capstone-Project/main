@@ -58,13 +58,13 @@ setView(display)
   return (
     <>
     {/* App window */}
-      <Box sx={{ display: "flex", height: "100vh", bgcolor: "#242629" }}>
+      <Box sx={{ display: "flex", height: "100vh", }}>
         {/**sidebar */}
             <Navbar setDisplay={setDisplay}/>
 
         {view === "Dashboard" ? (
-          <Box >
-            <Dashboard height="200vh"/>
+          <Box height="100%" width='100vw' bgcolor= "#242629" >
+            <Dashboard />
           </Box>
         ) : null}
 

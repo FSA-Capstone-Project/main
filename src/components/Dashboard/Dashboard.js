@@ -23,9 +23,9 @@ import Chart from "../Chart/Chart";
 import { data } from "autoprefixer";
 import { Add } from "@mui/icons-material";
 import Robot from "../../API/openAi/chatGPT";
+import TrackedApps from "./TrackedApps";
 
 const Dashboard = () => {
-  
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Dashboard = () => {
             title: doc.data().title,
             goal: doc.data().goal,
             progress: doc.data().progress,
-            due: doc.data().due.toDate()
+            due: doc.data().due.toDate(),
           };
           data.push(habit);
           setHabits(data);
@@ -65,35 +65,23 @@ const Dashboard = () => {
         sx={{ display: "flex", flexGrow: 1, contain: "content" }}
         width="100%"
         height="100%"
-        bgcolor="#242629"
       >
-        <Grid container spacing={8} direction={"column"}>
-          <Grid item xs={6} md={12}>
-            <Header />
+        <Grid container spacing={4} direction={"column"} bgcolor='red' width='100%'>
+          {/* First Row */}
+            <Grid item xs={12} md={12} >
+              <Header />
+            </Grid>
+          {/* Second Row */}
+          <Grid item xs={12} md={12} bgcolor='yellow'>
+            <TrackedApps />
           </Grid>
-          <AddHabit />
           <Grid item xs={6} md={4}>
             <Grid
               container
-              display={"flex"}
               spacing={10}
               margin={2}
               borderRadius={"10px"}
-            >
-              {habits.length ? (
-                habits.map((habit) => (
-                  <Grid item>
-                    <Guage habit={habit.id} title={habit.title} due={habit.due}/>
-                  </Grid>
-                ))
-              ) : (
-                <Grid>
-                  <h3 style={{ color: "white" }}>
-                    You have no habits to display!
-                  </h3>
-                </Grid>
-              )}
-            </Grid>
+            ></Grid>
           </Grid>
         </Grid>
       </Box>
