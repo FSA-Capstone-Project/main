@@ -39,18 +39,20 @@ const Navbar = ({setDisplay}) => {
   };
 
   return (
-    <Box sx={{display:'flex', top:'0' , height:'100vh', backgroundImage:"linear-gradient(20deg, #2087f7 0%, #3358f4 100%)"}}>
-    <Sidebar
+    <Box sx={{display:'flex', top:'0' , height:'100vh'}}>
+    <Sidebar 
+    style={{backgroundImage:"linear-gradient(45deg, #3358f4 0%, #379f93 100%)"}}
+      
         borderRadius='3rem'
       defaultCollapsed="true"
 
       onMouseOver={() => collapseSidebar(setSidebarIsOpen(true))}
       onMouseOut={() => collapseSidebar(setSidebarIsOpen(false))}
     >
-      <Menu sx={{bgcolor:"red"}}>
+      <Menu>
         <Box
           sx={{
-            background: "linear-gradient(20deg, #7f6af5 0%, #7f3af0 80%)",
+            backgroundColor: "rgba(51,88,244,.5)",
           }} // login-card'
           marginTop="2rem"
           marginBottom="2rem"
@@ -64,7 +66,7 @@ const Navbar = ({setDisplay}) => {
           height={sidebarIsOpen === true ? "12rem" : "4rem"}
           // height="4rem"
           width="80%"
-          bgcolor="#0001"
+          bgcolor="#3358f4"
           boxShadow="0px 0px 12px #94a1b2"
         >
           <AccountCircleIcon fontSize="large" />

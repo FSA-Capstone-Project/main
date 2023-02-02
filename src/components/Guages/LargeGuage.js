@@ -30,20 +30,26 @@ const LargeGuage = (props) => {
   getData();
 
   return (
-    <Box sx={{display:'flex', flexDirection:"column", justifyContent:'center', alignItems:"center"}}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Box
         sx={{
-          position: "relative",
-          height: "14rem",
+          backgroundImage: "linear-gradient(45deg, #3358f4 0%, #379f93 100%)",
+          height: "18rem",
           width: "15rem",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          bgcolor: "lightgrey",
           borderRadius: "12px",
         }}
       >
-        <CircularProgress variant="determinate" value={percentDone} />
+        <CircularProgress variant="determinate" value={percentDone}/>
         <Box
           sx={{
             position: "absolute",
@@ -55,7 +61,7 @@ const LargeGuage = (props) => {
           <Typography
             variant="caption"
             component="div"
-            color="black"
+            color="white"
           >{`${Math.round(percentDone)}%`}</Typography>
         </Box>
       </Box>
@@ -74,11 +80,11 @@ const LargeGuage = (props) => {
           component="div"
           color="white"
         >
-          {((props.due-today) / (1000 * 60 * 60 * 24)) > 0 ? 
-          `${Math.round((props.due-today) / (1000 * 60 * 60 * 24))} Day(s) Left!` 
-          : "You Failed."
-          }
-
+          {(props.due - today) / (1000 * 60 * 60 * 24) > 0
+            ? `${Math.round(
+                (props.due - today) / (1000 * 60 * 60 * 24)
+              )} Day(s) Left!`
+            : "You Failed."}
         </Typography>
       </Box>
     </Box>

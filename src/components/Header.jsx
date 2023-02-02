@@ -35,14 +35,14 @@ function Header() {
         bgcolor="#26293c"
         borderRadius="15px"
       >
-        <Grid item xs={5} p="2rem">
+        <Grid item xs={6} p="2rem">
           <Typography variant="h3" color="whitesmoke">Analytics DashBoard</Typography>
           <Typography variant="darktext">
             {` Welcome back, ${name}. We've missed you! `}
           </Typography>
         </Grid>
         <Grid item xs={3} color="white"></Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Box>A img, or links over here</Box>
         </Grid>
       </Grid>

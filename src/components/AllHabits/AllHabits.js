@@ -70,7 +70,7 @@ const AllHabits = () => {
                   style={{ margin: 4, padding: 2 }}
                   onClick={updateHabit}
                 >
-                {`${habit.progress}`}
+                {`${Math.round((habit.progress / habit.goal )*100)}%`}
                 </Button>
               </Grid>
             </Grid>

@@ -27,30 +27,31 @@ import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
 
 const Dashboard = () => {
+  
   const [habits, setHabits] = useState([]);
 
-  useEffect(() => {
-    const data = [];
-    app
-      .firestore()
-      .collection("users")
-      .doc(`${auth.currentUser.email}`)
-      .collection("habits")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.docs.forEach((doc) => {
-          let habit = {
-            id: doc.id,
-            title: doc.data().title,
-            goal: doc.data().goal,
-            progress: doc.data().progress,
-            due: doc.data().due.toDate(),
-          };
-          data.push(habit);
-          setHabits(data);
-        });
-      });
-  }, []);
+  // useEffect(() => {
+  //   const data = [];
+  //   app
+  //     .firestore()
+  //     .collection("users")
+  //     .doc(`${auth.currentUser.email}`)
+  //     .collection("habits")
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       querySnapshot.docs.forEach((doc) => {
+  //         let habit = {
+  //           id: doc.id,
+  //           title: doc.data().title,
+  //           goal: doc.data().goal,
+  //           progress: doc.data().progress,
+  //           due: doc.data().due.toDate(),
+  //         };
+  //         data.push(habit);
+  //         setHabits(data);
+  //       });
+  //     });
+  // }, []);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
