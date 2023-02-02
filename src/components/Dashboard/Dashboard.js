@@ -26,9 +26,13 @@ import Robot from "../../API/openAi/chatGPT";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
 
+import {useMediaQuery} from "@mui/material/";
+
 const Dashboard = () => {
-  
+
   const [habits, setHabits] = useState([]);
+  const largeScreen = useMediaQuery(theme => theme.breakpoints.up('md'));
+
 
   useEffect(() => {
     const data = [];
@@ -63,12 +67,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <Box
-        sx={{ display: "flex", flexGrow: 1, contain: "content" }}
-        width="100%"
-        height="100%"
-      >
-        <Grid container spacing={4} direction={"column"} width='100%'>
+
+        <Grid container spacing={4}  width='100%' >
           {/* First Row */}
             <Grid item xs={12} md={12} >
               <Header />
@@ -77,45 +77,14 @@ const Dashboard = () => {
           <Grid item xs={12} md={12}>
             <TrackedApps data = {habits}/>
           </Grid>
-          <Grid item xs={12} md={12}>
+          <Grid item xs={12} md={12} height='100%' >
             <GaugeContainer data={habits}/>
           </Grid>
-          <Grid item xs={6} md={4}>
-            <Grid
-              container
-              spacing={10}
-              margin={2}
-              borderRadius={"10px"}
-            ></Grid>
-          </Grid>
+
         </Grid>
-      </Box>
     </>
   );
 };
 
 export default Dashboard;
 
-// <Grid container spacing={2}>
-// <Grid item>
-//   <Box width="900px" height="300px" bgcolor="blue">
-//     Greeting
-//   </Box>
-// </Grid>
-// </Grid>
-{
-  /* <Grid container spacing={10} margin={2} borderRadius={"10px"}>
-{habits.length ? (
-  habits.map((habit) => (
-    <Grid item>
-      <Guage habit={habit.id} title={habit.title} />
-    </Grid> */
-}
-//   ))
-// ) : (
-//   <Grid>
-//     <h3 style={{ color: "white" }}>You have no habits to display!</h3>
-//   </Grid>
-// )}
-// </Grid>
-// <Grid>{/* <AddHabit/> */}</Grid>

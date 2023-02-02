@@ -57,19 +57,19 @@ const Home = () => {
 
   return (
     <>
-      {/* App window */}
-      <Box sx={{ display: "flex", height: "100vh" }}>
+    {/* App window */}
+      <Box sx={{ display: "flex" }} height='100vh' >
         {/**sidebar */}
         <Navbar setDisplay={setDisplay} />
 
         {view === "Dashboard" ? (
-          <Box height="100%" width="100vw" bgcolor="#1e1e2b">
+          <Box  width='100vw' bgcolor= "#1e1e2b" >
             <Dashboard />
           </Box>
         ) : null}
 
         {view === "Allhabits" ? (
-          <Box width="100vh" height="100vh" bgcolor="purple">
+          <Box width= "100vh"  height= "100vh" >
             <AllHabits />
           </Box>
         ) : null}
