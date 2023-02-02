@@ -43,6 +43,7 @@ const Navbar = ({setDisplay}) => {
     <Sidebar
         // borderRadius='3rem'
       defaultCollapsed="true"
+
       onMouseOver={() => collapseSidebar(setSidebarIsOpen(true))}
       onMouseOut={() => collapseSidebar(setSidebarIsOpen(false))}
     >

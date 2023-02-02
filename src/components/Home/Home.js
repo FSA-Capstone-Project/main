@@ -57,7 +57,7 @@ setView(display)
   return (
     <>
     {/* App window */}
-      <Box sx={{ display: "flex" , }} height='100%' >
+      <Box sx={{ display: "flex" }} height='100vh' >
         {/**sidebar */}
             <Navbar setDisplay={setDisplay}/>
 
