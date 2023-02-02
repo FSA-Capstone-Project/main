@@ -11,6 +11,7 @@ const LiquidGuage = (props) => {
 
     const [progress, setProgress] = useState(0);
     const [goal, setGoal] = useState(0);
+
     const today = new Date();
   
     const getData = async () => {
@@ -107,9 +108,6 @@ const LiquidGuage = (props) => {
                     waveTextStyle={{
                         fill: color('#fff').toString(),
                         fontFamily: 'Arial'
-                    }}
-                    onClick={() => {
-                        this.setState({ value: Math.random() * 100 });
                     }}
                 />
                 <div
