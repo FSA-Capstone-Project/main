@@ -29,6 +29,7 @@ import GaugeContainer from "./GaugeContainer";
 import {useMediaQuery} from "@mui/material/";
 
 const Dashboard = () => {
+
   const [habits, setHabits] = useState([]);
   const largeScreen = useMediaQuery(theme => theme.breakpoints.up('md'));
 
@@ -74,10 +75,10 @@ const Dashboard = () => {
             </Grid>
           {/* Second Row */}
           <Grid item xs={12} md={12}>
-            <TrackedApps />
+            <TrackedApps data = {habits}/>
           </Grid>
           <Grid item xs={12} md={12} height='100%' >
-            <GaugeContainer />
+            <GaugeContainer data={habits}/>
           </Grid>
 
         </Grid>

@@ -9,7 +9,8 @@ import { Paper } from "@mui/material/";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
 import Dashboard from "../Dashboard/Dashboard";
-import MemoryGame from "../MemoryGame/MemoryGame"
+import MemoryGame from "../MemoryGame/MemoryGame";
+import InteractiveCalendar from "../Calendar/Calendar";
 import {
   Button,
   Input,
@@ -19,7 +20,7 @@ import {
   Typography,
 } from "@mui/material/";
 import RocketRoundedIcon from "@mui/icons-material/RocketRounded";
-import MemorySharpIcon from '@mui/icons-material/MemorySharp'
+import MemorySharpIcon from "@mui/icons-material/MemorySharp";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -50,16 +51,16 @@ const Home = () => {
       });
   };
 
-  const setDisplay = (display) =>{
-setView(display)
-  }
+  const setDisplay = (display) => {
+    setView(display);
+  };
 
   return (
     <>
     {/* App window */}
       <Box sx={{ display: "flex" }} height='100vh' >
         {/**sidebar */}
-            <Navbar setDisplay={setDisplay}/>
+        <Navbar setDisplay={setDisplay} />
 
         {view === "Dashboard" ? (
           <Box  width='100vw' bgcolor= "#1e1e2b" >
@@ -70,6 +71,12 @@ setView(display)
         {view === "Allhabits" ? (
           <Box width= "100vh"  height= "100vh" >
             <AllHabits />
+          </Box>
+        ) : null}
+
+        {view === "Calendar" ? (
+          <Box>
+            <InteractiveCalendar />
           </Box>
         ) : null}
 

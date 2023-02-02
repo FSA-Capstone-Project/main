@@ -1,61 +1,88 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Grid } from "@mui/material/";
 
-
 const MemoryGame = () => {
-
   const [order, setOrder] = useState([]);
   const [clicks, setClicks] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
   const [level, setLevel] = useState(1);
+  const [gameOver, setGameOver] = useState(false);
 
-  const startGame = () => {
-    setGameStarted(true);
-    setOrder([]);
-    setOrder([...order, Math.floor(Math.random() * 9)]);
-    setClicks(0);
-    setLevel(1);
-  };
-
-  const stopGame = () => {
-    alert("Game Over");
-    setGameStarted(false);
-    setClicks(0);
-    setOrder([]);
-    setLevel(1);
+  const toggleGame = () => {
+    if (!gameStarted) {
+      setGameStarted(true);
+      setOrder([Math.floor(Math.random() * 9)]);
+      pingBoxes();
+    } else {
+      setGameStarted(false);
+      setGameOver(false);
+      setOrder([]);
+      setLevel(1);
+      setClicks(0);
+    }
   };
 
   const clickedBox = (e) => {
-    if (!gameStarted) return;
+    if (gameOver) return;
     if (e.target.id === String(order[clicks])) {
       setClicks(clicks + 1);
     } else {
-      stopGame();
+      setGameOver(true);
+      wrongBoxAnimation();
     }
-    if (clicks === level - 1) {
-      order.push(Math.floor(Math.random() * 9));
-      setClicks(0);
+    if (clicks === level - 1 && gameStarted && !gameOver) {
+      nextLevelAnimation();
+      console.log("ORDER1", order)
+      setOrder([...order, Math.floor(Math.random() * 9)]);
+      console.log("ORDER2", order)
       setLevel(level + 1);
+      setClicks(0);
       pingBoxes();
     }
   };
 
-  const pingBoxes = () => {
-    order.forEach((box, index) => {
+  const pingBoxes = (index = 0) => {
+    if (index === order.length) return;
+    setTimeout(() => {
+      document.getElementById(String(order[index])).style.backgroundColor =
+        "red";
       setTimeout(() => {
-        document.getElementById(String(box)).style.backgroundColor = "red";
-        setTimeout(() => {
-          document.getElementById(String(box)).style.backgroundColor = "blue";
-        }, 1000);
-      }, 1000 * index);
-    });
+        document.getElementById(String(order[index])).style.backgroundColor =
+          "blue";
+        pingBoxes(index + 1);
+      }, 750);
+    }, 750);
+  };
+
+  const nextLevelAnimation = () => {
+    const boxes = document.getElementsByClassName("MuiGrid-root");
+    for (let i = 0; i < boxes.length; i++) {
+      boxes[i].style.backgroundColor = "green";
+    }
+    setTimeout(() => {
+      for (let i = 0; i < boxes.length; i++) {
+        boxes[i].style.backgroundColor = "blue";
+      }
+    }, 250);
+  };
+  
+  const wrongBoxAnimation = () => {
+    const boxes = document.getElementsByClassName("MuiGrid-root");
+    for (let i = 0; i < boxes.length; i++) {
+      boxes[i].style.backgroundColor = "red";
+    }
+    setTimeout(() => {
+      for (let i = 0; i < boxes.length; i++) {
+        boxes[i].style.backgroundColor = "blue";
+      }
+    }, 250);
   };
 
   useEffect(() => {
     if (gameStarted) {
       pingBoxes();
     }
-  }, [gameStarted]);
+  },);
 
   return (
     <>
@@ -91,9 +118,21 @@ const MemoryGame = () => {
         </Box>
       </Box>
       {gameStarted ? (
-        <Button onClick={stopGame}>Stop</Button>
+        <Button
+          sx={{ marginTop: "2vh" }}
+          variant="contained"
+          onClick={toggleGame}
+        >
+          End Game
+        </Button>
       ) : (
-        <Button onClick={startGame}>Start</Button>
+        <Button
+          sx={{ marginTop: "2vh" }}
+          variant="contained"
+          onClick={toggleGame}
+        >
+          Start Game
+        </Button>
       )}
     </>
   );

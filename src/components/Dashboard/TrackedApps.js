@@ -1,12 +1,25 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { Typography, Grid, Box } from "@mui/material";
 import LineChart from "./LineChart/LineChart";
 import data from "./LineChart/LineChartData";
 import LiquidGuage from "../Guages/LiquidGuage";
 import { useMediaQuery } from "@mui/material/";
 
+
+import { OneKPlusOutlined } from "@mui/icons-material";
+import { connectFirestoreEmulator } from "firebase/firestore";
+
 function TrackedApps() {
   const largeScreen = useMediaQuery((theme) => theme.breakpoints.up("md"));
+
+  // const [habit, setHabit] = useState(null);
+
+  // useEffect(() => {
+  //   console.log(props.data)
+  //   const water = props.data.find(element => element.title === "Water")
+  //   setHabit(water)
+  // }, [props.data]);
+
   return (
     <Box>
       <Grid
