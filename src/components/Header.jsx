@@ -3,8 +3,11 @@ import { Box, Grid, Typography } from "@mui/material";
 import { auth, app, db } from "../firebase";
 import Robot from "../API/openAi/chatGPT";
 
+import {useMediaQuery} from "@mui/material/";
+
 function Header() {
   const [name, setName] = useState("");
+  const largeScreen = useMediaQuery(theme => theme.breakpoints.up('md'));
 
   useEffect(() => {
     app
@@ -28,7 +31,8 @@ function Header() {
     <Box>
       <Grid
         container
-        xs={12}
+        direction={largeScreen?"row":"column"}
+        xs={10}
         md={10}
         margin="auto"
         marginTop="4rem"

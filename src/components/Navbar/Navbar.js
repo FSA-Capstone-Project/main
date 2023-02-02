@@ -39,11 +39,10 @@ const Navbar = ({setDisplay}) => {
   };
 
   return (
-    <Box sx={{display:'flex', top:'0' , height:'100vh', backgroundImage:"linear-gradient(20deg, #2087f7 0%, #3358f4 100%)"}}>
+    <Box sx={{display:'flex' , backgroundImage:"linear-gradient(20deg, #2087f7 0%, #3358f4 100%)"}}>
     <Sidebar
-        borderRadius='3rem'
+        // borderRadius='3rem'
       defaultCollapsed="true"
-
       onMouseOver={() => collapseSidebar(setSidebarIsOpen(true))}
       onMouseOut={() => collapseSidebar(setSidebarIsOpen(false))}
     >
@@ -91,7 +90,7 @@ const Navbar = ({setDisplay}) => {
         <MenuItem icon={<CalendarMonthIcon fontSize="large" />}>
           Calendar
         </MenuItem>
-        
+
         <MenuItem
               onClick={()=> setDisplay("MemoryGame")}
              icon={<MemorySharpIcon fontSize="large" />}>

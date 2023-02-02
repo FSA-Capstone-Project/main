@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app, auth, db } from "./firebase";
 import { AuthProvider } from "./components/Auth";
 // import AllHabits from "./components/AllHabits/AllHabits";
+import {Box} from "@mui/material";
 
 const AppRoutes = () => {
 
@@ -25,7 +26,8 @@ const AppRoutes = () => {
 
 
   return (
-    <div>
+
+
       <AuthProvider>
         {auth && auth.currentUser ? (
           <Routes>
@@ -37,7 +39,8 @@ const AppRoutes = () => {
           </Routes>
         )}
       </AuthProvider>
-    </div>
+
+
   );
 };
 
