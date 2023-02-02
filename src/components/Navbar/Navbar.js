@@ -90,7 +90,9 @@ const Navbar = ({setDisplay}) => {
           Dashboard
         </MenuItem>
 
-        <MenuItem icon={<CalendarMonthIcon fontSize="large" />}>
+        <MenuItem 
+        onClick={()=> setDisplay("Calendar")}
+        icon={<CalendarMonthIcon fontSize="large" />}>
           Calendar
         </MenuItem>
         
