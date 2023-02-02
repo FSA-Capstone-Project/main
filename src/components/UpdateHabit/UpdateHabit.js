@@ -8,19 +8,43 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const UpdateHabit = () => {
-  const [input, setInput] = useState({ title: "", goal: null, progress: null });
+  const [input, setInput] = useState({ title: "", goal: null, progress: null, due: null });
   const [date, setDate] = useState(null)
 
-  const addHabit = () => {
-    setDoc(
-      doc(db, "users", `${auth.currentUser.email}`, "habits", `${input.title}`),
-      {
-        title: input.title,
-        goal: input.goal,
-        progress: input.progress,
-        due: date
-      }
-    );
+  const changeHabit = () => {
+    const timestamp = date.toDate();
+    db.doc(`users/${auth.currentUser.email}/habits/${input.title}`)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          doc.ref.update({
+            goal: input.goal,
+            progress: input.progress,
+            due: timestamp
+          })
+            .then(() => {
+              console.log("Habit updated successfully");
+            })
+            .catch((error) => {
+              console.error("Error updating habit: ", error);
+            });
+        } else {
+          doc.ref.set({
+            goal: input.goal,
+            progress: input.progress,
+            due: timestamp
+          })
+            .then(() => {
+              console.log("Habit created successfully");
+            })
+            .catch((error) => {
+              console.error("Error creating habit: ", error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error("Error getting habit: ", error);
+      });
   };
 
   const handleChange = (e) => {
@@ -93,7 +117,7 @@ const UpdateHabit = () => {
         <Button
           variant="contained"
           sx={{ margin: "5px" }}
-          onClick={addHabit}
+          onClick={changeHabit}
           endIcon={<AccessibleForwardIcon />}
         >
           Update

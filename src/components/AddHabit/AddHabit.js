@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Navbar } from "../../components";
 import { app, auth, db } from "../../firebase";
 import { collection, doc, setDoc, addDoc } from "firebase/firestore";
 import { Button, Input, TextField, Box, Typography } from "@mui/material/";
