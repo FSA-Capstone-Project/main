@@ -1,16 +1,17 @@
 import { color } from 'd3-color';
 import { interpolateRgb } from 'd3-interpolate';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import LiquidFillGauge from 'react-liquid-gauge';
 import { app, auth, db } from "../../firebase";
 import { collection, doc, getDoc } from "firebase/firestore";
+import { ContentPasteSearchOutlined } from '@mui/icons-material';
  
-const LiquidGuage = () => {
-    const [value, setValue] = useState(0)
+const LiquidGuage = (props) => {
+
     const [progress, setProgress] = useState(0);
     const [goal, setGoal] = useState(0);
-    const [percentDone, setPercentDone] = useState(0);
+
     const today = new Date();
   
     const getData = async () => {
@@ -27,19 +28,17 @@ const LiquidGuage = () => {
         let goal = docSnap.data().goal;
         setProgress(habitProgress);
         setGoal(goal);
-        setPercentDone(Math.round((progress / goal) * 100));
       }
     };
     getData();
 
-    
     const startColor = '#2087f7'; // cornflowerblue
     const endColor = '#2087f7'; // crimson
  
 
         const radius = 120;
         const interpolate = interpolateRgb(startColor, endColor);
-        const fillColor = interpolate(value / 100);
+        const fillColor = interpolate(0 / 100);
         const gradientStops = [
             {
                 key: '0%',
@@ -67,7 +66,7 @@ const LiquidGuage = () => {
                     style={{ margin: '0 auto' }}
                     width={radius * 2}
                     height={radius * 2}
-                    value={percentDone}
+                    value={(Math.round((progress/goal) * 100))} //
                     percent="%"
                     textSize={1}
                     textOffsetX={0}
@@ -109,9 +108,6 @@ const LiquidGuage = () => {
                     waveTextStyle={{
                         fill: color('#fff').toString(),
                         fontFamily: 'Arial'
-                    }}
-                    onClick={() => {
-                        this.setState({ value: Math.random() * 100 });
                     }}
                 />
                 <div
