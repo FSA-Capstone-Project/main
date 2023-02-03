@@ -36,20 +36,20 @@ const Home = () => {
   return (
     <>
     {/* App window */}
-      <Box sx={{ display: "flex" }} height='100vh' >
+      <Box sx={{ display: "flex" }} height='100vh' bgcolor="#1e1e2b" overflow='auto'>
         {/**sidebar */}
         <Navbar setDisplay={setDisplay} />
 
         {view === "Dashboard" ? (
-          <Box  width='100vw' bgcolor= "#1e1e2b" >
+          <Box  width='100vw' height='100vh' >
             <Dashboard />
           </Box>
         ) : null}
 
         {view === "Allhabits" ? (
-          <Box width= "100vh"  height= "100vh" bgcolor= "#1e1e2b">
+          // <Box>
             <AllHabits />
-          </Box>
+          // </Box>
         ) : null}
 
         {view === "Calendar" ? (

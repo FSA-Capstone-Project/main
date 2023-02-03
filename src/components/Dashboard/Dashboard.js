@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
-import { app, auth, db } from "../../firebase";
+import { app, auth } from "../../firebase";
 // import Robot from "../../API/openAi/chatGPT";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
@@ -9,6 +9,8 @@ import { Grid } from "@mui/material";
 const Dashboard = () => {
 
   const [habits, setHabits] = useState([]);
+  const title = 'Analytics'
+
 
   useEffect(() => {
     const data = [];
@@ -36,10 +38,10 @@ const Dashboard = () => {
   return (
     <>
 
-        <Grid container spacing={4}  width='100%' >
+        <Grid container spacing={2}  width='100%' >
           {/* First Row */}
             <Grid item xs={12} md={12} >
-              <Header />
+              <Header title={title}/>
             </Grid>
           {/* Second Row */}
           <Grid item xs={12} md={12}>
@@ -55,4 +57,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
