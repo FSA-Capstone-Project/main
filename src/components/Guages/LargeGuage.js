@@ -42,12 +42,12 @@ const LargeGuage = (props) => {
             backgroundImage: `linear-gradient(45deg, #379f93 ${Math.round(
               percentDone
             )}%, #3358f4 100%)`,
-            height: "18rem",
+            height: "15rem",
             width: "15rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: "20px",
+            padding: "15px",
             alignItems: "center",
             borderRadius: "12px",
             marginLeft: "auto",
@@ -136,12 +136,12 @@ const LargeGuage = (props) => {
             backgroundImage: `linear-gradient(45deg, #379f93 ${Math.round(
               percentDone
             )}%, #3358f4 100%)`,
-            height: "18rem",
+            height: "15rem",
             width: "15rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: "20px",
+            padding: "15px",
             alignItems: "center",
             borderRadius: "12px",
             marginLeft: "auto",
@@ -212,12 +212,12 @@ const LargeGuage = (props) => {
             backgroundImage: `linear-gradient(45deg, pink ${Math.round(
               percentDone
             )}%, red 100%)`,
-            height: "18rem",
+            height: "15rem",
             width: "15rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: "20px",
+            padding: "15px",
             alignItems: "center",
             borderRadius: "12px",
             marginLeft: "auto",
