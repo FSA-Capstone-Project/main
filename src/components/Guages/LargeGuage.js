@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { app, auth, db } from "../../firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
-import CircularProgress from "@mui/material/CircularProgress";
+import React from "react";
 import { Box, Typography } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 
@@ -78,7 +75,7 @@ const LargeGuage = (props) => {
       <Box sx={{ width: "12rem" }}>
             <LinearProgress
               variant="determinate"
-              
+
               value={Math.round((props.progress / props.goal) * 100)}
               sx={{ height: "2rem", borderRadius: "10px", boxShadow: "3px 3px 12px black"}}
             />

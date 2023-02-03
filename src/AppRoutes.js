@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
-import { Routes, Route, Router } from "react-router-dom";
-import { Home, AddHabit, Login, LoginForm } from "./components";
-import { CssBaseline } from "@mui/material";
-import { useNavigate, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { Home, LoginForm } from "./components";
+import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { app, auth, db } from "./firebase";
+import { auth } from "./firebase";
 import { AuthProvider } from "./components/Auth";
 // import AllHabits from "./components/AllHabits/AllHabits";
-import {Box} from "@mui/material";
 
 const AppRoutes = () => {
 

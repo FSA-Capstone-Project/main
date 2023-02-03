@@ -1,35 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navbar } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { AddHabit } from "../../components";
-import { bgcolor, display } from "@mui/system";
-import CircularProgress from "@mui/material/CircularProgress";
-import { Paper } from "@mui/material/";
-import Grid from "@mui/material/Unstable_Grid2";
-import { styled } from "@mui/material/styles";
 import Dashboard from "../Dashboard/Dashboard";
 import MemoryGame from "../MemoryGame/MemoryGame";
 import InteractiveCalendar from "../Calendar/Calendar";
-import {
-  Button,
-  Input,
-  TextField,
-  Box,
-  Icon,
-  Typography,
-} from "@mui/material/";
-import RocketRoundedIcon from "@mui/icons-material/RocketRounded";
-import MemorySharpIcon from "@mui/icons-material/MemorySharp";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import MenuIcon from "@mui/icons-material/Menu";
-import LogoutIcon from "@mui/icons-material/Logout";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
+import { Box } from "@mui/material/";
+import { useProSidebar } from "react-pro-sidebar";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
-import { Opacity } from "@mui/icons-material";
 import AllHabits from "../AllHabits/AllHabits";
 
 const Home = () => {
@@ -69,7 +47,7 @@ const Home = () => {
         ) : null}
 
         {view === "Allhabits" ? (
-          <Box width= "100vh"  height= "100vh" >
+          <Box width= "100vh"  height= "100vh" bgcolor= "#1e1e2b">
             <AllHabits />
           </Box>
         ) : null}

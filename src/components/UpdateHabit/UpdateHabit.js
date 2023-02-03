@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { app, auth, db } from "../../firebase";
-import { collection, doc, setDoc, addDoc } from "firebase/firestore";
-import { Button, Input, TextField, Box, Typography } from "@mui/material/";
+import React, { useState } from "react";
+import { auth, db } from "../../firebase";
+import { Button, TextField, Box, Typography } from "@mui/material/";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
