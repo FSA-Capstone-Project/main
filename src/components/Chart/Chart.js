@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { app, auth, db } from "../../firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
+import React, { useState } from "react";
+import { auth, db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material/";
 

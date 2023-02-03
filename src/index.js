@@ -7,8 +7,6 @@ import App from "./App";
 //this gives a css starter for mui
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { ProSidebarProvider } from "react-pro-sidebar";
-import { Theme, ThemeOptions } from '@mui/material/styles';
-
 
 
 const root = ReactDOM.createRoot(
@@ -22,7 +20,7 @@ const theme = createTheme({
         },
       },
       typography: {
-        darktext: { 
+        darktext: {
           color: '#94a1b2'
         },
         purple: {
