@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Grid, Box } from "@mui/material";
-import { app, auth, db } from "../../firebase";
+import { Grid, Box } from "@mui/material";
 import LargeGuage from "../Guages/LargeGuage";
 import { useMediaQuery } from "@mui/material/";
 

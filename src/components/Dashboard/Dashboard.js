@@ -1,32 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material/";
-import { Navbar } from "../../components";
 import Header from "../Header";
 import { app, auth, db } from "../../firebase";
-import {
-  collection,
-  doc,
-  getDoc,
-  query,
-  querySnapshot,
-} from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { AddHabit } from "../../components";
-import { bgcolor, display } from "@mui/system";
-import CircularProgress from "@mui/material/CircularProgress";
-import Guage from "../Guages/SmallGuage";
-import { Paper } from "@mui/material/";
-import Grid from "@mui/material/Unstable_Grid2";
-import { styled } from "@mui/material/styles";
-import Chart from "../Chart/Chart";
-import { data } from "autoprefixer";
-import { Add } from "@mui/icons-material";
-import Robot from "../../API/openAi/chatGPT";
+// import Robot from "../../API/openAi/chatGPT";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
-
 import {useMediaQuery} from "@mui/material/";
+import { styled, Paper, Grid } from "@mui/material";
 
 const Dashboard = () => {
 

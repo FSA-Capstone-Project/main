@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import { auth, app, db } from "../firebase";
-import Robot from "../API/openAi/chatGPT";
+import { auth, app } from "../firebase";
+// import Robot from "../API/openAi/chatGPT";
 
 import {useMediaQuery} from "@mui/material/";
 

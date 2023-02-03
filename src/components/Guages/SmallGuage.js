@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { app, auth, db } from "../../firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
+import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box, Typography } from "@mui/material/";
 
@@ -74,8 +72,8 @@ const SmallGuage = (props) => {
           component="div"
           color="white"
         >
-          {((props.due-today) / (1000 * 60 * 60 * 24)) > 0 ? 
-          `${Math.round((props.due-today) / (1000 * 60 * 60 * 24))} Day(s) Left!` 
+          {((props.due-today) / (1000 * 60 * 60 * 24)) > 0 ?
+          `${Math.round((props.due-today) / (1000 * 60 * 60 * 24))} Day(s) Left!`
           : "You Failed."
           }
 

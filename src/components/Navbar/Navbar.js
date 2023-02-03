@@ -1,16 +1,8 @@
 import React, {useState} from "react";
-import {
-  Button,
-  Input,
-  TextField,
-  Box,
-  Icon,
-  Typography,
-} from "@mui/material/";
-import { Link, useNavigate } from "react-router-dom";
+import { Box } from "@mui/material/";
+import { useNavigate } from "react-router-dom";
 import RocketRoundedIcon from "@mui/icons-material/RocketRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -18,7 +10,6 @@ import MemorySharpIcon from '@mui/icons-material/MemorySharp'
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
-import { Opacity } from "@mui/icons-material";
 
 const Navbar = ({setDisplay}) => {
 

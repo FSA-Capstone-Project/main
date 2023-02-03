@@ -1,19 +1,17 @@
 import { color } from 'd3-color';
 import { interpolateRgb } from 'd3-interpolate';
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 import LiquidFillGauge from 'react-liquid-gauge';
-import { app, auth, db } from "../../firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
-import { ContentPasteSearchOutlined } from '@mui/icons-material';
- 
+import { auth, db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
+
 const LiquidGuage = (props) => {
 
     const [progress, setProgress] = useState(0);
     const [goal, setGoal] = useState(0);
 
     const today = new Date();
-  
+
     const getData = async () => {
       const docRef = doc(
         db,
@@ -34,7 +32,7 @@ const LiquidGuage = (props) => {
 
     const startColor = '#2087f7'; // cornflowerblue
     const endColor = '#2087f7'; // crimson
- 
+
 
         const radius = 120;
         const interpolate = interpolateRgb(startColor, endColor);
@@ -59,7 +57,7 @@ const LiquidGuage = (props) => {
                 offset: '100%'
             }]
 
- 
+
         return (
             <div>
                 <LiquidFillGauge
@@ -81,7 +79,7 @@ const LiquidGuage = (props) => {
                         const percentStyle = {
                             fontSize: textPixels * 0.6
                         };
- 
+
                         return (
                             <tspan>
                                 <tspan className="value" style={valueStyle}>{value}</tspan>

@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Navbar } from "../../components";
-import { app, auth, db } from "../../firebase";
-import { collection, doc, setDoc, addDoc } from "firebase/firestore";
-import { Button, Input, TextField, Box, Typography } from "@mui/material/";
-import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
-import { useNavigate } from "react-router-dom";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import React, { useState } from "react";
+import { auth, db } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { Button, TextField, Box, Typography } from "@mui/material/";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const AddHabit = () => {
   const [input, setInput] = useState({ title: "", goal: null, progress: null });

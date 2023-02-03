@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { auth, db } from "../../firebase";
-import { useNavigate, Link } from "react-router-dom";
-import { GoogleAuthProvider, getAuth } from "firebase/auth";
-import { collection, addDoc, doc, setDoc } from "firebase/firestore";
-import { Button, Input, TextField, Box, Typography } from "@mui/material/";
+import React, { useState } from "react";
+import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import { Button, TextField, Box, Typography } from "@mui/material/";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 
 const styles = {

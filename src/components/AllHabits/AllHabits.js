@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { db, auth, app } from '../../firebase';
+import { auth, app } from '../../firebase';
 import Grid from '@mui/material/Grid';
 import { AddHabit } from "../../components";
 import { Button, Box } from "@mui/material";
