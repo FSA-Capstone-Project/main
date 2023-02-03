@@ -4,14 +4,11 @@ import { app, auth, db } from "../../firebase";
 // import Robot from "../../API/openAi/chatGPT";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
-import {useMediaQuery} from "@mui/material/";
-import { styled, Paper, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 
 const Dashboard = () => {
 
   const [habits, setHabits] = useState([]);
-  const largeScreen = useMediaQuery(theme => theme.breakpoints.up('md'));
-
 
   useEffect(() => {
     const data = [];
@@ -35,14 +32,6 @@ const Dashboard = () => {
         });
       });
   }, []);
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
 
   return (
     <>
