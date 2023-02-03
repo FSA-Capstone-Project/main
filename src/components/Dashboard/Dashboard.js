@@ -31,7 +31,7 @@ import {useMediaQuery} from "@mui/material/";
 const Dashboard = () => {
 
   const [habits, setHabits] = useState([]);
-  const largeScreen = useMediaQuery(theme => theme.breakpoints.up('md'));
+  const headerTitle = 'Analytics'
 
 
   useEffect(() => {
@@ -68,17 +68,17 @@ const Dashboard = () => {
   return (
     <>
 
-        <Grid container spacing={4}  width='100%' >
+        <Grid container spacing={4} direction='column' width='100%' >
           {/* First Row */}
             <Grid item xs={12} md={12} >
-              <Header />
+              <Header title={headerTitle}/>
             </Grid>
           {/* Second Row */}
           <Grid item xs={12} md={12}>
             <TrackedApps data = {habits}/>
           </Grid>
           <Grid item xs={12} md={12} height='100%' >
-            <GaugeContainer data={habits}/>
+            <GaugeContainer data={habits} />
           </Grid>
 
         </Grid>

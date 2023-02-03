@@ -6,9 +6,10 @@ import Robot from "../API/openAi/chatGPT";
 import {useMediaQuery} from "@mui/material/";
 
 
-const Header = () => {
+const Header = (headerTitle) => {
   const [name, setName] = useState("");
   const largeScreen = useMediaQuery(theme => theme.breakpoints.up('md'));
+
 
   useEffect(() => {
     app
@@ -41,7 +42,7 @@ const Header = () => {
         borderRadius="15px"
       >
         <Grid item xs={6} p="2rem">
-          <Typography variant="h3" color="whitesmoke">Analytics DashBoard</Typography>
+          <Typography variant="h3" color="whitesmoke">{`${headerTitle.title} DashBoard`}</Typography>
           <Typography variant="darktext">
             {` Welcome back, ${name}. We've missed you! `}
           </Typography>

@@ -5,14 +5,13 @@ import { collection, doc, setDoc, addDoc } from "firebase/firestore";
 import { Button, Input, TextField, Box, Typography } from "@mui/material/";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 import { useNavigate } from "react-router-dom";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const AddHabit = () => {
-
   const [input, setInput] = useState({ title: "", goal: null, progress: null });
-  const [date, setDate] = useState(null)
+  const [date, setDate] = useState(null);
 
   const addHabit = () => {
     setDoc(
@@ -21,7 +20,7 @@ const AddHabit = () => {
         title: input.title,
         goal: input.goal,
         progress: input.progress,
-        due: date
+        due: date,
       }
     );
   };
@@ -69,12 +68,26 @@ const AddHabit = () => {
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
+            color="white"
             label="Goal Date"
+            sx={{ color: "red" }}
             value={date}
             onChange={(newValue) => {
               setDate(newValue.$d);
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField
+                sx={{
+                  bgcolor: "#fffffe",
+                  borderRadius: "9px",
+
+                  input: { color: '#fff' },
+                  // input: { color },
+                  label: { color: 'white'  },
+                }}
+                {...params}
+              />
+            )}
           />
         </LocalizationProvider>
 

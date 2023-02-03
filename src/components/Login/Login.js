@@ -12,7 +12,6 @@ const styles = {
 };
 
 const Login = ({ switchForm }) => {
-  
   const [input, setInput] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
@@ -66,7 +65,7 @@ const Login = ({ switchForm }) => {
         <Typography variant="darktext" sx={{ fontSize: "25px" }}>
           <AccessibleForwardIcon sx={{ fontSize: "2em" }} />
         </Typography>
-        <Typography variant="purple" sx={{ margin: "5px", fontSize: '2em'}}>
+        <Typography variant="purple" sx={{ margin: "5px", fontSize: "2em" }}>
           Sign In
         </Typography>
 
@@ -105,7 +104,7 @@ const Login = ({ switchForm }) => {
           // bgcolor='red'
           display="flex"
         >
-          <Typography variant='darktext' sx={{ fontSize: "15px" }}>
+          <Typography variant="darktext" sx={{ fontSize: "15px" }}>
             Need an Account?
             <Button
               sx={{ margin: 0.4 }}
@@ -113,7 +112,7 @@ const Login = ({ switchForm }) => {
               variant="text"
               onClick={handleSignUp}
             >
-              Sign Up
+              <Typography variant="purple">Sign Up</Typography>
             </Button>
           </Typography>
         </Box>
