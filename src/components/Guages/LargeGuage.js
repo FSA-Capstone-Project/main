@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
-import { SmsFailed } from "@mui/icons-material";
 
 const LargeGuage = (props) => {
   const today = new Date();
@@ -51,6 +50,7 @@ const LargeGuage = (props) => {
                 fontSize: 60,
                 letterSpacing: "-.2rem",
                 color: "#22223b",
+                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
               }}
             >{`${Math.round(percentDone)}%`}</Box>
             <Box sx={{ color: "#fff", fontSize: 12, fontWeight: 600 }}>
@@ -123,6 +123,7 @@ const LargeGuage = (props) => {
                 fontSize: 60,
                 letterSpacing: "-.2rem",
                 color: "#22223b",
+                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
               }}
             >{`${Math.round(percentDone)}%`}</Box>
             <Box sx={{ color: "limegreen", fontSize: 14, fontWeight: 600 }}>
@@ -195,6 +196,7 @@ const LargeGuage = (props) => {
                 fontSize: 60,
                 letterSpacing: "-.2rem",
                 color: "#22223b",
+                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
               }}
             >{`${Math.round(percentDone)}%`}</Box>
             <Box sx={{ color: "red", fontSize: 14, fontWeight: 600 }}>
