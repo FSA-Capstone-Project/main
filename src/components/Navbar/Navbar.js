@@ -61,7 +61,9 @@ const Navbar = ({setDisplay}) => {
           <AccountCircleIcon fontSize="large" />
         </Box>
 
-        <MenuItem icon={<AccountCircleIcon fontSize="large" />}>
+        <MenuItem 
+          onClick={() => setDisplay("Profile")}
+          icon={<AccountCircleIcon fontSize="large" />}>
           Profile
         </MenuItem>
 
