@@ -42,7 +42,7 @@ const LargeGuage = (props) => {
             backgroundImage: `linear-gradient(45deg, #379f93 ${Math.round(
               percentDone
             )}%, #3358f4 100%)`,
-            height: "15rem",
+            height: "18rem",
             width: "15rem",
             display: "flex",
             flexDirection: "column",
@@ -98,7 +98,6 @@ const LargeGuage = (props) => {
               <AddCircleOutlineIcon onClick={()=>handleAdd(props.progress)}/>
              </Box>
 
-
           </Box>
             <Box sx={{ textAlign:'center',color: "#fff", fontSize: 12, fontWeight: 600 }}>
               Progress
@@ -136,7 +135,7 @@ const LargeGuage = (props) => {
             backgroundImage: `linear-gradient(45deg, #379f93 ${Math.round(
               percentDone
             )}%, #3358f4 100%)`,
-            height: "15rem",
+            height: "18rem",
             width: "15rem",
             display: "flex",
             flexDirection: "column",
@@ -212,7 +211,7 @@ const LargeGuage = (props) => {
             backgroundImage: `linear-gradient(45deg, pink ${Math.round(
               percentDone
             )}%, red 100%)`,
-            height: "15rem",
+            height: "18rem",
             width: "15rem",
             display: "flex",
             flexDirection: "column",
