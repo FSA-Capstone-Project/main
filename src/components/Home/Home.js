@@ -9,6 +9,7 @@ import { useProSidebar } from "react-pro-sidebar";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import AllHabits from "../AllHabits/AllHabits";
+import Profile from "../Profile/Profile";
 
 const Home = () => {
   const [view, setView] = useState("Dashboard");
@@ -61,6 +62,12 @@ const Home = () => {
         {view === "MemoryGame" ? (
           <Box>
             <MemoryGame />
+          </Box>
+        ) : null}
+
+{view === "Profile" ? (
+          <Box>
+            <Profile />
           </Box>
         ) : null}
       </Box>
