@@ -5,6 +5,7 @@ import { app, auth } from "../../firebase";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
 import { Grid } from "@mui/material";
+import Voice from "../../API/openAi/chat";
 
 const Dashboard = () => {
 
@@ -43,7 +44,8 @@ const Dashboard = () => {
             <Grid item xs={12} md={12} >
               <Header title={title}/>
             </Grid>
-          {/* Second Row */}
+        {/* Second Row */}
+        <Voice/>
           <Grid item xs={12} md={12}>
             <TrackedApps data = {habits}/>
           </Grid>
