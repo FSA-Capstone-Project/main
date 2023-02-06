@@ -3,11 +3,15 @@ import { Box, Grid, Typography } from "@mui/material";
 import { auth, app } from "../firebase";
 // import Robot from "../API/openAi/chatGPT";
 import {useMediaQuery} from "@mui/material/";
+import { AddHabit } from "../components";
+import { Modal, Button } from "@mui/material";
 
 
 const Header = ({title}) => {
   const [name, setName] = useState("");
   const largeScreen = useMediaQuery(theme => theme.breakpoints.up('md'));
+  const [showForm, setShowForm] = useState(false);
+  // const [habits, setHabits] = useState([]);
 
   useEffect(() => {
     app
@@ -27,6 +31,10 @@ const Header = ({title}) => {
       });
   }, []);
 
+  const showFormHandler = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <Box>
       <Grid
@@ -45,9 +53,26 @@ const Header = ({title}) => {
             Welcome back, {name}. We've missed you!
           </Typography>
         </Grid>
-        <Grid item xs={3} color="white"></Grid>
-        <Grid item xs={3}>
-          <Box>A img, or links over here</Box>
+        <Grid item xs={5} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button
+            size="large"
+            variant="contained"
+            style={{ margin: 6, padding: "6px" }}
+            onClick={showFormHandler}
+          >
+            +
+        </Button>
+        <Modal
+        open={showForm}
+        onClose={showFormHandler}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <AddHabit />
+        </Modal>
         </Grid>
       </Grid>
     </Box>
