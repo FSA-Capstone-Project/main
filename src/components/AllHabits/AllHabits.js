@@ -35,9 +35,6 @@ const AllHabits = () => {
       });
   }, [])
 
-  const showFormHandler = () => {
-    setShowForm(!showForm);
-  };
 
   const changeHabit = (habit) => {
     setSelectedHabit(habit);
@@ -56,28 +53,16 @@ const AllHabits = () => {
        overflow: 'auto'
     }}>
       <Header  title={title}/>
-      <Grid style={{ display: "flex", alignItems: "center", justifyContent: "center", margin: 10, borderRadius: "20px" }}>
-        <Button
-          size="small"
-          variant="contained"
-          style={{ margin: 6, padding: 2 }}
-          onClick={showFormHandler}
-        >
-          Add Habit
-        </Button>
-        {showForm && <AddHabit />}
-      </Grid>
-
       {habits.length ? (
         habits.map((habit) => (
           <Grid containerSpacing={6} margin={2} borderRadius={"20px"} justify="center" alignItems="center">
             <Grid item xs={6} md={12} bgcolor="#26293c">
-              <h3 style={{ color: "whitesmoke" }}>{`${habit.title}`}</h3>
+              <h3 style={{ color: "whitesmoke", padding: "10px" }}>{`${habit.title}`}</h3>
               {/* These are the individual habits */}
               <Button
                 size="small"
                 variant="contained"
-                style={{ margin: 4, padding: 2, color: "limegreen" }}
+                style={{ margin: 4, marginTop: "10px", marginLeft: "10px", marginRight: "10px", color: "limegreen" }}
                 onClick={() => changeHabit(habit)}
               >
                 {`${Math.round((habit.progress / habit.goal) * 100)}%`}
