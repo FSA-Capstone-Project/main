@@ -3,17 +3,18 @@ import { Box, Typography } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import { auth, app } from "../../firebase";
+import { auth, app, db } from "../../firebase";
+
 
 const LargeGuage = (props) => {
 
   const today = new Date();
   const timeRemaining = (props.due - today) / (1000 * 60 * 60 * 24);
   const percentDone = Math.round((props.progress / props.goal) * 100);
-  const [prog, setProg] = useState(props.progress)
+  let [prog, setProg] = useState(props.progress)
 
-  const handleAdd = async (number) => {
-    setProg(number + 1)
+  const handleAdd = async () => {
+    setProg(prog ++)
     const docRef = app
     .firestore()
     .collection("users")
@@ -23,8 +24,8 @@ const LargeGuage = (props) => {
     await docRef.update({progress: prog});
   };
 
-  const handleSubtract = async (number) => {
-    setProg(number - 1)
+  const handleSubtract = async () => {
+    setProg(prog--)
     const docRef = app
     .firestore()
     .collection("users")
@@ -33,6 +34,7 @@ const LargeGuage = (props) => {
     .doc(`${props.habit}`)
     await docRef.update({progress: prog});
   };
+
 
   return (
     <Box>
@@ -79,7 +81,7 @@ const LargeGuage = (props) => {
           <Box sx={{display:'flex', width:'100%', flexDirection:'row', justifyContent:"space-between", alignItems:'center'}}>
 
              <Box>
-              <RemoveCircleOutlineIcon onClick={()=>handleSubtract(props.progress)}/>
+              <RemoveCircleOutlineIcon onClick={()=>handleSubtract()}/>
              </Box>
 
             <Box
@@ -95,7 +97,7 @@ const LargeGuage = (props) => {
             >{`${Math.round(percentDone)}%`}</Box>
 
              <Box>
-              <AddCircleOutlineIcon onClick={()=>handleAdd(props.progress)}/>
+              <AddCircleOutlineIcon onClick={()=>handleAdd()}/>
              </Box>
 
           </Box>
