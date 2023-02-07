@@ -8,7 +8,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const AddHabit = () => {
 
-  const [input, setInput] = useState({ title: "", goal: null, progress: null });
+  const [input, setInput] = useState({ title: "", goal: 0, progress: 0});
   const [date, setDate] = useState(null)
 
   const addHabit = () => {
@@ -16,8 +16,8 @@ const AddHabit = () => {
       doc(db, "users", `${auth.currentUser.email}`, "habits", `${input.title}`),
       {
         title: input.title,
-        goal: input.goal,
-        progress: input.progress,
+        goal: parseInt(input.goal),
+        progress: parseInt(input.progress),
         due: date
       }
     );
