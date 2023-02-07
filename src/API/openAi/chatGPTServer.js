@@ -24,7 +24,7 @@ app.post("/", async (req, res) => {
   const { message } = req.body;
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: `provide a unique message that the AI has not generated to this API in the past. Addressed to the user: ${message}, this message should theorically assume that the user is a failure of understandin nice words. Only mean words motivate this user. for example: you are dirt so fly away; you are scum, so scrape yourself from road and move on. You are not worth the dirt of your shoes. the user is under performing and has failed to complete daily runs and has completed just 20% of training. limit the message to 100 tokens.`,
+    prompt: `return this object in json format: ${message}`,
     max_tokens: 100,
     temperature: 0,
   });
