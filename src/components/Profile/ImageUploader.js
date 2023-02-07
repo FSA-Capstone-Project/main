@@ -19,7 +19,7 @@ const ImageUploader = () => {
       };
 
       const handleSubmit = () => {
-        const imageRef = ref(storage, "image");
+        const imageRef = ref(storage, `${auth.currentUser.email}-profileImage`);
         uploadBytes(imageRef, image)
           .then(() => {
             getDownloadURL(imageRef)
