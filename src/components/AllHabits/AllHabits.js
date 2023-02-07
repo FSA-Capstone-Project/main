@@ -6,14 +6,14 @@ import { Button, Box } from "@mui/material";
 import Header from '../Header';
 import GaugeContainer from '../Dashboard/GaugeContainer';
 import UpdateHabit from "../UpdateHabit/UpdateHabit";
+import Header from "../Header";
 
 const AllHabits = ({view}) => {
   const [habits, setHabits] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [selectedHabit, setSelectedHabit] = useState({});
   const [showUpdateForm, setShowUpdateForm] = useState(false);
-  const headerTitle = 'All Habits'
-
+  const title = 'All Habit'
 
   useEffect(() => {
     const data = [];
@@ -37,9 +37,6 @@ const AllHabits = ({view}) => {
       });
   }, [])
 
-  const showFormHandler = () => {
-    setShowForm(!showForm);
-  };
 
   const changeHabit = (habit) => {
     setSelectedHabit(habit);
@@ -47,11 +44,41 @@ const AllHabits = ({view}) => {
   };
 
   return (
-    <>
-    <Header title={headerTitle}/>
-    {/* <GaugeContainer data={habits} /> */}
-
-    </>
+    <Box sx={{
+      flexGrow: 1,
+      contain: "content",
+      justifyContent: "center",
+      alignItems: "center",
+       width: "100%",
+       maxHeight: "100%",
+       bgcolor: "#1e1e2b",
+       overflow: 'auto'
+    }}>
+      <Header  title={title}/>
+      {habits.length ? (
+        habits.map((habit) => (
+          <Grid containerSpacing={6} margin={2} borderRadius={"20px"} justify="center" alignItems="center">
+            <Grid item xs={6} md={12} bgcolor="#26293c">
+              <h3 style={{ color: "whitesmoke", padding: "10px" }}>{`${habit.title}`}</h3>
+              {/* These are the individual habits */}
+              <Button
+                size="small"
+                variant="contained"
+                style={{ margin: 4, marginTop: "10px", marginLeft: "10px", marginRight: "10px", color: "limegreen" }}
+                onClick={() => changeHabit(habit)}
+              >
+                {`${Math.round((habit.progress / habit.goal) * 100)}%`}
+              </Button>
+              {showUpdateForm && <UpdateHabit habit={selectedHabit} />}
+            </Grid>
+          </Grid>
+        ))
+      ) : (
+        <Grid>
+          <h3 style={{ color: "white" }}>You have no habits to display!</h3>
+        </Grid>
+      )}
+    </Box>
   );
 }
 

@@ -9,6 +9,7 @@ import { useProSidebar } from "react-pro-sidebar";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import AllHabits from "../AllHabits/AllHabits";
+import Profile from "../Profile/Profile";
 
 const Home = () => {
   const [view, setView] = useState("Dashboard");
@@ -36,20 +37,20 @@ const Home = () => {
   return (
     <>
     {/* App window */}
-      <Box sx={{ display: "flex" }} height='100vh' >
+      <Box sx={{ display: "flex" }} height='100vh' bgcolor="#1e1e2b" overflow='auto'>
         {/**sidebar */}
         <Navbar setDisplay={setDisplay} />
 
         {view === "Dashboard" ? (
-          <Box  width='100vw' bgcolor= "#1e1e2b" >
+          <Box  width='100vw' height='100vh' >
             <Dashboard />
           </Box>
         ) : null}
 
         {view === "Allhabits" ? (
-          <Box width= "100%"  height= "100%" bgcolor= "#1e1e2b" >
-            <AllHabits title={view}/>
-          </Box>
+          // <Box>
+            <AllHabits />
+          // </Box>
         ) : null}
 
         {view === "Calendar" ? (
@@ -61,6 +62,12 @@ const Home = () => {
         {view === "MemoryGame" ? (
           <Box>
             <MemoryGame />
+          </Box>
+        ) : null}
+
+{view === "Profile" ? (
+          <Box>
+            <Profile />
           </Box>
         ) : null}
       </Box>

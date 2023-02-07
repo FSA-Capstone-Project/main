@@ -40,7 +40,7 @@ const AddHabit = () => {
         display="flex"
         flexDirection="column"
         bgcolor="#16161a"
-        borderRadius="15px"
+        borderRadius="20px"
         alignItems="center"
         justifyContent="center"
         height="300px"
@@ -63,7 +63,7 @@ const AddHabit = () => {
           // inputProps={{ type: "text", value: input.title }}
         />
 
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} style={{ backgroundColor: "#fffffe" }}>
           <DatePicker
             color="white"
             label="Goal Date"

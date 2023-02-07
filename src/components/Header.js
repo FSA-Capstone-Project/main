@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { auth, app } from "../firebase";
 // import Robot from "../API/openAi/chatGPT";
-
 import {useMediaQuery} from "@mui/material/";
+import { AddHabit } from "../components";
+import { Modal, Button } from "@mui/material";
 
 
-const Header = (headerTitle) => {
+const Header = ({title}) => {
   const [name, setName] = useState("");
   const largeScreen = useMediaQuery(theme => theme.breakpoints.up('md'));
+  const [showForm, setShowForm] = useState(false);
+  // const [habits, setHabits] = useState([]);
 
 
   useEffect(() => {
@@ -29,6 +32,10 @@ const Header = (headerTitle) => {
       });
   }, []);
 
+  const showFormHandler = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <Box>
       <Grid
@@ -37,19 +44,36 @@ const Header = (headerTitle) => {
         xs={10}
         md={10}
         margin="auto"
-        marginTop="4rem"
+        marginTop="2rem"
         bgcolor="#26293c"
-        borderRadius="15px"
+        borderRadius="20px"
       >
         <Grid item xs={6} p="2rem">
-          <Typography variant="h3" color="whitesmoke">{`${headerTitle.title} DashBoard`}</Typography>
+          <Typography variant="h3" color="whitesmoke">{title} DashBoard</Typography>
           <Typography variant="darktext">
-            {` Welcome back, ${name}. We've missed you! `}
+            Welcome back, {name}. We've missed you!
           </Typography>
         </Grid>
-        <Grid item xs={3} color="white"></Grid>
-        <Grid item xs={3}>
-          <Box>A img, or links over here</Box>
+        <Grid item xs={5} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button
+            size="large"
+            variant="contained"
+            style={{ margin: 6, padding: "6px" }}
+            onClick={showFormHandler}
+          >
+            +
+        </Button>
+        <Modal
+        open={showForm}
+        onClose={showFormHandler}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <AddHabit />
+        </Modal>
         </Grid>
       </Grid>
     </Box>

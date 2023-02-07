@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Grid } from "@mui/material/";
+import Header from "../Header";
+
 
 const MemoryGame = () => {
   const [order, setOrder] = useState([]);
@@ -7,6 +9,7 @@ const MemoryGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [level, setLevel] = useState(1);
   const [gameOver, setGameOver] = useState(false);
+  const title = "Memory Game";
 
   const toggleGame = () => {
     if (!gameStarted) {
@@ -65,7 +68,7 @@ const MemoryGame = () => {
       }
     }, 250);
   };
-  
+
   const wrongBoxAnimation = () => {
     const boxes = document.getElementsByClassName("MuiGrid-root");
     for (let i = 0; i < boxes.length; i++) {
@@ -87,6 +90,7 @@ const MemoryGame = () => {
   return (
     <>
       <Box className="Game">
+        <Header title={title} />
         <Box className="Level">Level: {String(level)}</Box>
         <Box
           sx={{

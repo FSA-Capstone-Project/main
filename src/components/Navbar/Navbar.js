@@ -10,8 +10,11 @@ import MemorySharpIcon from '@mui/icons-material/MemorySharp'
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
+import Avatar from "@mui/material/Avatar";
 
 const Navbar = ({setDisplay}) => {
+
+  const user = auth.currentUser
 
   const { collapseSidebar, collapsed, defaultCollapsed } = useProSidebar();
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
@@ -52,16 +55,23 @@ const Navbar = ({setDisplay}) => {
           alignItems="center"
           justifyContent="center"
           // do a media query based on the sidebar being collapsed??
-          height={sidebarIsOpen === true ? "12rem" : "4rem"}
-          // height="4rem"
-          width="80%"
+          height={sidebarIsOpen === true ? "12.5rem" : "4.5rem"}
+          width={sidebarIsOpen === true ? "12.5rem" : "4.5rem"}
+          
           bgcolor="#3358f4"
           boxShadow="0px 0px 12px #94a1b2"
         >
-          <AccountCircleIcon fontSize="large" />
+          {sidebarIsOpen ? 
+          <Avatar src={user.photoURL} sx={{ width: "12rem", height: "12rem",  }} />
+          :
+          <Avatar src={user.photoURL} sx={{ width: "4rem", height: "4rem",  }} />
+          }
+          
         </Box>
 
-        <MenuItem icon={<AccountCircleIcon fontSize="large" />}>
+        <MenuItem 
+          onClick={() => setDisplay("Profile")}
+          icon={<AccountCircleIcon fontSize="large" />}>
           Profile
         </MenuItem>
 

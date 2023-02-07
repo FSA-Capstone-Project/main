@@ -1,12 +1,38 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
-import { SmsFailed } from "@mui/icons-material";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { app, auth } from "../../firebase";
 
 const LargeGuage = (props) => {
+
   const today = new Date();
   const timeRemaining = (props.due - today) / (1000 * 60 * 60 * 24);
   const percentDone = Math.round((props.progress / props.goal) * 100);
+  const [prog, setProg] = useState(props.progress)
+
+  const handleAdd = async (number) => {
+    setProg(number + 1)
+    const docRef = app
+    .firestore()
+    .collection("users")
+    .doc(`${auth.currentUser.email}`)
+    .collection("habits")
+    .doc(`${props.habit}`)
+    await docRef.update({progress: prog});
+  };
+
+  const handleSubtract = async (number) => {
+    setProg(number - 1)
+    const docRef = app
+    .firestore()
+    .collection("users")
+    .doc(`${auth.currentUser.email}`)
+    .collection("habits")
+    .doc(`${props.habit}`)
+    await docRef.update({progress: prog});
+  };
 
   return (
     <Box>
@@ -21,7 +47,7 @@ const LargeGuage = (props) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: "20px",
+            padding: "15px",
             alignItems: "center",
             borderRadius: "12px",
             marginLeft: "auto",
@@ -29,7 +55,7 @@ const LargeGuage = (props) => {
             border: "1px solid grey",
             boxShadow: "3px 3px 12px black",
           }}
-        >
+        >    
           <Box
             sx={{
               textAlign: "center",
@@ -37,12 +63,25 @@ const LargeGuage = (props) => {
               fontSize: 30,
               letterSpacing: "-.2rem",
               color: "#22223b",
+              marginBottom:'.2rem'
             }}
           >
             {props.title}
+            <Box sx={{textAlign: "center",
+              fontWeight: 600,
+              fontSize: 14,
+              letterSpacing: "0rem",
+              marginTop:'-.5rem'}}
+              >
+                {`${props.progress} / ${props.goal}`}</Box>
           </Box>
+          
+          <Box sx={{display:'flex', width:'100%', flexDirection:'row', justifyContent:"space-between", alignItems:'center'}}>
 
-          <Box sx={{ textAlign: "center" }}>
+             <Box>
+              <RemoveCircleOutlineIcon onClick={()=>handleSubtract(props.progress)}/>
+             </Box>
+
             <Box
               sx={{
                 fontWeight: 800,
@@ -51,19 +90,26 @@ const LargeGuage = (props) => {
                 fontSize: 60,
                 letterSpacing: "-.2rem",
                 color: "#22223b",
+                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
               }}
             >{`${Math.round(percentDone)}%`}</Box>
-            <Box sx={{ color: "#fff", fontSize: 12, fontWeight: 600 }}>
+             
+             <Box>
+              <AddCircleOutlineIcon onClick={()=>handleAdd(props.progress)}/>
+             </Box>
+
+          </Box>
+            <Box sx={{ textAlign:'center',color: "#fff", fontSize: 12, fontWeight: 600 }}>
               Progress
             </Box>
-          </Box>
-
+         
           <Box>
             <Typography
               sx={{ display: "flex", justifyContent: "center" }}
               component="div"
               color="#2b2e40"
-              fontWeight="400"
+              fontWeight="500"
+              letterSpacing='0rem'
             >
               {`Days Left:${Math.round(timeRemaining)}`}
             </Typography>
@@ -81,7 +127,8 @@ const LargeGuage = (props) => {
             />
           </Box>
         </Box>
-      ) : // COMPLETED
+
+      ) : // ---------------COMPLETED--------------------------
       timeRemaining > 0 && percentDone >= 100 ? (
         <Box
           sx={{
@@ -93,7 +140,7 @@ const LargeGuage = (props) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: "20px",
+            padding: "15px",
             alignItems: "center",
             borderRadius: "12px",
             marginLeft: "auto",
@@ -123,6 +170,7 @@ const LargeGuage = (props) => {
                 fontSize: 60,
                 letterSpacing: "-.2rem",
                 color: "#22223b",
+                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
               }}
             >{`${Math.round(percentDone)}%`}</Box>
             <Box sx={{ color: "limegreen", fontSize: 14, fontWeight: 600 }}>
@@ -135,7 +183,8 @@ const LargeGuage = (props) => {
               sx={{ display: "flex", justifyContent: "center" }}
               component="div"
               color="#2b2e40"
-              fontWeight="400"
+              fontWeight="500"
+              letterSpacing='0rem'
             >
               {`Days Left:${Math.round(timeRemaining)}`}
             </Typography>
@@ -153,7 +202,9 @@ const LargeGuage = (props) => {
             />
           </Box>
         </Box>
-      ) : // FAILED
+
+
+      ) : // ----------------------- FAILED ----------------------------------
       timeRemaining < 0 && percentDone < 100 ? (
         <Box
           sx={{
@@ -165,7 +216,7 @@ const LargeGuage = (props) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: "20px",
+            padding: "15px",
             alignItems: "center",
             borderRadius: "12px",
             marginLeft: "auto",
@@ -195,6 +246,7 @@ const LargeGuage = (props) => {
                 fontSize: 60,
                 letterSpacing: "-.2rem",
                 color: "#22223b",
+                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
               }}
             >{`${Math.round(percentDone)}%`}</Box>
             <Box sx={{ color: "red", fontSize: 14, fontWeight: 600 }}>
@@ -207,7 +259,8 @@ const LargeGuage = (props) => {
               sx={{ display: "flex", justifyContent: "center" }}
               component="div"
               color="#2b2e40"
-              fontWeight="400"
+              fontWeight="500"
+              letterSpacing='0rem'
             >
               {(props.due - today) / (1000 * 60 * 60 * 24) > 0
                 ? `Days Left:
@@ -232,5 +285,7 @@ const LargeGuage = (props) => {
     </Box>
   );
 };
+
+
 
 export default LargeGuage;
