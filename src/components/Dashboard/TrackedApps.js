@@ -4,6 +4,7 @@ import { Grid, Box } from "@mui/material";
 // import data from "./LineChart/LineChartData";
 import LiquidGuage from "../Guages/LiquidGuage";
 import { useMediaQuery } from "@mui/material/";
+import dashLogo from '../../illistration/dashLogo.svg'
 
 function TrackedApps() {
   const largeScreen = useMediaQuery((theme) => theme.breakpoints.up("md"));
@@ -27,8 +28,12 @@ function TrackedApps() {
         margin="auto"
         direction={largeScreen ? "row" : "column"}
       >
-        <Grid item xs={6} bgcolor="#16161a" borderRadius="15px" height="300px">
-          {/* <LineChart data={data}/> */}
+        <Grid item xs={6}  borderRadius="15px" height="300px">
+          <Box marginLeft='5rem'>
+          <img src={dashLogo} />
+
+          </Box>
+          {/* <AIPhoto /> */}
         </Grid>
         <Grid
           item

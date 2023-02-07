@@ -13,6 +13,7 @@ const Header = ({title}) => {
   const [showForm, setShowForm] = useState(false);
   // const [habits, setHabits] = useState([]);
 
+
   useEffect(() => {
     app
       .firestore()

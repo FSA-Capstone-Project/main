@@ -55,7 +55,7 @@ const LargeGuage = (props) => {
             border: "1px solid grey",
             boxShadow: "3px 3px 12px black",
           }}
-        >    
+        >
           <Box
             sx={{
               textAlign: "center",
@@ -75,7 +75,7 @@ const LargeGuage = (props) => {
               >
                 {`${props.progress} / ${props.goal}`}</Box>
           </Box>
-          
+
           <Box sx={{display:'flex', width:'100%', flexDirection:'row', justifyContent:"space-between", alignItems:'center'}}>
 
              <Box>
@@ -93,7 +93,7 @@ const LargeGuage = (props) => {
                 textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
               }}
             >{`${Math.round(percentDone)}%`}</Box>
-             
+
              <Box>
               <AddCircleOutlineIcon onClick={()=>handleAdd(props.progress)}/>
              </Box>
@@ -102,7 +102,7 @@ const LargeGuage = (props) => {
             <Box sx={{ textAlign:'center',color: "#fff", fontSize: 12, fontWeight: 600 }}>
               Progress
             </Box>
-         
+
           <Box>
             <Typography
               sx={{ display: "flex", justifyContent: "center" }}

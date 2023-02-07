@@ -28,6 +28,9 @@ const theme = createTheme({
         },
         h3: {
           color: '#94a1b2'
+        },
+        h1: {
+          color: '#94a1b2'
         }
       },
 

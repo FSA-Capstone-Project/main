@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { db } from "../../firebase";
 import { collection } from "firebase/firestore";
-
+import { Box } from "@mui/system";
 import SignUp from "../SignUp/SignUp";
 import Login from "../Login/Login";
 
@@ -15,20 +15,22 @@ const LoginForm = () => {
   const [toggleLoginForm, setLoginForm] = useState(true);
   const collectionRef = collection(db, "users");
 
-  const switchForm = ()=>{
-    setLoginForm(!toggleLoginForm)
-  }
+  const switchForm = () => {
+    setLoginForm(!toggleLoginForm);
+  };
 
   //for styling.. the whole dom needs a bg color and each componentent will
   // be colored to give contrast
 
   return (
     <>
-      {toggleLoginForm ? (
-        <Login switchForm={switchForm}/>
-      ) : (
-        <SignUp switchForm={switchForm} />
-      )}
+      <Box bgcolor="#1e1e2b">
+        {toggleLoginForm ? (
+          <Login switchForm={switchForm} />
+        ) : (
+          <SignUp switchForm={switchForm} />
+        )}
+      </Box>
     </>
   );
 };
