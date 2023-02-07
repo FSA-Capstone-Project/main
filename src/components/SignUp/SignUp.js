@@ -74,8 +74,9 @@ const SignUp = ({switchForm}) =>{
         borderRadius="15px"
         alignItems="center"
         justifyContent="center"
-        height="500px"
+        height="550px"
         width="300px"
+
       >
          <Typography variant="darktext" sx={{ fontSize: "25px" }}>
           <AccessibleForwardIcon sx={{ fontSize: "2em" }} />
@@ -163,7 +164,10 @@ const SignUp = ({switchForm}) =>{
             variant="text"
             onClick={handleLogin}
           >
+            <Typography variant="purple">
+
             Sign In
+            </Typography>
           </Button>
           </Typography>
 

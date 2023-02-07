@@ -66,12 +66,26 @@ const AddHabit = () => {
 
         <LocalizationProvider dateAdapter={AdapterDayjs} style={{ backgroundColor: "#fffffe"}}>
           <DatePicker
+            color="white"
             label="Goal Date"
+            sx={{ color: "red" }}
             value={date}
             onChange={(newValue) => {
               setDate(newValue.$d);
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField
+                sx={{
+                  bgcolor: "#fffffe",
+                  borderRadius: "9px",
+
+                  input: { color: '#fff' },
+                  // input: { color },
+                  label: { color: 'white'  },
+                }}
+                {...params}
+              />
+            )}
           />
         </LocalizationProvider>
 
