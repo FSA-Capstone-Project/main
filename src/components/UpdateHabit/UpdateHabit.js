@@ -69,9 +69,10 @@ const UpdateHabit = () => {
         justifyContent="center"
         height="300px"
         width="300px"
+        marginBottom="20px"
       >
         <Typography variant="darktext" sx={{ fontSize: "25px" }}></Typography>
-        <Typography variant="purple" sx={{ fontSize: "2em", margin: "5px" }}>
+        <Typography variant="purple" sx={{ fontSize: "2em", margin: "5px"}}>
           Update Your Habit
           {/* {`${habit.title}`} */}
         </Typography>
@@ -115,7 +116,7 @@ const UpdateHabit = () => {
         </LocalizationProvider>
         <Button
           variant="contained"
-          sx={{ margin: "5px" }}
+          sx={{ margin: "5px", padding: "4px", marginBottom: "12px" }}
           onClick={changeHabit}
           endIcon={<AccessibleForwardIcon />}
         >

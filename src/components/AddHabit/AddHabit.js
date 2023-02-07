@@ -56,14 +56,14 @@ const AddHabit = () => {
           size="small"
           name="title"
           placeholder="Habit Name"
-          sx={{ margin: 1, bgcolor: "#fffffe", borderRadius: "9px" }}
+          sx={{ margin: ".5px", bgcolor: "#fffffe", borderRadius: "9px" }}
           type="text"
           onChange={handleChange}
           value={input.title}
           // inputProps={{ type: "text", value: input.title }}
         />
 
-        <LocalizationProvider dateAdapter={AdapterDayjs} style={{ backgroundColor: "#fffffe" }}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} style={{ backgroundColor: "#fffffe"}}>
           <DatePicker
             color="white"
             label="Goal Date"
@@ -93,7 +93,7 @@ const AddHabit = () => {
           size="small"
           name="goal"
           placeholder="Goal (Number)"
-          sx={{ margin: 1, bgcolor: "#fffffe", borderRadius: "9px" }}
+          sx={{ margin: "7px", bgcolor: "#fffffe", borderRadius: "9px" }}
           type="number"
           onChange={handleChange}
           value={input.goal}
@@ -103,7 +103,7 @@ const AddHabit = () => {
         <TextField
           variant="outlined"
           size="small"
-          sx={{ margin: 1, bgcolor: "#fffffe", borderRadius: "9px" }}
+          sx={{ margin: "1px", bgcolor: "#fffffe", borderRadius: "9px" }}
           name="progress"
           placeholder="Progress"
           onChange={handleChange}
