@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import { app, auth } from "../../firebase";
+import { auth, app } from "../../firebase";
 
 const LargeGuage = (props) => {
 

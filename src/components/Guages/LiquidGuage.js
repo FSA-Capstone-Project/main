@@ -1,16 +1,19 @@
 import { color } from 'd3-color';
 import { interpolateRgb } from 'd3-interpolate';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LiquidFillGauge from 'react-liquid-gauge';
-import { auth, db } from "../../firebase";
+import { auth, db, app } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 const LiquidGuage = (props) => {
 
-    const [progress, setProgress] = useState(0);
+    const [prog, setProg] = useState(0);
     const [goal, setGoal] = useState(0);
-
     const today = new Date();
+
+    useEffect(()=>{
+        getData()
+    },[])
 
     const getData = async () => {
       const docRef = doc(
@@ -24,11 +27,22 @@ const LiquidGuage = (props) => {
       if (docSnap.exists()) {
         let habitProgress = docSnap.data().progress;
         let goal = docSnap.data().goal;
-        setProgress(habitProgress);
+        setProg(habitProgress);
         setGoal(goal);
       }
     };
-    getData();
+
+
+    const handleAdd = async (number) => {
+        setProg(number + 1)
+        const docRef = app
+        .firestore()
+        .collection("users")
+        .doc(`${auth.currentUser.email}`)
+        .collection("habits")
+        .doc(`Water`)
+        await docRef.update({progress: prog});
+      };
 
     const startColor = '#2087f7'; // cornflowerblue
     const endColor = '#2087f7'; // crimson
@@ -61,10 +75,10 @@ const LiquidGuage = (props) => {
         return (
             <div>
                 <LiquidFillGauge
-                    style={{ margin: '0 auto' }}
+                    style={{ margin: '0 auto'}}
                     width={radius * 2}
                     height={radius * 2}
-                    value={(Math.round((progress/goal) * 100))} //
+                    value={(Math.round((prog/goal) * 100))} //
                     percent="%"
                     textSize={1}
                     textOffsetX={0}
@@ -110,11 +124,14 @@ const LiquidGuage = (props) => {
                 />
                 <div
                     style={{
+                        display:'flex',
                         margin: '20px auto',
-                        width: 120
+                        width: 120,
+                        justifyContent:"center"
                     }}
-                >
+                ><button onClick={()=>handleAdd(prog)}>Add Water</button>
                 </div>
+               
             </div>
         );
     }
