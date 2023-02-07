@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react';
 import LiquidFillGauge from 'react-liquid-gauge';
 import { auth, db, app } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { Button } from '@mui/material';
 
 const LiquidGuage = (props) => {
 
     const [prog, setProg] = useState(0);
     const [goal, setGoal] = useState(0);
+    const [percentDone, setPercentDone] = useState(0)
     const today = new Date();
 
     useEffect(()=>{
@@ -29,6 +31,7 @@ const LiquidGuage = (props) => {
         let goal = docSnap.data().goal;
         setProg(habitProgress);
         setGoal(goal);
+        setPercentDone((prog / goal) * 100)
       }
     };
 
@@ -44,13 +47,13 @@ const LiquidGuage = (props) => {
         await docRef.update({progress: prog});
       };
 
-    const startColor = '#2087f7'; // cornflowerblue
-    const endColor = '#2087f7'; // crimson
+    const startColor = '#7df9ff'; // cornflowerblue
+    const endColor = '#2087f7'; // crimson#ADD8E6
 
 
         const radius = 120;
         const interpolate = interpolateRgb(startColor, endColor);
-        const fillColor = interpolate(0 / 100);
+        const fillColor = interpolate(prog / goal);
         const gradientStops = [
             {
                 key: '0%',
@@ -129,7 +132,15 @@ const LiquidGuage = (props) => {
                         width: 120,
                         justifyContent:"center"
                     }}
-                ><button onClick={()=>handleAdd(prog)}>Add Water</button>
+                >
+                <Button
+                    sx={{
+                        color:'black',
+                        backgroundColor:fillColor,
+                    }}
+                    onClick={()=>handleAdd(prog)}
+                    variant="contained"
+                    >Add Water</Button>
                 </div>
                
             </div>

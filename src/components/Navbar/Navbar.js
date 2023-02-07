@@ -77,7 +77,7 @@ const Navbar = ({setDisplay}) => {
 
         <MenuItem
           onClick={() => setDisplay("Allhabits")}
-          icon={<HomeRoundedIcon fontSize="large" />}
+          icon={<HomeRoundedIcon fontSize="large"/>}
         >
           Home
         </MenuItem>
