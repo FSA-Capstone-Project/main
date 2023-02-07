@@ -57,7 +57,7 @@ const Header = ({title}) => {
           <Button
             size="large"
             variant="contained"
-            style={{ margin: 6, padding: "6px" }}
+            style={{ margin: 6, padding: "6px", fontSize: "2.5rem" }}
             onClick={showFormHandler}
           >
             +
