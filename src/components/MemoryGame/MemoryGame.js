@@ -91,7 +91,7 @@ const MemoryGame = () => {
     <>
       <Box className="Game">
         <Header title={title} />
-        <Box className="Level">Level: {String(level)}</Box>
+        <Box className="Level" style={{ color: 'limegreen', marginTop: "2rem", marginLeft: "2rem"}}>Level: {String(level)}</Box>
         <Box
           sx={{
             height: "50vh",
@@ -99,6 +99,7 @@ const MemoryGame = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            marginLeft: "5rem"
           }}
         >
           <Grid container spacing={2}>
