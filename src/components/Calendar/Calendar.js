@@ -20,11 +20,11 @@ const InteractiveCalendar = () => {
       alignItems: "center",
        width: "100%",
        maxHeight: "100%",
-       bgcolor: "#1e1e2b",
+      //  bgcolor: "#1e1e2b",
        overflow: 'auto'
     }}>
       <Header title={title}/>
-      <Grid>
+      <Grid style={{ marginTop: "5rem", marginLeft: "30px" }}>
       <Calendar showWeekNumbers onChange={whenChanged} value={date}/>
         {date.toString()}
       </Grid>

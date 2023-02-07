@@ -57,12 +57,12 @@ const AllHabits = () => {
         habits.map((habit) => (
           <Grid containerSpacing={6} margin={2} borderRadius={"20px"} justify="center" alignItems="center">
             <Grid item xs={6} md={12} bgcolor="#26293c">
-              <h3 style={{ color: "whitesmoke", padding: "10px" }}>{`${habit.title}`}</h3>
+              <h3 style={{ color: "whitesmoke", padding: "9px" }}>{`${habit.title}`}</h3>
               {/* These are the individual habits */}
               <Button
                 size="small"
                 variant="contained"
-                style={{ margin: 4, marginTop: "10px", marginLeft: "10px", marginRight: "10px", color: "limegreen" }}
+                style={{ margin: 4, marginBottom: "10px", marginTop: "6px", marginLeft: "10px", marginRight: "10px", color: "limegreen" }}
                 onClick={() => changeHabit(habit)}
               >
                 {`${Math.round((habit.progress / habit.goal) * 100)}%`}
