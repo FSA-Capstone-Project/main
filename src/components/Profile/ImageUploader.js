@@ -3,6 +3,8 @@ import { auth, app, storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 
+import { Button, Box } from "@mui/material";
+
 const ImageUploader = () => {
 
     const user = auth.currentUser
@@ -15,7 +17,7 @@ const ImageUploader = () => {
           setImage(e.target.files[0]);
         }
       };
-    
+
       const handleSubmit = () => {
         const imageRef = ref(storage, "image");
         uploadBytes(imageRef, image)
@@ -40,12 +42,17 @@ const ImageUploader = () => {
 
 
 return (
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
+          <input type="file" onChange={handleImageChange} style={{color:'#94a1b2', paddingLeft:'3rem'}} />
 
-<div className="App">
-      <input type="file" onChange={handleImageChange} />
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
+        <Button variant="contained" onClick={handleSubmit} sx={{m:'2rem'}}>Submit</Button>
+    </Box>
 )
 }
 
 export default ImageUploader
+
+

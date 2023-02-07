@@ -3,7 +3,6 @@ import { auth, app } from '../../firebase';
 import Grid from '@mui/material/Grid';
 import { AddHabit } from "../../components";
 import { Button, Box } from "@mui/material";
-import Header from '../Header';
 import GaugeContainer from '../Dashboard/GaugeContainer';
 import UpdateHabit from "../UpdateHabit/UpdateHabit";
 import Header from "../Header";
