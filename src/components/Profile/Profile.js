@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Grid } from "@mui/material/";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Box } from "@mui/material/";
 import { auth, app } from "../../firebase";
-import { data } from "autoprefixer";
-import { ConstructionOutlined, ContactlessOutlined } from "@mui/icons-material";
+import Avatar from "@mui/material/Avatar";
+import ImageUploader from "./ImageUploader";
 
 const Profile = () => {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [phone, setPhone] = useState("");
-  const [habits, setHabits] = useState([]);
+
+    const user = auth.currentUser
+   
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
+    const [phone, setPhone] = useState("");
+    const [habits, setHabits] = useState([]);
 
   useEffect(() => {
     const data = [];
+    console.log("USEEFFECT", auth.currentUser)
     app
       .firestore()
       .collection("users")
@@ -51,6 +54,7 @@ const Profile = () => {
       });
   }, []);
 
+
   return (
     <Box
       sx={{
@@ -76,13 +80,16 @@ const Profile = () => {
           boxShadow: "3px 3px 20px black",
         }}
       >
-        <AccountCircleIcon/>
+        
+        <Avatar src={user.photoURL} sx={{ width: 150, height: 150 }} />
+        <ImageUploader/>
         <Box>Name: {name}</Box>  
         <Box>Age: {age}</Box>
         <Box>Phone: {phone}</Box>
         <Box>Email: {auth.currentUser.email}</Box>
         <Box>Habits: {habits.length}</Box>
         <Box>Joined: {(auth.currentUser.metadata.creationTime).slice(0,16)}</Box>
+
       </Box>
     </Box>
   );
