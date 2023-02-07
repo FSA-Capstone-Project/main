@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./chat.css";
 
-import { db, app, auth , doc, onSnapshot} from "../../firebase";
+import { db, app, auth } from "../../firebase";
+
+
 
 function Voice(props) {
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
   const [userInfo, setUserInfo] = useState({});
   const [userHabits, setUserHabits] = useState([]);
-  const [userSuccess, setUserSuccess] = useState(null);
+
 
   async function fetchUserInfo() {
     const userInfo = await db.collection("users").doc(`${auth.currentUser.email}`);
@@ -37,34 +39,19 @@ function Voice(props) {
 
   }
 
-   async function fetchUserSucess() {
-    console.log('fetching user success')
-     const userSuccess = await db
-       .collection("users")
-       .doc(`${auth.currentUser.email}`)
-       .collection("habits")
-       .where("progress", ">=", "goal");
-       userSuccess.get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.data());
-        setUserSuccess(doc.data())
-        // console.log('doc in',doc)
-      });
-      console.log('FETCHED user success')
-       })
 
-  }
+
 
 
   useEffect(() => {
     fetchUserInfo();
     fetchUserHabits();
-    fetchUserSucess();
+
+
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userSuccess)
     console.log(userHabits)
     console.log(userInfo)
     fetch("http://localhost:3002/", {
