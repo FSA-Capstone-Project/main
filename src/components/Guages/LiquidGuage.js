@@ -5,6 +5,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 import { auth, db, app } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Button } from '@mui/material';
+import "./Guage.css";
 
 const LiquidGuage = (props) => {
 
@@ -133,7 +134,7 @@ const LiquidGuage = (props) => {
                         justifyContent:"center"
                     }}
                 >
-                <Button
+                <Button className='addWater'
                     sx={{
                         color:'black',
                         backgroundColor:fillColor,
