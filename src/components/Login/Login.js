@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import { Button, TextField, Box, Typography } from "@mui/material/";
+import { Button, TextField, Box, Typography, Divider } from "@mui/material/";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
+import login from '../../illistration/login.svg'
 
 const styles = {
   paragraph: "#94a1b2",
@@ -43,23 +44,34 @@ const Login = ({ switchForm }) => {
   };
 
   return (
-    <Box // login-card
+    <Box // login-page
       display="flex"
-      // flexDirection="column"
+      flexDirection="row"
       alignItems="center"
       justifyContent="center"
       height="100vh"
+
     >
-      <Box // this is the login form
+      <Box // this is the login card
         display="flex"
-        flexDirection="column"
+        flexDirection="row"
+        justifyContent='space-between'
         bgcolor="#16161a"
         borderRadius="15px"
         alignItems="center"
-        justifyContent="center"
-        height="400px"
-        width="300px"
+        // justifyContent="center"
+        height="550px"
+        width="900px"
       >
+        {/* Left side */}
+        <Box
+         display="flex"
+         flexDirection="column"
+         alignItems="center"
+         justifyContent="center"
+         height='100%'
+         width="50%"
+         >
         <Typography variant="darktext" sx={{ fontSize: "25px" }}>
           <AccessibleForwardIcon sx={{ fontSize: "2em" }} />
         </Typography>
@@ -114,6 +126,18 @@ const Login = ({ switchForm }) => {
             </Button>
           </Typography>
         </Box>
+      </Box>
+      <Box
+       display="flex"
+       flexDirection="column"
+       alignItems="center"
+       justifyContent="center"
+       height='100%'
+       width="50%"
+       marginTop='7rem'
+       >
+      <img src={login} alt=""  />
+      </Box>
       </Box>
     </Box>
   );

@@ -119,6 +119,7 @@ const LargeGuage = (props) => {
             <LinearProgress
               variant="determinate"
               value={percentDone}
+              color="primary"
               sx={{
                 height: "2rem",
                 borderRadius: "10px",
