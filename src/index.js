@@ -19,6 +19,12 @@ const theme = createTheme({
           main: "#7f5af0",
         },
       },
+      formControl: {
+        secondary: {
+          color: 'red',
+          borderColor: 'red'
+        }
+      },
       typography: {
         darktext: {
           color: '#94a1b2'
