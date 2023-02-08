@@ -31,6 +31,15 @@ const theme = createTheme({
         },
         h1: {
           color: '#94a1b2'
+        },
+        h5: {
+          color: '#94a1b2'
+        },
+        h2: {
+          color: '#94a1b2'
+        },
+        h4: {
+          color: '#94a1b2'
         }
       },
       components:{

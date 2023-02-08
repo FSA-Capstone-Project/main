@@ -4,6 +4,7 @@ import { collection } from "firebase/firestore";
 import { Box } from "@mui/system";
 import SignUp from "../SignUp/SignUp";
 import Login from "../Login/Login";
+import Hero from "../Login/Hero";
 
 const styles = {
   paragraph: "#94a1b2",
@@ -24,12 +25,14 @@ const LoginForm = () => {
 
   return (
     <>
-      <Box bgcolor="#1e1e2b">
+      <Box bgcolor="#1e1e2b" height='200vh'>
         {toggleLoginForm ? (
           <Login switchForm={switchForm} />
         ) : (
           <SignUp switchForm={switchForm} />
         )}
+        {/*  */}
+        <Hero />
       </Box>
     </>
   );
