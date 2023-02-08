@@ -25,25 +25,19 @@ function Hero() {
          margin='auto'
          marginTop='3rem'
          width='75%'
-        sx={{color: "black"}}>MindMaster</Typography>
+         sx={{color: "#16161a"}}>MindMaster</Typography>
         <Typography
         sx={{color: "#16161a"}}
           margin='auto'
          width='75%'
          marginTop='5rem'
           variant='h2'
-          >Your thougths shape your actions</Typography>
-        <Typography
-        sx={{color: "black"}}
-        variant='h4'
-        margin='auto'
-        marginTop='2rem'
-        width='75%'
-        > and your Goals get you there</Typography>
+          >Your goals shape your actions, and you actions shape your future</Typography>
+
 
 
         <Typography
-        sx={{color: "black"}}
+        sx={{color: "#16161a"}}
         variant='h5'
         margin='auto'
         marginTop='2rem'

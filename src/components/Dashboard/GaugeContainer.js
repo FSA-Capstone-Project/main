@@ -47,8 +47,12 @@ function GaugeContainer() {
 
       >
         {habits.length
+<<<<<<< HEAD
           ? habits.slice(0,).map((habit) => {
             if (habit.title === "Water") return null;
+=======
+          ? habits.slice(0, 4).map((habit) => {
+>>>>>>> a6fb7c2d1bfca64d5b805cec50616f630c51564b
               return (
                 <Grid item xs={3} borderRadius="15px" key={habit.id}>
           <LargeGuage habit={habit.id} title={habit.title} goal={habit.goal} progress={habit.progress} due={habit.due}/>
