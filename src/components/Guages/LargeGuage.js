@@ -5,6 +5,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { auth, app, db } from "../../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
+import "./Guage.css";
 
 const LargeGuage = (props) => {
 
@@ -93,9 +94,9 @@ const LargeGuage = (props) => {
 
           <Box sx={{display:'flex', width:'100%', flexDirection:'row', justifyContent:"space-between", alignItems:'center'}}>
 
-             <Box>
-              <RemoveCircleOutlineIcon onClick={()=>handleSubtract()}/>
-             </Box>
+
+             <button onClick={()=>handleSubtract()}><RemoveCircleOutlineIcon/></button>
+
 
             <Box
               sx={{
@@ -109,9 +110,9 @@ const LargeGuage = (props) => {
               }}
             >{`${Math.round(percentDone)}%`}</Box>
 
-             <Box>
-              <AddCircleOutlineIcon onClick={()=>handleAdd()}/>
-             </Box>
+
+              <button onClick={()=>handleAdd()}><AddCircleOutlineIcon/></button>
+
 
           </Box>
             <Box sx={{ textAlign:'center',color: "#fff", fontSize: 12, fontWeight: 600 }}>

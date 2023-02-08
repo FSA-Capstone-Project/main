@@ -43,8 +43,8 @@ const Dashboard = () => {
               <Header title={title}/>
             </Grid>
         {/* Second Row */}
-        <Voice />
-        <Picture/>
+        {/* <Voice />
+        <Picture/> */}
           <Grid item xs={12} md={12}>
             <TrackedApps />
           </Grid>
