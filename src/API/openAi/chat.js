@@ -43,65 +43,6 @@ function Voice(props) {
 
   }
 
-// async function userSuccessRecords() {
-//       const data = [];
-//  db
-//     .collection("users")
-//     .doc(`${auth.currentUser.email}`)
-//     .collection("habits")
-//     .where("goal", ">=", "1")
-//     .get()
-//     .then((querySnapshot) => {
-//       querySnapshot.docs.forEach((doc) => {
-//         console.log(doc, 'into the loop')
-
-//         data.push(doc);
-//         })
-//       });
-//       console.log(data, "data")
-//       // setUserSuccessRecord(data);
-//     }
-
-  // async function userSuccessRecords() {
-  //   const data = [];
-  //   db.collection("users")
-  //     .doc(`${auth.currentUser.email}`)
-  //     .collection("habits")
-  //     .where("progress", ">=", 1)
-  //     .get()
-  //     .then((querySnapshot) => {
-  //       querySnapshot.forEach((doc) => {
-  //         data.push(doc.data());
-  //       });
-  //       console.log(data, "data");
-  //       // setUserSuccessRecord(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error getting documents: ", error);
-  //     });
-  // }
-
-  // // This works with only completed habits
-  // async function userSuccessRecords() {
-  //   const data = [];
-  //   const querySnapshot = await db
-  //     .collection("users")
-  //     .doc(`${auth.currentUser.email}`)
-  //     .collection("habits")
-  //     .get();
-
-  //   querySnapshot.forEach((doc) => {
-  //     const habit = doc.data();
-  //     if (habit.progress >= habit.goal) {
-  //       data.push(habit);
-  //     }
-  //   });
-
-  //   console.log(data, "data from userSuccessRecords");
-  //   setUserSuccessRecord(data);
-  //   console.log (userSuccessRecord, "userSuccessRecord")
-  // }
-
   async function userSuccessRecords() {
     const successHabits = [];
     const inProgressHabits = [];
