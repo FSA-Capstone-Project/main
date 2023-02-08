@@ -3,6 +3,7 @@ import "./chat.css";
 
 import { db, app, auth } from "../../firebase";
 import { positive_words, negative_phrases, negative_words, positive_phrases } from "./chatSeed";
+import { doc } from "firebase/firestore";
 
 
 
@@ -11,6 +12,9 @@ function Voice(props) {
   const [response, setResponse] = useState("");
   const [userInfo, setUserInfo] = useState({});
   const [userHabits, setUserHabits] = useState([]);
+
+  const [userSuccessRecord, setUserSuccessRecord] = useState([]);
+  const [userInProgress, setUserInProgress] = useState([]);
 
 
   async function fetchUserInfo() {
@@ -30,13 +34,96 @@ function Voice(props) {
         goal: doc.data().goal,
         progress: doc.data().progress,
       }
-        console.log(habit)
+        // console.log(habit)
         habits.push(habit)
-        console.log(habits)
+        // console.log(habits)
         setUserHabits(habits)
 
       });
 
+  }
+
+// async function userSuccessRecords() {
+//       const data = [];
+//  db
+//     .collection("users")
+//     .doc(`${auth.currentUser.email}`)
+//     .collection("habits")
+//     .where("goal", ">=", "1")
+//     .get()
+//     .then((querySnapshot) => {
+//       querySnapshot.docs.forEach((doc) => {
+//         console.log(doc, 'into the loop')
+
+//         data.push(doc);
+//         })
+//       });
+//       console.log(data, "data")
+//       // setUserSuccessRecord(data);
+//     }
+
+  // async function userSuccessRecords() {
+  //   const data = [];
+  //   db.collection("users")
+  //     .doc(`${auth.currentUser.email}`)
+  //     .collection("habits")
+  //     .where("progress", ">=", 1)
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       querySnapshot.forEach((doc) => {
+  //         data.push(doc.data());
+  //       });
+  //       console.log(data, "data");
+  //       // setUserSuccessRecord(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error getting documents: ", error);
+  //     });
+  // }
+
+  // // This works with only completed habits
+  // async function userSuccessRecords() {
+  //   const data = [];
+  //   const querySnapshot = await db
+  //     .collection("users")
+  //     .doc(`${auth.currentUser.email}`)
+  //     .collection("habits")
+  //     .get();
+
+  //   querySnapshot.forEach((doc) => {
+  //     const habit = doc.data();
+  //     if (habit.progress >= habit.goal) {
+  //       data.push(habit);
+  //     }
+  //   });
+
+  //   console.log(data, "data from userSuccessRecords");
+  //   setUserSuccessRecord(data);
+  //   console.log (userSuccessRecord, "userSuccessRecord")
+  // }
+
+  async function userSuccessRecords() {
+    const successHabits = [];
+    const inProgressHabits = [];
+    const querySnapshot = await db
+      .collection("users")
+      .doc(`${auth.currentUser.email}`)
+      .collection("habits")
+      .get();
+
+    querySnapshot.forEach((doc) => {
+      const habit = doc.data();
+      if (habit.progress >= habit.goal) {
+        successHabits.push(habit);
+      } else {
+        inProgressHabits.push(habit);
+      }
+    });
+
+    console.log(successHabits);
+    console.log(inProgressHabits);
+    setUserSuccessRecord(successHabits);
+    setUserInProgress(inProgressHabits);
   }
 
   async function messageDispatch() {
@@ -45,20 +132,11 @@ function Voice(props) {
     const positive = positive_words[Math.floor(Math.random() * positive_words.length)]
     const negative = negative_words[Math.floor(Math.random() * negative_words.length)]
     const negativePhrase = negative_phrases[Math.floor(Math.random() * negative_phrases.length)]
-    const positivePhase =
-      positive_phrases[Math.floor(Math.random() * positive_phrases.length)];
+    const positivePhase = positive_phrases[Math.floor(Math.random() * positive_phrases.length)];
     const localUser = userInfo
-    // const localHabits = userHabits
-     console.log(positive)
-     console.log(negative)
-     console.log(negativePhrase)
-     console.log(positivePhase)
-    console.log(localUser.reinforcement);
-    // console.log(userHabits[0].id)
-
     // setMessage(localUser.name + " " + localUser.reinforcement + " " + positive + " " + positivePhase)
     setMessage(localUser)
-    console.log(message)
+    // console.log(message)
   }
 
 
@@ -66,19 +144,16 @@ function Voice(props) {
   useEffect(() => {
     fetchUserInfo()
     fetchUserHabits()
+    userSuccessRecords()
   }, []);
 
   useEffect(() => {
     messageDispatch()
   }, [userInfo]);
 
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        // messageDispatch()
-    console.log(userHabits)
-    console.log(userInfo)
-    console.log(message)
-    fetch("http://localhost:3002/", {
+  function fetchVoiceOfWisdom() {
+    console.log(JSON.stringify({ message }) , "message JSON")
+    fetch("http://localhost:3002/text-completion", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -89,6 +164,30 @@ function Voice(props) {
       .then((data) => {
         setResponse(data.message);
       });
+  }
+
+
+  // function fetchVoiceOfWisdom(userInfo, userProgress, currentTime) {
+  //   fetch("http://localhost:3002/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ userInfo, userProgress, currentTime }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setResponse(data.message);
+  //     });
+  // }
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        userSuccessRecords()
+        fetchVoiceOfWisdom()
+        // messageDispatch()
+    // console.log(userHabits)
+    // console.log(userInfo)
+    // console.log(message)
   };
 
   return (

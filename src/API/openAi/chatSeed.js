@@ -203,4 +203,8 @@ export const negative_phrases = [
 
 
 
-
+// trainig_data = [
+// {"prompt": "<prompt text>", "completion": "<ideal generated text>"},
+// {"prompt": "<prompt text>", "completion": "<ideal generated text>"},
+// {"prompt": "<prompt text>", "completion": "<ideal generated text>"},
+// ]
