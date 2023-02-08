@@ -4,8 +4,8 @@ import LargeGuage from "../Guages/LargeGuage";
 import { useMediaQuery } from "@mui/material/";
 import { app, auth } from "../../firebase";
 
-function GaugeContainer() {
 
+function GaugeContainer() {
   const largeScreen = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const [habits, setHabits] = useState([]);
 
@@ -33,7 +33,7 @@ function GaugeContainer() {
   }, [habits]);
 
   return (
-    <Box  >
+    <Box>
       <Grid
         container
         // justifyContent="space-around"
@@ -41,28 +41,43 @@ function GaugeContainer() {
         xs={12}
         md={10}
         margin="auto"
-        height='100%'
+        height="100%"
         direction={largeScreen ? "row" : "column"}
-        flexWrap='wrap'
-
+        flexWrap="wrap"
       >
-        {habits.length
-<<<<<<< HEAD
-          ? habits.slice(0,).map((habit) => {
+        {habits.length ? (
+          habits.slice(0,4).map((habit) => {
             if (habit.title === "Water") return null;
-=======
-          ? habits.slice(0, 4).map((habit) => {
->>>>>>> a6fb7c2d1bfca64d5b805cec50616f630c51564b
-              return (
-                <Grid item xs={3} borderRadius="15px" key={habit.id}>
-          <LargeGuage habit={habit.id} title={habit.title} goal={habit.goal} progress={habit.progress} due={habit.due}/>
-           </Grid>
-              );
-            })
-          : null}
-
-
-
+            return (
+              <Grid item xs={3} borderRadius="15px" key={habit.id}>
+                <LargeGuage
+                  habit={habit.id}
+                  title={habit.title}
+                  goal={habit.goal}
+                  progress={habit.progress}
+                  due={habit.due}
+                />
+              </Grid>
+            );
+          })
+        ) : (
+          <Box
+            sx={{
+              height: "12rem",
+              width: "25rem",
+              color: "white",
+              borderRadius: "10px",
+              padding: "10px",
+              backgroundColor: "#26293c",
+            }}
+          >
+            <Box>
+              Welcome! We've started you off with your first Habit to the right!
+              Here, you can track your water intake throughout the day. When you
+              get to 100%, reset the guage and start again tomorrow!
+            </Box>
+          </Box>
+        )}
       </Grid>
     </Box>
   );
