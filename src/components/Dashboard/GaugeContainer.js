@@ -47,7 +47,7 @@ function GaugeContainer() {
 
       >
         {habits.length
-          ? habits.slice(0, 4).map((habit) => {
+          ? habits.slice(0, 10).map((habit) => {
               return (
                 <Grid item xs={3} borderRadius="15px" >
           <LargeGuage habit={habit.id} title={habit.title} goal={habit.goal} progress={habit.progress} due={habit.due}/>
