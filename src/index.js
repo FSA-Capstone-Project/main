@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(
 const theme = createTheme({
   palette: {
         primary: {
-          main: "#2b2e40",
+          main: "#7f5af0",
         },
       },
       typography: {
@@ -33,6 +33,18 @@ const theme = createTheme({
           color: '#94a1b2'
         }
       },
+      components:{
+        MuiLinearProgress:{
+         styleOverrides: {
+          determinate:{
+            backgroundColor: '#94a1b2',
+
+          }
+        }
+      }
+
+    }
+
 
 });
 

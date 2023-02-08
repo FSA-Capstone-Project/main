@@ -3,6 +3,7 @@ import { auth, db } from "../../firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { Button, TextField, Box, Typography } from "@mui/material/";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
+import signup from "../../illistration/signup.svg"
 
 
 const SignUp = ({switchForm}) =>{
@@ -60,24 +61,31 @@ const SignUp = ({switchForm}) =>{
 
   return (
 
-<Box // login-card
+<Box // login-page
       display="flex"
       // flexDirection="column"
       alignItems="center"
       justifyContent="center"
       height="100vh"
     >
-      <Box // this is the login form
+      <Box // this is the login card
         display="flex"
-        flexDirection="column"
+        flexDirection="row"
         bgcolor="#16161a"
         borderRadius="15px"
         alignItems="center"
         justifyContent="center"
         height="550px"
-        width="300px"
+        width="900px"
 
-      >
+        >
+
+        <Box  display="flex"
+         flexDirection="column"
+         alignItems="center"
+         justifyContent="center"
+         height='100%'
+         width="50%">
          <Typography variant="darktext" sx={{ fontSize: "25px" }}>
           <AccessibleForwardIcon sx={{ fontSize: "2em" }} />
         </Typography>
@@ -173,6 +181,15 @@ const SignUp = ({switchForm}) =>{
 
 
         </Box>
+      </Box>
+      <Box  display="flex"
+         flexDirection="column"
+         alignItems="center"
+         justifyContent="center"
+         height='100%'
+         width="50%">
+          <img src={signup} alt=""  />
+         </Box>
       </Box>
     </Box>
 
