@@ -87,7 +87,7 @@ const SignUp = ({switchForm}) =>{
          height='100%'
          width="50%">
          <Typography variant="darktext" sx={{ fontSize: "25px" }}>
-          <AccessibleForwardIcon sx={{ fontSize: "2em" }} />
+         <img src='./Logo.png' alt='logo' height='50px'/>
         </Typography>
         <Typography variant="purple"  sx={{ fontSize:'2em', margin:'5px'}}>Sign Up</Typography>
 
