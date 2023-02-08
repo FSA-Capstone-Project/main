@@ -73,7 +73,7 @@ const Login = ({ switchForm }) => {
          width="50%"
          >
         <Typography variant="darktext" sx={{ fontSize: "25px" }}>
-          <AccessibleForwardIcon sx={{ fontSize: "2em" }} />
+          <img src='./Logo.png' alt='logo' height='200px'/>
         </Typography>
         <Typography variant="purple" sx={{ margin: "5px", fontSize: "2em" }}>
           Sign In

@@ -3,40 +3,31 @@ import { interpolateRgb } from "d3-interpolate";
 import React, { useEffect, useState } from "react";
 import LiquidFillGauge from "react-liquid-gauge";
 import { auth, db, app } from "../../firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { Button, Box } from "@mui/material";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { Button } from "@mui/material";
 import "./Guage.css";
 
-const LiquidGuage = (props) => {
-  const [prog, setProg] = useState(0);
+const LiquidGuage = () => {
+  let [prog, setProg] = useState(0);
   const [goal, setGoal] = useState(0);
   const [percentDone, setPercentDone] = useState(0);
   const today = new Date();
 
   useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
-    const docRef = doc(
-      db,
-      "users",
-      `${auth.currentUser.email}`,
-      "habits",
-      `Water`
+    const unsub = onSnapshot(
+      doc(db, "users", `${auth.currentUser.email}`, "habits", "Water"),
+      (doc) => {
+        console.log("Current data: ", doc.data());
+        setProg(doc.data().progress);
+        setGoal(doc.data().goal);
+        setPercentDone((prog / goal) * 100);
+        return () => unsub;
+      }
     );
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      let habitProgress = docSnap.data().progress;
-      let goal = docSnap.data().goal;
-      setProg(habitProgress);
-      setGoal(goal);
-      setPercentDone((prog / goal) * 100);
-    }
-  };
+  }, [prog, goal]);
 
-  const handleAdd = async (number) => {
-    setProg(number + 1);
+  const handleAdd = async () => {
+    setProg(prog++);
     const docRef = app
       .firestore()
       .collection("users")
@@ -44,6 +35,16 @@ const LiquidGuage = (props) => {
       .collection("habits")
       .doc(`Water`);
     await docRef.update({ progress: prog });
+  };
+
+  const reset = async () => {
+    const docRef = app
+      .firestore()
+      .collection("users")
+      .doc(`${auth.currentUser.email}`)
+      .collection("habits")
+      .doc(`Water`);
+    await docRef.update({ progress: 0 });
   };
 
   const startColor = "#7df9ff"; // cornflowerblue
@@ -75,7 +76,6 @@ const LiquidGuage = (props) => {
 
   return (
     <div>
-
       <LiquidFillGauge
         style={{ margin: "0 auto" }}
         width={radius * 2}
@@ -134,17 +134,31 @@ const LiquidGuage = (props) => {
           justifyContent: "center",
         }}
       >
-        <Button
-          className="addWater"
-          sx={{
-            color: "black",
-            backgroundColor: fillColor,
-          }}
-          onClick={() => handleAdd(prog)}
-          variant="contained"
-        >
-          Add Water
-        </Button>
+        {percentDone >= 99 ? (
+          <Button
+            className="addWater"
+            sx={{
+              color: "black",
+              backgroundColor: fillColor,
+            }}
+            onClick={reset}
+            variant="contained"
+          >
+            Reset
+          </Button>
+        ) : (
+          <Button
+            className="addWater"
+            sx={{
+              color: "black",
+              backgroundColor: fillColor,
+            }}
+            onClick={handleAdd}
+            variant="contained"
+          >
+            Add Water
+          </Button>
+        )}
       </div>
     </div>
   );
