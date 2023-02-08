@@ -37,16 +37,7 @@ const Dashboard = () => {
 
   return (
     <>
-    <Box
-        position="absolute"
-        height="300px"
-        width="300px"
-        bgcolor="red"
-        borderRadius="500px"
-        right="50px"
-        zIndex="1"
-        sx={{ opacity: "100%" }}
-      ></Box>
+    
         <Grid container spacing={2}  width='100%' >
           {/* First Row */}
             <Grid item xs={12} md={12} >
