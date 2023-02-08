@@ -4,7 +4,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { auth, app, db } from "../../firebase";
-
+import { doc, onSnapshot } from "firebase/firestore";
 
 const LargeGuage = (props) => {
 
@@ -14,31 +14,44 @@ const LargeGuage = (props) => {
   let [prog, setProg] = useState(props.progress)
 
   const handleAdd = async () => {
-    setProg(prog ++)
     const docRef = app
-    .firestore()
-    .collection("users")
-    .doc(`${auth.currentUser.email}`)
-    .collection("habits")
-    .doc(`${props.habit}`)
-    await docRef.update({progress: prog});
+      .firestore()
+      .collection("users")
+      .doc(`${auth.currentUser.email}`)
+      .collection("habits")
+      .doc(`${props.habit}`);
+    await docRef.update({ progress: prog + 1 });
+    const updatedDoc = await docRef.get();
+    setProg(updatedDoc.data().progress);
   };
 
   const handleSubtract = async () => {
-    setProg(prog--)
     const docRef = app
-    .firestore()
-    .collection("users")
-    .doc(`${auth.currentUser.email}`)
-    .collection("habits")
-    .doc(`${props.habit}`)
-    await docRef.update({progress: prog});
-  };
+      .firestore()
+      .collection("users")
+      .doc(`${auth.currentUser.email}`)
+      .collection("habits")
+      .doc(`${props.habit}`);
+    await docRef.update({ progress: prog - 1 });
+    const updatedDoc = await docRef.get();
+    setProg(updatedDoc.data().progress);
+  };  
+
+
+  useEffect(()=>{
+    const unsub = onSnapshot(doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`), (doc) => {
+      console.log("Current data: ", doc.data());
+      const progress = doc.data().progress
+      setProg(progress)
+      return unsub
+  });
+  },[props.habit])
 
 
   return (
     <Box>
-      {timeRemaining > 0 && percentDone < 100 ? (
+      {
+      timeRemaining > 0 && percentDone < 100 ? (
         <Box
           sx={{
             backgroundImage: `linear-gradient(45deg, #379f93 ${Math.round(
@@ -121,6 +134,7 @@ const LargeGuage = (props) => {
             <LinearProgress
               variant="determinate"
               value={percentDone}
+              color="primary"
               sx={{
                 height: "2rem",
                 borderRadius: "10px",
