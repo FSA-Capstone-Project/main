@@ -3,40 +3,55 @@ import { Box, Typography } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import { auth, app } from "../../firebase";
+import { auth, app, db } from "../../firebase";
+import { doc, onSnapshot } from "firebase/firestore";
 
 const LargeGuage = (props) => {
 
   const today = new Date();
   const timeRemaining = (props.due - today) / (1000 * 60 * 60 * 24);
   const percentDone = Math.round((props.progress / props.goal) * 100);
-  const [prog, setProg] = useState(props.progress)
+  let [prog, setProg] = useState(props.progress)
 
-  const handleAdd = async (number) => {
-    setProg(number + 1)
+  const handleAdd = async () => {
     const docRef = app
-    .firestore()
-    .collection("users")
-    .doc(`${auth.currentUser.email}`)
-    .collection("habits")
-    .doc(`${props.habit}`)
-    await docRef.update({progress: prog});
+      .firestore()
+      .collection("users")
+      .doc(`${auth.currentUser.email}`)
+      .collection("habits")
+      .doc(`${props.habit}`);
+    await docRef.update({ progress: prog + 1 });
+    const updatedDoc = await docRef.get();
+    setProg(updatedDoc.data().progress);
   };
 
-  const handleSubtract = async (number) => {
-    setProg(number - 1)
+  const handleSubtract = async () => {
     const docRef = app
-    .firestore()
-    .collection("users")
-    .doc(`${auth.currentUser.email}`)
-    .collection("habits")
-    .doc(`${props.habit}`)
-    await docRef.update({progress: prog});
-  };
+      .firestore()
+      .collection("users")
+      .doc(`${auth.currentUser.email}`)
+      .collection("habits")
+      .doc(`${props.habit}`);
+    await docRef.update({ progress: prog - 1 });
+    const updatedDoc = await docRef.get();
+    setProg(updatedDoc.data().progress);
+  };  
+
+
+  useEffect(()=>{
+    const unsub = onSnapshot(doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`), (doc) => {
+      console.log("Current data: ", doc.data());
+      const progress = doc.data().progress
+      setProg(progress)
+      return unsub
+  });
+  },[props.habit])
+
 
   return (
     <Box>
-      {timeRemaining > 0 && percentDone < 100 ? (
+      {
+      timeRemaining > 0 && percentDone < 100 ? (
         <Box
           sx={{
             backgroundImage: `linear-gradient(45deg, #379f93 ${Math.round(
@@ -79,7 +94,7 @@ const LargeGuage = (props) => {
           <Box sx={{display:'flex', width:'100%', flexDirection:'row', justifyContent:"space-between", alignItems:'center'}}>
 
              <Box>
-              <RemoveCircleOutlineIcon onClick={()=>handleSubtract(props.progress)}/>
+              <RemoveCircleOutlineIcon onClick={()=>handleSubtract()}/>
              </Box>
 
             <Box
@@ -95,7 +110,7 @@ const LargeGuage = (props) => {
             >{`${Math.round(percentDone)}%`}</Box>
 
              <Box>
-              <AddCircleOutlineIcon onClick={()=>handleAdd(props.progress)}/>
+              <AddCircleOutlineIcon onClick={()=>handleAdd()}/>
              </Box>
 
           </Box>

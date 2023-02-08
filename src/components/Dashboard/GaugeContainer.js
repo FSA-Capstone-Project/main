@@ -30,7 +30,7 @@ function GaugeContainer() {
           setHabits(data);
         });
       });
-  }, []);
+  }, [habits]);
 
   return (
     <Box  >
@@ -49,7 +49,7 @@ function GaugeContainer() {
         {habits.length
           ? habits.slice(0, 10).map((habit) => {
               return (
-                <Grid item xs={3} borderRadius="15px" >
+                <Grid item xs={3} borderRadius="15px" key={habit.id}>
           <LargeGuage habit={habit.id} title={habit.title} goal={habit.goal} progress={habit.progress} due={habit.due}/>
            </Grid>
               );
