@@ -6,38 +6,51 @@ const MemoryGame = () => {
   const [clicks, setClicks] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
   const [level, setLevel] = useState(1);
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(true);
 
-  const toggleGame = () => {
-    if (!gameStarted) {
-      setGameStarted(true);
-      setOrder([Math.floor(Math.random() * 9)]);
-      pingBoxes();
-    } else {
-      setGameStarted(false);
-      setGameOver(false);
-      setOrder([]);
-      setLevel(1);
-      setClicks(0);
-    }
+  const startGame = () => {
+    setGameStarted(true);
+    setGameOver(false);
+    setOrder([]);    
+    setOrder([...order, Math.floor(Math.random() * 9)]);
+    console.log(order, "STARTGAMEorder")
+    pingBoxes();
+  };
+
+  const stopGame = () => {
+    setGameStarted(false);
+    setGameOver(true);
+    setOrder([]);
+    setLevel(1);
+    setClicks(0);
   };
 
   const clickedBox = (e) => {
     if (gameOver) return;
     if (e.target.id === String(order[clicks])) {
       setClicks(clicks + 1);
-    } else {
-      setGameOver(true);
+    } 
+    else {
       wrongBoxAnimation();
+      stopGame();
     }
-    if (clicks === level - 1 && gameStarted && !gameOver) {
+    console.log(clicks, "clicks")
+    console.log(level, "level")
+    console.log(order, "order")
+    if (clicks === level && gameStarted && !gameOver) {
       nextLevelAnimation();
-      console.log("ORDER1", order)
+      console.log("ORDERONE", order);
       setOrder([...order, Math.floor(Math.random() * 9)]);
-      console.log("ORDER2", order)
+      console.log("ORDERTWO", order);
+      
+      setTimeout(() => {}, 300);
       setLevel(level + 1);
       setClicks(0);
       pingBoxes();
+    } 
+    else {
+      wrongBoxAnimation()
+      stopGame();
     }
   };
 
@@ -49,7 +62,9 @@ const MemoryGame = () => {
       setTimeout(() => {
         document.getElementById(String(order[index])).style.backgroundColor =
           "blue";
-        pingBoxes(index + 1);
+        setTimeout(() => {
+          pingBoxes(index + 1);
+        }, 750);
       }, 750);
     }, 750);
   };
@@ -65,7 +80,7 @@ const MemoryGame = () => {
       }
     }, 250);
   };
-  
+
   const wrongBoxAnimation = () => {
     const boxes = document.getElementsByClassName("MuiGrid-root");
     for (let i = 0; i < boxes.length; i++) {
@@ -77,12 +92,6 @@ const MemoryGame = () => {
       }
     }, 250);
   };
-
-  useEffect(() => {
-    if (gameStarted) {
-      pingBoxes();
-    }
-  },);
 
   return (
     <>
@@ -121,7 +130,7 @@ const MemoryGame = () => {
         <Button
           sx={{ marginTop: "2vh" }}
           variant="contained"
-          onClick={toggleGame}
+          onClick={stopGame}
         >
           End Game
         </Button>
@@ -129,7 +138,7 @@ const MemoryGame = () => {
         <Button
           sx={{ marginTop: "2vh" }}
           variant="contained"
-          onClick={toggleGame}
+          onClick={startGame}
         >
           Start Game
         </Button>
