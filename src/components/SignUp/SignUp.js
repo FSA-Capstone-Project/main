@@ -52,6 +52,11 @@ const SignUp = ({switchForm}) =>{
           age: input.age,
           phone: `+1${input.phone}`
         });
+      }).then(()=>{
+        setDoc(doc(db, 'users', `${input.email}`, 'habits', "Water"),{
+          goal:8,
+          progress:0
+      })
       })
       .catch((error) => alert(error.message));
       switchForm()
