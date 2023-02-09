@@ -10,6 +10,7 @@ import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import AllHabits from "../AllHabits/AllHabits";
 import Profile from "../Profile/Profile";
+import bgImg from '../../illistration/bgImg.png'
 
 const Home = () => {
   const [view, setView] = useState("Dashboard");
@@ -37,12 +38,14 @@ const Home = () => {
   return (
     <>
     {/* App window */}
-      <Box sx={{ display: "flex" }} height='100vh' bgcolor="#1e1e2b" overflow='auto'>
+      <Box sx={{ display: "flex",
+     backgroundImage: `url(${bgImg})`, width:'100%', backgroundRepeat: 'no-repeat', flexGrow: 1,backgroundSize: "cover" }} height='100vh' bgcolor="#1e1e2b" overflow='auto'>
         {/**sidebar */}
         <Navbar setDisplay={setDisplay} />
 
         {view === "Dashboard" ? (
-          <Box  width='100vw' height='100vh' >
+          <Box  width='100vw' height='100vh'>
+
             <Dashboard />
           </Box>
         ) : null}
@@ -54,13 +57,13 @@ const Home = () => {
         ) : null}
 
         {view === "Calendar" ? (
-          <Box>
+          <Box width='100vw' height='100vh'>
             <InteractiveCalendar />
           </Box>
         ) : null}
 
         {view === "MemoryGame" ? (
-          <Box>
+          <Box width='100vw' height='100vh'>
             <MemoryGame />
           </Box>
         ) : null}
