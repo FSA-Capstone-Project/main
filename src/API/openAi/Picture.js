@@ -25,10 +25,12 @@ const Picture = () => {
         setImage(data.data);
 
       // Update the user's record in the database
+
       const userInfoRef = await db
         .collection("users")
         .doc(`${auth.currentUser.email}`);
-      userInfoRef.update({ photo: data.data });
+        userInfoRef.update({ photo: data.data });
+
     } catch (error) {
       console.error(error);
     }

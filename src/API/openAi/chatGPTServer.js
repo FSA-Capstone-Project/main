@@ -15,8 +15,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const configuration = new Configuration({
-organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
-apiKey: "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",
+  organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
+  apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
