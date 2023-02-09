@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import { Box } from "@mui/material/";
 import { useNavigate } from "react-router-dom";
 import RocketRoundedIcon from "@mui/icons-material/RocketRounded";
@@ -20,6 +20,10 @@ const Navbar = ({setDisplay}) => {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
 
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    setSidebarIsOpen(false)
+  },[])
 
   const handleSignOut = () => {
     signOut(auth)
@@ -57,19 +61,19 @@ const Navbar = ({setDisplay}) => {
           // do a media query based on the sidebar being collapsed??
           height={sidebarIsOpen === true ? "12.5rem" : "4.5rem"}
           width={sidebarIsOpen === true ? "12.5rem" : "4.5rem"}
-          
+
           bgcolor="#3358f4"
           boxShadow="0px 0px 12px #94a1b2"
         >
-          {sidebarIsOpen ? 
+          {sidebarIsOpen ?
           <Avatar src={user.photoURL} sx={{ width: "12rem", height: "12rem",  }} />
           :
           <Avatar src={user.photoURL} sx={{ width: "4rem", height: "4rem",  }} />
           }
-          
+
         </Box>
 
-        <MenuItem 
+        <MenuItem
           onClick={() => setDisplay("Profile")}
           icon={<AccountCircleIcon fontSize="large" />}>
           Profile
