@@ -91,10 +91,10 @@ const Profile = () => {
     <Box
       sx={{
         display: "flex",
-        // alignItems: "center",
-        // justifyContent: "left",
+
         height: "100vh",
         width: "100vw",
+
       }}
     >
       <Box
@@ -108,7 +108,7 @@ const Profile = () => {
       >
         {/* header */}
         <Box>
-          <Typography variant="h1"> Profile </Typography>
+          <Typography variant="h1"> {name} </Typography>
           <Typography variant="darktext">
             {" "}
             Edit and update your profile{" "}
