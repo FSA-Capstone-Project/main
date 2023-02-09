@@ -2,71 +2,78 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Grid } from "@mui/material/";
 
 const MemoryGame = () => {
-  const [order, setOrder] = useState([]);
+  // const [order, setOrder] = useState([]);
   const [clicks, setClicks] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
   const [level, setLevel] = useState(1);
   const [gameOver, setGameOver] = useState(true);
+  const [order, setOrder] = useState({});
+  // const [pingingBoxes, setPingingBoxes] = useState(true);
 
+  useEffect(() => {
+    if (gameStarted) {
+      pingBoxes();
+    }
+  }, [gameStarted]);
+  
   const startGame = () => {
+    // setPingingBoxes(true);
     setGameStarted(true);
     setGameOver(false);
-    setOrder([]);    
-    setOrder([...order, Math.floor(Math.random() * 9)]);
-    console.log(order, "STARTGAMEorder")
-    pingBoxes();
+    order[0] = Math.floor(Math.random() * 9);
+    console.log(order, "STARTGAMEorder");
   };
 
   const stopGame = () => {
+    // setPingingBoxes(false);
     setGameStarted(false);
     setGameOver(true);
-    setOrder([]);
+    setOrder({});
     setLevel(1);
     setClicks(0);
   };
 
   const clickedBox = (e) => {
-    if (gameOver) return;
-    if (e.target.id === String(order[clicks])) {
+    if (gameOver || !gameStarted) return;
+    let tempClicks = clicks;
+    if (String(e.target.id) === String(order[clicks])) {
       setClicks(clicks + 1);
-    } 
-    else {
+      tempClicks++;
+      setTimeout(() => {
+        document.getElementById(String(e.target.id)).style.backgroundColor =
+          "green";
+        setTimeout(() => {
+          document.getElementById(String(e.target.id)).style.backgroundColor =
+            "blue";
+        }, 250);
+      }, 250);
+    } else {
       wrongBoxAnimation();
       stopGame();
     }
-    console.log(clicks, "clicks")
-    console.log(level, "level")
-    console.log(order, "order")
-    if (clicks === level && gameStarted && !gameOver) {
+    console.log(tempClicks, "tempClicks");
+    console.log(level, "level");
+    
+    if (tempClicks === level) {
       nextLevelAnimation();
-      console.log("ORDERONE", order);
-      setOrder([...order, Math.floor(Math.random() * 9)]);
-      console.log("ORDERTWO", order);
-      
-      setTimeout(() => {}, 300);
+      order[tempClicks] = Math.floor(Math.random() * 9);
       setLevel(level + 1);
       setClicks(0);
       pingBoxes();
-    } 
-    else {
-      wrongBoxAnimation()
-      stopGame();
     }
   };
 
   const pingBoxes = (index = 0) => {
-    if (index === order.length) return;
+    if (index === Object.values(order).length || gameOver) return;
     setTimeout(() => {
-      document.getElementById(String(order[index])).style.backgroundColor =
+      document.getElementById(String(Object.values(order)[index])).style.backgroundColor =
         "red";
       setTimeout(() => {
-        document.getElementById(String(order[index])).style.backgroundColor =
+        document.getElementById(String(Object.values(order)[index])).style.backgroundColor =
           "blue";
-        setTimeout(() => {
           pingBoxes(index + 1);
         }, 750);
       }, 750);
-    }, 750);
   };
 
   const nextLevelAnimation = () => {
@@ -118,7 +125,8 @@ const MemoryGame = () => {
                   }}
                   item
                   xs={4}
-                  onClick={clickedBox}
+                  onClick={gameStarted ? clickedBox : null}
+                  // onClick={pingingBoxes ? null : clickedBox}
                   id={String(box)}
                 ></Grid>
               );
