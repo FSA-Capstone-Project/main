@@ -11,7 +11,6 @@ function TrackedApps() {
     <>
     <Box>
 
-
       <Grid
         container
         justifyContent="space-around"
