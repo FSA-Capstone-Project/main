@@ -13,6 +13,10 @@ const LargeGuage = (props) => {
   const timeRemaining = (props.due - today) / (1000 * 60 * 60 * 24);
   const percentDone = Math.round((props.progress / props.goal) * 100);
   let [prog, setProg] = useState(props.progress)
+  const updatProg = props.fn
+  console.log(prog)
+
+
 
   const handleAdd = async () => {
     const docRef = app
@@ -24,6 +28,8 @@ const LargeGuage = (props) => {
     await docRef.update({ progress: prog + 1 });
     const updatedDoc = await docRef.get();
     setProg(updatedDoc.data().progress);
+    updatProg(prog)
+
   };
 
   const handleSubtract = async () => {
@@ -36,12 +42,13 @@ const LargeGuage = (props) => {
     await docRef.update({ progress: prog - 1 });
     const updatedDoc = await docRef.get();
     setProg(updatedDoc.data().progress);
-  };  
+    updatProg(prog)
+  };
 
 
   useEffect(()=>{
     const unsub = onSnapshot(doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`), (doc) => {
-      console.log("Current data: ", doc.data());
+      // console.log("Current data: ", doc.data());
       const progress = doc.data().progress
       setProg(progress)
       return unsub
@@ -95,7 +102,7 @@ const LargeGuage = (props) => {
           <Box sx={{display:'flex', width:'100%', flexDirection:'row', justifyContent:"space-between", alignItems:'center'}}>
 
 
-             <button onClick={()=>handleSubtract()}><RemoveCircleOutlineIcon/></button>
+             <button onClick={handleSubtract}><RemoveCircleOutlineIcon/></button>
 
 
             <Box
@@ -111,7 +118,7 @@ const LargeGuage = (props) => {
             >{`${Math.round(percentDone)}%`}</Box>
 
 
-              <button onClick={()=>handleAdd()}><AddCircleOutlineIcon/></button>
+              <button onClick={handleAdd}><AddCircleOutlineIcon/></button>
 
 
           </Box>

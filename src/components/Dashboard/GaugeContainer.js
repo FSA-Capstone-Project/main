@@ -8,6 +8,12 @@ function GaugeContainer() {
 
   const largeScreen = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const [habits, setHabits] = useState([]);
+  const [progress, setProgress] = useState()
+
+
+  const updateProgress = (prog)=>{
+   setProgress(prog)
+  }
 
   useEffect(() => {
     const data = [];
@@ -28,9 +34,12 @@ function GaugeContainer() {
           };
           data.push(habit);
           setHabits(data);
+
+
+
         });
       });
-  }, [habits]);
+  }, [progress]);
 
   return (
     <Box  >
@@ -50,7 +59,7 @@ function GaugeContainer() {
           ? habits.slice(0, 4).map((habit) => {
               return (
                 <Grid item xs={3} borderRadius="15px" key={habit.id}>
-          <LargeGuage habit={habit.id} title={habit.title} goal={habit.goal} progress={habit.progress} due={habit.due}/>
+          <LargeGuage habit={habit.id} title={habit.title} goal={habit.goal} progress={habit.progress} due={habit.due} fn={updateProgress}/>
            </Grid>
               );
             })
