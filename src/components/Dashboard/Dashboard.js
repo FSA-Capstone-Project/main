@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import { app, auth } from "../../firebase";
-// import Robot from "../../API/openAi/chatGPT";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
 import { Grid, Box } from "@mui/material";
+
 
 const Dashboard = () => {
 
@@ -37,7 +37,7 @@ const Dashboard = () => {
     <>
 
         <Grid container spacing={2}  width='100%' >
-          {/* First Row */}
+        {/* First Row */}
             <Grid item xs={12} md={12} >
               <Header title={title} zIndex='100'/>
             </Grid>
@@ -51,7 +51,7 @@ const Dashboard = () => {
             <GaugeContainer />
           </Grid>
 
-        </Grid>
+      </Grid>
     </>
   );
 };

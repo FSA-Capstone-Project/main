@@ -185,9 +185,14 @@ function Voice(props) {
     messageDispatch();
   };
 
-  const handleClick = () => {
+  const handleClick = (mood) => {
+    // e.preventDefault();
     setActive((prev) => !prev);
     setLoading(true);
+    handleSubmit();
+    // console.log(e.target)
+    setMood(mood)
+    console.log(mood)
   };
 
   return (
@@ -197,7 +202,7 @@ function Voice(props) {
         <input
           type="text"
           value={props.name}
-          onChange={(e) => setMessage(e.target.value)}
+          // onChange={(e) => setMessage(e.target.value)}
         />
         <button type="submit">Submit</button>
       </form>
@@ -216,20 +221,14 @@ function Voice(props) {
             <>
               <button
                 style={active ? styles.disabled : styles.blueButton}
-                onClick={() => {
-                  handleClick();
-                  setMood("nice");
-                }}
+                onClick={() => { handleClick("nice");}}
                 disabled={active}
               >
                 Nice
               </button>
               <button
                 style={active ? styles.disabled : styles.redButton}
-                onClick={() => {
-                  handleClick();
-                  setMood("mean");
-                }}
+                onClick={() => {handleClick("mean")}}
                 disabled={active}
               >
                 Mean
