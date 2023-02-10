@@ -65,9 +65,9 @@ const AllHabits = ({ view }) => {
                 <Grid
                   item
                   bgcolor="#26293c"
-                  height="6rem"
+                  height={showUpdateForm && selectedHabit === habit ? "auto" : "6rem"}
                   m="10px"
-                  borderRadius="12px"
+                  borderRadius="15px"
                   display="flex"
                   flexDirection="row"
                   justifyContent="space-between"
@@ -86,8 +86,25 @@ const AllHabits = ({ view }) => {
                       goal={habit.goal}
                     />
                   </Box>
-                  {console.log(habit)}
-                </Grid>
+                    {/* {console.log(habit)} */}
+                    <Button
+                      size="small"
+                      variant="contained"
+                      style={{
+                      margin: 4,
+                      marginBottom: "10px",
+                      marginTop: "10px",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                      color: "white",
+                    }}
+                    onClick={() => changeHabit(habit)}
+                  >
+                    Update
+                    {/* {`${Math.round((habit.progress / habit.goal) * 100)}%`} */}
+                  </Button>
+                    {showUpdateForm && selectedHabit === habit && <UpdateHabit habit={selectedHabit} />}
+                  </Grid>
               ))
             ) : (
               <Grid>
@@ -109,36 +126,3 @@ const AllHabits = ({ view }) => {
 };
 
 export default AllHabits;
-
-// <Grid
-// container
-// Spacing={8}
-// margin={2}
-// borderRadius={"20px"}
-// justify="center"
-// alignItems="center"
-// >
-// {habits.map((habit) => (
-//   <Grid item xs={6} md={12} bgcolor="#26293c" borderRadius="10px">
-//     <Typography variant="h3">{`${habit.title}`}</Typography>
-//     {/* These are the individual habits */}
-//     <Button
-//       size="small"
-//       variant="contained"
-//       style={{
-//         margin: 4,
-//         marginBottom: "10px",
-//         marginTop: "6px",
-//         marginLeft: "10px",
-//         marginRight: "10px",
-//         color: "limegreen",
-//       }}
-//       onClick={() => changeHabit(habit)}
-//     >
-//       {`${Math.round((habit.progress / habit.goal) * 100)}%`}
-//     </Button>
-//     {showUpdateForm && <UpdateHabit habit={selectedHabit} />}
-//   </Grid>
-// )
-// )}
-// </Grid>
