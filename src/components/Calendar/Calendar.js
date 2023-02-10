@@ -27,7 +27,7 @@ const InteractiveCalendar = () => {
             id: doc.id,
             title: doc.data().title,
             goal: doc.data().goal,
-            due: doc.data().due,
+            due: doc.data().due.toDate(),
           };
           data.push(habit);
           setHabits(data);
@@ -36,7 +36,8 @@ const InteractiveCalendar = () => {
   }, []);
   // =====================
   return (
-    <Box className="calendarHolder">
+    <Box display="flex" justifyContent="center" alignItems="center"
+    className="calendarHolder">
       <Calendar onChange={whenChanged} value={date} calendarType={"US"}/>
       
       {habits.length ? (
@@ -56,8 +57,7 @@ const InteractiveCalendar = () => {
                 }}
               >
                 <Typography>
-                  {`${singleHabit.title}
-                  ${singleHabit.goal}`}
+                  {singleHabit.title}
                 </Typography>
               </Box>
             );

@@ -30,7 +30,7 @@ const Navbar = ({setDisplay}) => {
   };
 
   return (
-    <Box sx={{display:'flex' , backgroundImage:"linear-gradient(20deg, #2087f7 0%, #3358f4 100%)"}}>
+    <Box sx={{display:'flex', backgroundImage:"linear-gradient(20deg, #2087f7 0%, #3358f4 100%)"}}>
     <Sidebar
         // borderRadius='3rem'
       defaultCollapsed="true"

@@ -41,13 +41,13 @@ const Home = () => {
         <Navbar setDisplay={setDisplay} />
 
         {view === "Dashboard" ? (
-          <Box  width='100vw' bgcolor= "#1e1e2b" >
+          <Box  width='100vw' bgcolor="#1e1e2b" >
             <Dashboard />
           </Box>
         ) : null}
 
         {view === "Allhabits" ? (
-          <Box width= "100vh"  height= "100vh" bgcolor= "#1e1e2b">
+          <Box width= "100vw"  height= "100vh" bgcolor="#1e1e2b">
             <AllHabits />
           </Box>
         ) : null}
@@ -59,7 +59,7 @@ const Home = () => {
         ) : null}
 
         {view === "MemoryGame" ? (
-          <Box>
+          <Box width= "100vw" bgcolor="#1e1e2b">
             <MemoryGame />
           </Box>
         ) : null}
