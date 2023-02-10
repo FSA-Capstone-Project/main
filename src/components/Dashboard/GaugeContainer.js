@@ -8,6 +8,12 @@ import { app, auth } from "../../firebase";
 function GaugeContainer() {
   const largeScreen = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const [habits, setHabits] = useState([]);
+  const [progress, setProgress] = useState()
+
+
+  const updateProgress = (prog)=>{
+   setProgress(prog)
+  }
 
   useEffect(() => {
     const data = [];
@@ -28,9 +34,12 @@ function GaugeContainer() {
           };
           data.push(habit);
           setHabits(data);
+
+
+
         });
       });
-  }, [habits]);
+  }, [progress]);
 
   return (
     <Box>
@@ -55,7 +64,7 @@ function GaugeContainer() {
                   title={habit.title}
                   goal={habit.goal}
                   progress={habit.progress}
-                  due={habit.due}
+                  due={habit.due} fn={updateProgress}
                 />
               </Grid>
             );

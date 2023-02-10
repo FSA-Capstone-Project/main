@@ -1,43 +1,62 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Grid } from "@mui/material/";
-import Header from "../Header";
-
 
 const MemoryGame = () => {
-  const [order, setOrder] = useState([]);
+  // const [order, setOrder] = useState([]);
   const [clicks, setClicks] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
   const [level, setLevel] = useState(1);
-  const [gameOver, setGameOver] = useState(false);
-  const title = "Memory Game";
+  const [gameOver, setGameOver] = useState(true);
+  const [order, setOrder] = useState({});
+  // const [pingingBoxes, setPingingBoxes] = useState(true);
 
-  const toggleGame = () => {
-    if (!gameStarted) {
-      setGameStarted(true);
-      setOrder([Math.floor(Math.random() * 9)]);
+  useEffect(() => {
+    if (gameStarted) {
       pingBoxes();
-    } else {
-      setGameStarted(false);
-      setGameOver(false);
-      setOrder([]);
-      setLevel(1);
-      setClicks(0);
     }
+  }, [gameStarted]);
+  
+  const startGame = () => {
+    // setPingingBoxes(true);
+    setGameStarted(true);
+    setGameOver(false);
+    order[0] = Math.floor(Math.random() * 9);
+    console.log(order, "STARTGAMEorder");
+  };
+
+  const stopGame = () => {
+    // setPingingBoxes(false);
+    setGameStarted(false);
+    setGameOver(true);
+    setOrder({});
+    setLevel(1);
+    setClicks(0);
   };
 
   const clickedBox = (e) => {
-    if (gameOver) return;
-    if (e.target.id === String(order[clicks])) {
+    if (gameOver || !gameStarted) return;
+    let tempClicks = clicks;
+    if (String(e.target.id) === String(order[clicks])) {
       setClicks(clicks + 1);
+      tempClicks++;
+      setTimeout(() => {
+        document.getElementById(String(e.target.id)).style.backgroundColor =
+          "green";
+        setTimeout(() => {
+          document.getElementById(String(e.target.id)).style.backgroundColor =
+            "blue";
+        }, 250);
+      }, 250);
     } else {
-      setGameOver(true);
       wrongBoxAnimation();
+      stopGame();
     }
-    if (clicks === level - 1 && gameStarted && !gameOver) {
+    console.log(tempClicks, "tempClicks");
+    console.log(level, "level");
+    
+    if (tempClicks === level) {
       nextLevelAnimation();
-      console.log("ORDER1", order)
-      setOrder([...order, Math.floor(Math.random() * 9)]);
-      console.log("ORDER2", order)
+      order[tempClicks] = Math.floor(Math.random() * 9);
       setLevel(level + 1);
       setClicks(0);
       pingBoxes();
@@ -45,16 +64,16 @@ const MemoryGame = () => {
   };
 
   const pingBoxes = (index = 0) => {
-    if (index === order.length) return;
+    if (index === Object.values(order).length || gameOver) return;
     setTimeout(() => {
-      document.getElementById(String(order[index])).style.backgroundColor =
+      document.getElementById(String(Object.values(order)[index])).style.backgroundColor =
         "red";
       setTimeout(() => {
-        document.getElementById(String(order[index])).style.backgroundColor =
+        document.getElementById(String(Object.values(order)[index])).style.backgroundColor =
           "blue";
-        pingBoxes(index + 1);
+          pingBoxes(index + 1);
+        }, 750);
       }, 750);
-    }, 750);
   };
 
   const nextLevelAnimation = () => {
@@ -81,17 +100,10 @@ const MemoryGame = () => {
     }, 250);
   };
 
-  useEffect(() => {
-    if (gameStarted) {
-      pingBoxes();
-    }
-  },);
-
   return (
     <>
       <Box className="Game">
-        <Header title={title} />
-        <Box className="Level" style={{ color: 'limegreen', marginTop: "2rem", marginLeft: "2rem"}}>Level: {String(level)}</Box>
+        <Box className="Level">Level: {String(level)}</Box>
         <Box
           sx={{
             height: "50vh",
@@ -99,7 +111,6 @@ const MemoryGame = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: "5rem"
           }}
         >
           <Grid container spacing={2}>
@@ -114,7 +125,8 @@ const MemoryGame = () => {
                   }}
                   item
                   xs={4}
-                  onClick={clickedBox}
+                  onClick={gameStarted ? clickedBox : null}
+                  // onClick={pingingBoxes ? null : clickedBox}
                   id={String(box)}
                 ></Grid>
               );
@@ -126,7 +138,7 @@ const MemoryGame = () => {
         <Button
           sx={{ marginTop: "2vh" }}
           variant="contained"
-          onClick={toggleGame}
+          onClick={stopGame}
         >
           End Game
         </Button>
@@ -134,7 +146,7 @@ const MemoryGame = () => {
         <Button
           sx={{ marginTop: "2vh" }}
           variant="contained"
-          onClick={toggleGame}
+          onClick={startGame}
         >
           Start Game
         </Button>

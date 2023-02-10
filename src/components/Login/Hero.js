@@ -6,10 +6,11 @@ import herologo from '../../illistration/herologo.svg'
 function Hero() {
   return (
   <Box
-  // bgcolor="#16161a"
+  bgcolor="#16161a"
    height='100vh'
    display='flex'
-    sx={{backgroundImage: `url(${backgroundimg})`}}
+   width='100vw'
+    sx={{backgroundImage: `url(${backgroundimg})`, width:'100%'}}
    >
 
 
@@ -53,7 +54,7 @@ function Hero() {
          justifyContent="center"
          height='100%'
          width="50%">
-          <img src={herologo} alt=""  />
+          <img src={herologo} alt="" />
          </Box>
   </Box>
   )

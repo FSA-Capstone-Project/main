@@ -8,25 +8,6 @@ const SmallGuage = (props) => {
   // const [percentDone, setPercentDone] = useState(0);
   const today = new Date();
 
-  // const getData = async () => {
-  //   const docRef = doc(
-  //     db,
-  //     "users",
-  //     `${auth.currentUser.email}`,
-  //     "habits",
-  //     `${props.habit}`
-  //   );
-  //   const docSnap = await getDoc(docRef);
-  //   if (docSnap.exists()) {
-  //     let habitProgress = docSnap.data().progress;
-  //     let goal = docSnap.data().goal;
-  //     setProgress(habitProgress);
-  //     setGoal(goal);
-  //     setPercentDone(Math.round((progress / goal) * 100));
-  //   }
-  // };
-  // getData();
-
   return (
     <Box sx={{display:'flex', flexDirection:"column", justifyContent:'center', alignItems:"center"}}>
       <Box
@@ -37,11 +18,11 @@ const SmallGuage = (props) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          bgcolor: "lightgrey",
+
           borderRadius: "12px",
         }}
       >
-        <CircularProgress variant="determinate" value={(Math.round((props.progress / props.goal) * 100))} />
+        <CircularProgress variant="determinate" value={(Math.round((props.progress / props.goal) * 100))} sx={{border:'1px solid #7f5af0',borderRadius: '10rem'}} />
         <Box
           sx={{
             position: "absolute",
@@ -72,10 +53,6 @@ const SmallGuage = (props) => {
           component="div"
           color="white"
         >
-          {((props.due-today) / (1000 * 60 * 60 * 24)) > 0 ?
-          `${Math.round((props.due-today) / (1000 * 60 * 60 * 24))} Day(s) Left!`
-          : "You Failed."
-          }
 
         </Typography>
       </Box>
