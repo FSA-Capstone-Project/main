@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Calendar from "react-calendar";
 import { auth, app } from "../../firebase";
-import './Calendar.css';
+import "./Calendar.css";
 
 const InteractiveCalendar = () => {
   const [date, setDate] = useState(new Date());
@@ -36,41 +36,42 @@ const InteractiveCalendar = () => {
   }, []);
   // =====================
   return (
-    <Box display="flex" justifyContent="center" alignItems="center"
-    className="calendarHolder">
-      <Calendar onChange={whenChanged} value={date} calendarType={"US"}/>
-      
-      {habits.length ? (
-        habits.map(singleHabit => {
+    <>
+      <Box
+        className="calendarHolder"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        bgcolor="#1e1e2b"
+      >
+        <Calendar onChange={whenChanged} value={date} calendarType={"US"} />
+      </Box>
+      <Box
+        className="calendarHolder"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        {habits.map((singleHabit) => {
           if (
             singleHabit.due.toDateString().slice(4, 10) ===
             date.toDateString().slice(4, 10)
           ) {
             return (
               <Box
-                sx={{
-                  backgroundColor: "primary.main",
-                  color: "primary.contrastText",
-                  borderRadius: "10px",
-                  padding: "10px",
-                  margin: "10px",
-                }}
+                variant="contained"
+                backgroundColor="black"
+                margin="10px 0px solid white"
+                color="primary.contrastText"
+                borderRadius="10px"
               >
-                <Typography>
-                  {singleHabit.title}
-                </Typography>
+                <Typography padding="20px">{singleHabit.title}</Typography>
               </Box>
             );
           }
-        })
-      ) : (
-        <Box>
-          <h3 style={{ color: "blue" }}>
-            You have no habits due on {date.toDateString().slice(4, 10)}
-          </h3>
-        </Box>
-      )}
-    </Box>
+        })}
+      </Box>
+    </>
   );
 };
 

@@ -47,19 +47,19 @@ const Home = () => {
         ) : null}
 
         {view === "Allhabits" ? (
-          <Box width= "100vw"  height= "100vh" bgcolor="#1e1e2b">
+          <Box width="100vw"  height="100vh" bgcolor="#1e1e2b">
             <AllHabits />
           </Box>
         ) : null}
 
         {view === "Calendar" ? (
-          <Box>
+          <Box width="100vw" bgcolor="#1e1e2b">
             <InteractiveCalendar />
           </Box>
         ) : null}
 
         {view === "MemoryGame" ? (
-          <Box width= "100vw" bgcolor="#1e1e2b">
+          <Box width="100vw" bgcolor="#1e1e2b">
             <MemoryGame />
           </Box>
         ) : null}
