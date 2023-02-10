@@ -68,7 +68,7 @@ const Home = () => {
           </Box>
         ) : null}
 
-{view === "Profile" ? (
+      {view === "Profile" ? (
           <Box>
             <Profile />
           </Box>

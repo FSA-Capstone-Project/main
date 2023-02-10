@@ -109,7 +109,7 @@ const MemoryGame = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        bgcolor="#1e1e2b"
+
       >
         <Box
           height="100vh"

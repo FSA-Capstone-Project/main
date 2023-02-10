@@ -43,6 +43,10 @@ const Dashboard = () => {
             <Grid item xs={12} md={12} >
               <Header title={title} zIndex='100'/>
             </Grid>
+            <Box ml='3rem'>
+
+            <Picture />
+            </Box>
         {/* Second Row */}
         {/* <Voice />
         <Picture/> */}

@@ -3,6 +3,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import Calendar from "react-calendar";
 import { auth, app } from "../../firebase";
 import "./Calendar.css";
+import bgImg from '../../illistration/bgImg.png'
 
 const InteractiveCalendar = () => {
   const [date, setDate] = useState(new Date());
@@ -43,6 +44,7 @@ const InteractiveCalendar = () => {
         justifyContent="center"
         alignItems="center"
         bgcolor="#1e1e2b"
+        sx={{backgroundImage: `url(${bgImg})`, width:'100%', backgroundRepeat: 'no-repeat', flexGrow: 1,backgroundSize: "cover" }}
       >
         <Calendar onChange={whenChanged} value={date} calendarType={"US"} />
       </Box>

@@ -16,7 +16,7 @@ dotenv.config();
 
 const configuration = new Configuration({
 organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
-apiKey: "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",
+apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
@@ -30,7 +30,7 @@ app.post("/text-completion", async (req, res) => {
 const response = await openai.createCompletion({
 model: "text-davinci-003",
 prompt: `return this text the same way you receive it: ${message}`,
-max_tokens: 100,
+max_tokens: 1000,
 temperature: 0,
 });
 console.log(response.data);
