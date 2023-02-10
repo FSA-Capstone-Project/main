@@ -2,12 +2,44 @@ import React, { useEffect, useState } from "react";
 import "./chat.css";
 
 import { db, app, auth } from "../../firebase";
-import { positive_words, negative_phrases, negative_words, positive_phrases } from "./chatSeed";
+import {
+  positive_words,
+  negative_phrases,
+  negative_words,
+  positive_phrases,
+} from "./chatSeed";
 import { doc } from "firebase/firestore";
+import { makeStyles } from "@mui/material/styles";
+import { CircularProgress } from "@mui/material";
 
+const blue = "#2196f3";
+const gray = "#9e9e9e";
+const red = "#ff5252";
 
+const styles = {
+  root: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  blueButton: {
+    backgroundColor: blue,
+    color: "white",
+  },
+  redButton: {
+    backgroundColor: red,
+    color: "white",
+  },
+  disabled: {
+    backgroundColor: gray,
+    color: "black",
+  },
+};
 
 function Voice(props) {
+  // const classes = useStyles();
+  const [active, setActive] = useState(false);
+
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
   const [userInfo, setUserInfo] = useState({});
@@ -16,31 +48,37 @@ function Voice(props) {
   const [userSuccessRecord, setUserSuccessRecord] = useState([]);
   const [userInProgress, setUserInProgress] = useState([]);
 
+  const [messageReceived, setMessageReceived] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [mood, setMood] = useState("");
 
   async function fetchUserInfo() {
-    const userInfo = await db.collection("users").doc(`${auth.currentUser.email}`);
+    const userInfo = await db
+      .collection("users")
+      .doc(`${auth.currentUser.email}`);
     const data = await userInfo.get();
     setUserInfo(data.data());
   }
 
   async function fetchUserHabits() {
     const habits = [];
-    const userHabits = await db.collection("users").doc(`${auth.currentUser.email}`).collection("habits");
-    const data = await userHabits.get()
-      data.forEach((doc) => {
+    const userHabits = await db
+      .collection("users")
+      .doc(`${auth.currentUser.email}`)
+      .collection("habits");
+    const data = await userHabits.get();
+    data.forEach((doc) => {
       let habit = {
         id: doc.id,
         title: doc.data().title,
         goal: doc.data().goal,
         progress: doc.data().progress,
-      }
-        // console.log(habit)
-        habits.push(habit)
-        // console.log(habits)
-        setUserHabits(habits)
-
-      });
-
+      };
+      // console.log(habit)
+      habits.push(habit);
+      // console.log(habits)
+      setUserHabits(habits);
+    });
   }
 
   async function userSuccessRecords() {
@@ -67,33 +105,53 @@ function Voice(props) {
     setUserInProgress(inProgressHabits);
   }
 
+  function fetchSeedContent(array) {
+    let randomWords = [];
+    while (randomWords.length < 3) {
+      let randomIndex = Math.floor(Math.random() * array.length);
+      let randomWord = array[randomIndex];
+      if (!randomWords.includes(randomWord)) {
+        randomWords.push(randomWord);
+      }
+    }
+    return randomWords.join(" ");
+  }
   async function messageDispatch() {
+    const messageSeed = {};
+    const user = userInfo;
 
-    const messageSeed = {}
-    const positive = positive_words[Math.floor(Math.random() * positive_words.length)]
-    const negative = negative_words[Math.floor(Math.random() * negative_words.length)]
-    const negativePhrase = negative_phrases[Math.floor(Math.random() * negative_phrases.length)]
-    const positivePhase = positive_phrases[Math.floor(Math.random() * positive_phrases.length)];
-    const localUser = userInfo
+    const positive = fetchSeedContent(positive_words);
+    const negative = fetchSeedContent(negative_words);
+    const negativePhrase = fetchSeedContent(negative_phrases);
+    const positivePhase = fetchSeedContent(positive_phrases);
+
+    const positiveWord =
+      positive_words[Math.floor(Math.random() * positive_words.length)];
+
+    const currentTime = new Date();
+
     // setMessage(localUser.name + " " + localUser.reinforcement + " " + positive + " " + positivePhase)
-    setMessage(localUser)
+    setMessage(user);
     // console.log(message)
+    console.log(user.reinforcement, "localUser");
   }
 
-
-
   useEffect(() => {
-    fetchUserInfo()
-    fetchUserHabits()
-    userSuccessRecords()
+    fetchUserInfo();
+    fetchUserHabits();
+    userSuccessRecords();
   }, []);
 
   useEffect(() => {
-    messageDispatch()
+    messageDispatch();
   }, [userInfo]);
 
+  useEffect(() => {
+    setLoading(false);
+  }, [response]);
+
   function fetchVoiceOfWisdom() {
-    console.log(JSON.stringify({ message }) , "message JSON")
+    console.log(JSON.stringify({ message }), "message JSON");
     fetch("http://localhost:3002/text-completion", {
       method: "POST",
       headers: {
@@ -106,7 +164,6 @@ function Voice(props) {
         setResponse(data.message);
       });
   }
-
 
   // function fetchVoiceOfWisdom(userInfo, userProgress, currentTime) {
   //   fetch("http://localhost:3002/", {
@@ -121,14 +178,16 @@ function Voice(props) {
   //       setResponse(data.message);
   //     });
   // }
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        userSuccessRecords()
-        fetchVoiceOfWisdom()
-        // messageDispatch()
-    // console.log(userHabits)
-    // console.log(userInfo)
-    // console.log(message)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    userSuccessRecords();
+    fetchVoiceOfWisdom()
+    messageDispatch();
+  };
+
+  const handleClick = () => {
+    setActive((prev) => !prev);
+    setLoading(true);
   };
 
   return (
@@ -138,13 +197,47 @@ function Voice(props) {
         <input
           type="text"
           value={props.name}
-          // onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => setMessage(e.target.value)}
         />
-              <button type="submit">Submit</button>
-          </form>
-          <br />
-          <button onClick={handleSubmit}>Inspire Me</button>
-      <h4 style={{ color: "blue" }}>{response}</h4>
+        <button type="submit">Submit</button>
+      </form>
+      <br />
+      <div>
+        <h4 style={{ color: "blue" }}>{response}</h4>
+      </div>
+      <div>
+        <button style={{ border: "solid black" }} onClick={handleSubmit}>
+          Inspire Me
+        </button>
+        <div style={styles.root}>
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <>
+              <button
+                style={active ? styles.disabled : styles.blueButton}
+                onClick={() => {
+                  handleClick();
+                  setMood("nice");
+                }}
+                disabled={active}
+              >
+                Nice
+              </button>
+              <button
+                style={active ? styles.disabled : styles.redButton}
+                onClick={() => {
+                  handleClick();
+                  setMood("mean");
+                }}
+                disabled={active}
+              >
+                Mean
+              </button>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

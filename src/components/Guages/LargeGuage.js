@@ -36,12 +36,12 @@ const LargeGuage = (props) => {
     await docRef.update({ progress: prog - 1 });
     const updatedDoc = await docRef.get();
     setProg(updatedDoc.data().progress);
-  };  
+  };
 
 
   useEffect(()=>{
     const unsub = onSnapshot(doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`), (doc) => {
-      console.log("Current data: ", doc.data());
+      // console.log("Current data: ", doc.data());
       const progress = doc.data().progress
       setProg(progress)
       return unsub

@@ -29,8 +29,8 @@ app.post("/text-completion", async (req, res) => {
   console.log(message, 'text-completion')
 const response = await openai.createCompletion({
 model: "text-davinci-003",
-prompt: `return this text the same way you receive it: ${message}`,
-max_tokens: 100,
+prompt: ` ${message}`,
+max_tokens: 1000,
 temperature: 0,
 });
 console.log(response.data);

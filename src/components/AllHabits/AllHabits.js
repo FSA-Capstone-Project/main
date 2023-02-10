@@ -6,6 +6,7 @@ import { Button, Box } from "@mui/material";
 import GaugeContainer from '../Dashboard/GaugeContainer';
 import UpdateHabit from "../UpdateHabit/UpdateHabit";
 import Header from "../Header";
+import Voice from '../../API/openAi/chat';
 
 const AllHabits = ({view}) => {
   const [habits, setHabits] = useState([]);
@@ -77,6 +78,7 @@ const AllHabits = ({view}) => {
           <h3 style={{ color: "white" }}>You have no habits to display!</h3>
         </Grid>
       )}
+      <Voice/>
     </Box>
   );
 }
