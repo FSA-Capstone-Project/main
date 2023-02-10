@@ -201,10 +201,19 @@ export const negative_phrases = [
   ]
 
 
+export function trainigData() {
+
+return [  ]
+}
+
+export const training_data = [
+{"prompt": "<prompt text>", "completion": "<ideal generated text>"},
+{"prompt": "<prompt text>", "completion": "<ideal generated text>"},
+{"prompt": "<prompt text>", "completion": "<ideal generated text>"},
+]
 
 
-// trainig_data = [
-// {"prompt": "<prompt text>", "completion": "<ideal generated text>"},
-// {"prompt": "<prompt text>", "completion": "<ideal generated text>"},
-// {"prompt": "<prompt text>", "completion": "<ideal generated text>"},
-// ]
+// provide a training plan to prepare for a marathon, the user is 25y/o runs frequenly, the race is in 10 week. user can train every two day. Return the training plan in a key pair value object where the key represents the weeks and the value the number of miles the user need to run
+
+
+// provide three random mean messages to the user, the user finds motivation with verbal abuse and grotesque threats and grusome words. Return the messages in an array
