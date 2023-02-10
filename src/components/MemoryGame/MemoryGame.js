@@ -15,7 +15,7 @@ const MemoryGame = () => {
       pingBoxes();
     }
   }, [gameStarted]);
-  
+
   const startGame = () => {
     // setPingingBoxes(true);
     setGameStarted(true);
@@ -53,7 +53,7 @@ const MemoryGame = () => {
     }
     console.log(tempClicks, "tempClicks");
     console.log(level, "level");
-    
+
     if (tempClicks === level) {
       nextLevelAnimation();
       order[tempClicks] = Math.floor(Math.random() * 9);
@@ -66,18 +66,20 @@ const MemoryGame = () => {
   const pingBoxes = (index = 0) => {
     if (index === Object.values(order).length || gameOver) return;
     setTimeout(() => {
-      document.getElementById(String(Object.values(order)[index])).style.backgroundColor =
-        "red";
+      document.getElementById(
+        String(Object.values(order)[index])
+      ).style.backgroundColor = "red";
       setTimeout(() => {
-        document.getElementById(String(Object.values(order)[index])).style.backgroundColor =
-          "blue";
-          pingBoxes(index + 1);
-        }, 750);
+        document.getElementById(
+          String(Object.values(order)[index])
+        ).style.backgroundColor = "blue";
+        pingBoxes(index + 1);
       }, 750);
+    }, 750);
   };
 
   const nextLevelAnimation = () => {
-    const boxes = document.getElementsByClassName("MuiGrid-root");
+    const boxes = document.getElementsByClassName("MuiGrid-item");
     for (let i = 0; i < boxes.length; i++) {
       boxes[i].style.backgroundColor = "green";
     }
@@ -89,7 +91,7 @@ const MemoryGame = () => {
   };
 
   const wrongBoxAnimation = () => {
-    const boxes = document.getElementsByClassName("MuiGrid-root");
+    const boxes = document.getElementsByClassName("MuiGrid-item");
     for (let i = 0; i < boxes.length; i++) {
       boxes[i].style.backgroundColor = "red";
     }
@@ -102,25 +104,31 @@ const MemoryGame = () => {
 
   return (
     <>
-      <Box className="Game">
-        <Box className="Level">Level: {String(level)}</Box>
+      <Box
+        className="Game"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        bgcolor="#1e1e2b"
+      >
         <Box
-          sx={{
-            height: "50vh",
-            width: "50vw",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          height="100vh"
+          width="50vw"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
         >
           <Grid container spacing={2}>
             {[...Array(9).keys()].map((box) => {
               return (
                 <Grid
                   sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     border: "2px solid black",
-                    width: "5vw",
-                    height: "10vh",
+                    width: "15vw",
+                    height: "15vh",
                     backgroundColor: "blue",
                   }}
                   item
@@ -131,26 +139,19 @@ const MemoryGame = () => {
                 ></Grid>
               );
             })}
+            {gameStarted ? (
+              <Button className="stopButton" padding="10px" variant="contained" onClick={stopGame}>
+                End Game
+              </Button>
+            ) : (
+              <Button className="startButton" padding="10px" variant="contained" onClick={startGame}>
+                Start Game
+              </Button>
+            )}
+            <Box className="Level" color="white" variant="contained" padding="10px">Level: {String(level)}</Box>
           </Grid>
-        </Box>
       </Box>
-      {gameStarted ? (
-        <Button
-          sx={{ marginTop: "2vh" }}
-          variant="contained"
-          onClick={stopGame}
-        >
-          End Game
-        </Button>
-      ) : (
-        <Button
-          sx={{ marginTop: "2vh" }}
-          variant="contained"
-          onClick={startGame}
-        >
-          Start Game
-        </Button>
-      )}
+        </Box>
     </>
   );
 };
