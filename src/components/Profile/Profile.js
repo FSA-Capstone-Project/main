@@ -13,7 +13,7 @@ import { alpha, styled } from "@mui/material/styles";
 import { auth, app } from "../../firebase";
 import Avatar from "@mui/material/Avatar";
 import ImageUploader from "./ImageUploader";
-import profile from "../../illistration/profile.svg";
+import profile from "../../illustration/profile.svg";
 import EmailIcon from "@mui/icons-material/Email";
 import Picture from "../../API/openAi/Picture";
 
