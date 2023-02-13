@@ -3,7 +3,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import Calendar from "react-calendar";
 import { auth, app } from "../../firebase";
 import "./Calendar.css";
-import bgImg from "../../illistration/bgImg.png";
+import bgImg from "../../illustration/bgImg.png";
 import SmallGuage from "../Guages/SmallGuage";
 
 const InteractiveCalendar = () => {
