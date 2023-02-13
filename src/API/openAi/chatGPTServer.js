@@ -21,8 +21,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const configuration = new Configuration({
-  organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
-  apiKey: "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",
+organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
+apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
@@ -35,8 +35,8 @@ app.post("/text-completion", async (req, res) => {
   console.log(message, 'text-completion')
 const response = await openai.createCompletion({
 model: "text-davinci-003",
-prompt: ` ${message}`,
-max_tokens: 1000,
+prompt: `return this text the same way you receive it: ${message}`,
+max_tokens: 100,
 temperature: 0,
 });
 console.log(response.data);
