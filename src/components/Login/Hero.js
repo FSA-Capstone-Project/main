@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Typography, Card, CardMedia, Paper } from '@mui/material'
-import backgroundimg from '../../illistration/backgroundimg.png'
-import herologo from '../../illistration/herologo.svg'
+import backgroundimg from '../../illustration/backgroundimg.png'
+import herologo from '../../illustration/herologo.svg'
 
 function Hero() {
   return (

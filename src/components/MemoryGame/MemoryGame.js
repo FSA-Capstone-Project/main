@@ -9,7 +9,7 @@ const MemoryGame = () => {
   const [gameOver, setGameOver] = useState(true);
   const [order, setOrder] = useState({});
   // const [pingingBoxes, setPingingBoxes] = useState(true);
-
+  
   useEffect(() => {
     if (gameStarted) {
       pingBoxes();
