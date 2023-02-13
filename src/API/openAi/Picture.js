@@ -20,7 +20,6 @@ const Picture = () => {
     setWords(event.target.value);
     setCount(event.target.value.split(" ").length);
   };
-
   async function fetchImage() {
     try {
       const response = await fetch("http://localhost:3002/image-generation", {
@@ -129,7 +128,6 @@ const Picture = () => {
     </>
   );
 };
-
 export default Picture;
 
 //     const imageName = data.data.split("/").pop().split("?")[0];

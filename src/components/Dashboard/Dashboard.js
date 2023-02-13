@@ -4,9 +4,9 @@ import { app, auth } from "../../firebase";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
 import { Grid, Box } from "@mui/material";
-import Voice  from "../../API/openAi/aIServices";
-import Picture from "../../API/openAi/Picture";
-import AiBanner from "../Ai/AiBanner";
+import Picture from '../../API/openAi/Picture'
+import Voice from '../../API/openAi/aIServices'
+import AiBanner from '../Ai/AiBanner'
 
 
 const Dashboard = () => {
@@ -47,6 +47,10 @@ const Dashboard = () => {
           <Picture />
           <AiBanner/>
             </Grid>
+            <Box ml='3rem'>
+
+            {/* <Picture /> */}
+            </Box>
         {/* Second Row */}
 
           <Grid item xs={12} md={12}>

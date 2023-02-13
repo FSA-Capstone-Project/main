@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material/";
+import { Box, Typography, Button } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { auth, app, db } from "../../firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import "./Guage.css";
 
 const LargeGuage = (props) => {
-
   const today = new Date();
   const timeRemaining = (props.due - today) / (1000 * 60 * 60 * 24);
   const percentDone = Math.round((props.progress / props.goal) * 100);
-  let [prog, setProg] = useState(props.progress)
-  const updatProg = props.fn
+  let [prog, setProg] = useState(props.progress);
+  const updatProg = props.fn;
   // console.log(prog)
-
-
 
   const handleAdd = async () => {
     const docRef = app
@@ -28,8 +25,7 @@ const LargeGuage = (props) => {
     await docRef.update({ progress: prog + 1 });
     const updatedDoc = await docRef.get();
     setProg(updatedDoc.data().progress);
-    updatProg(prog)
-
+    updatProg(prog);
   };
 
   const handleSubtract = async () => {
@@ -42,26 +38,29 @@ const LargeGuage = (props) => {
     await docRef.update({ progress: prog - 1 });
     const updatedDoc = await docRef.get();
     setProg(updatedDoc.data().progress);
-    updatProg(prog)
+    updatProg(prog);
   };
 
+  useEffect(() => {
+    const unsub = onSnapshot(
+      doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`),
+      (doc) => {
+        const progress = doc.data().progress;
+        setProg(progress);
+        return unsub;
+      }
+    );
+  }, [props.habit]);
 
-
-
-  useEffect(()=>{
-    const unsub = onSnapshot(doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`), (doc) => {
-      // console.log("Current data: ", doc.data());
-      const progress = doc.data().progress
-      setProg(progress)
-      return unsub
-  });
-  },[props.habit])
-
+  const handleRemove = async () => {
+    await deleteDoc(
+      doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`)
+    );
+  };
 
   return (
     <Box>
-      {
-      timeRemaining > 0 && percentDone < 100 ? (
+      {timeRemaining > 0 && percentDone < 100 ? (
         <Box
           sx={{
             backgroundImage: `linear-gradient(45deg, #379f93 ${Math.round(
@@ -88,24 +87,35 @@ const LargeGuage = (props) => {
               fontSize: 30,
               letterSpacing: "-.2rem",
               color: "#22223b",
-              marginBottom:'.2rem'
+              marginBottom: ".2rem",
             }}
           >
             {props.title}
-            <Box sx={{textAlign: "center",
-              fontWeight: 600,
-              fontSize: 14,
-              letterSpacing: "0rem",
-              marginTop:'-.5rem'}}
-              >
-                {`${props.progress} / ${props.goal}`}</Box>
+            <Box
+              sx={{
+                textAlign: "center",
+                fontWeight: 600,
+                fontSize: 14,
+                letterSpacing: "0rem",
+                marginTop: "-.5rem",
+              }}
+            >
+              {`${props.progress} / ${props.goal}`}
+            </Box>
           </Box>
 
-          <Box sx={{display:'flex', width:'100%', flexDirection:'row', justifyContent:"space-between", alignItems:'center'}}>
-
-
-             <button onClick={handleSubtract}><RemoveCircleOutlineIcon/></button>
-
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <button onClick={handleSubtract}>
+              <RemoveCircleOutlineIcon />
+            </button>
 
             <Box
               sx={{
@@ -115,18 +125,24 @@ const LargeGuage = (props) => {
                 fontSize: 60,
                 letterSpacing: "-.2rem",
                 color: "#22223b",
-                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
+                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)",
               }}
             >{`${Math.round(percentDone)}%`}</Box>
 
-
-              <button onClick={handleAdd}><AddCircleOutlineIcon/></button>
-
-
+            <button onClick={handleAdd}>
+              <AddCircleOutlineIcon />
+            </button>
           </Box>
-            <Box sx={{ textAlign:'center',color: "#fff", fontSize: 12, fontWeight: 600 }}>
-              Progress
-            </Box>
+          <Box
+            sx={{
+              textAlign: "center",
+              color: "#fff",
+              fontSize: 12,
+              fontWeight: 600,
+            }}
+          >
+            Progress
+          </Box>
 
           <Box>
             <Typography
@@ -134,7 +150,7 @@ const LargeGuage = (props) => {
               component="div"
               color="#2b2e40"
               fontWeight="500"
-              letterSpacing='0rem'
+              letterSpacing="0rem"
             >
               {`Days Left:${Math.round(timeRemaining)}`}
             </Typography>
@@ -153,7 +169,6 @@ const LargeGuage = (props) => {
             />
           </Box>
         </Box>
-
       ) : // ---------------COMPLETED--------------------------
       timeRemaining > 0 && percentDone >= 100 ? (
         <Box
@@ -196,7 +211,7 @@ const LargeGuage = (props) => {
                 fontSize: 60,
                 letterSpacing: "-.2rem",
                 color: "#22223b",
-                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
+                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)",
               }}
             >{`${Math.round(percentDone)}%`}</Box>
             <Box sx={{ color: "limegreen", fontSize: 14, fontWeight: 600 }}>
@@ -210,26 +225,32 @@ const LargeGuage = (props) => {
               component="div"
               color="#2b2e40"
               fontWeight="500"
-              letterSpacing='0rem'
+              letterSpacing="0rem"
             >
               {`Days Left:${Math.round(timeRemaining)}`}
             </Typography>
           </Box>
 
-          <Box sx={{ width: "12rem" }}>
-            <LinearProgress
-              variant="determinate"
-              value={percentDone}
+          <Box
+            sx={{
+              width: "12rem",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              className="addWater"
               sx={{
-                height: "2rem",
-                borderRadius: "10px",
-                boxShadow: "3px 3px 12px black",
+                color: "black",
               }}
-            />
+              variant="contained"
+              onClick={handleRemove}
+            >
+              Remove
+            </Button>
           </Box>
         </Box>
-
-
       ) : // ----------------------- FAILED ----------------------------------
       timeRemaining < 0 && percentDone < 100 ? (
         <Box
@@ -272,7 +293,7 @@ const LargeGuage = (props) => {
                 fontSize: 60,
                 letterSpacing: "-.2rem",
                 color: "#22223b",
-                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)"
+                textShadow: "1px 1px 10px rgba(0, 0, 0, 0.4)",
               }}
             >{`${Math.round(percentDone)}%`}</Box>
             <Box sx={{ color: "red", fontSize: 14, fontWeight: 600 }}>
@@ -286,7 +307,7 @@ const LargeGuage = (props) => {
               component="div"
               color="#2b2e40"
               fontWeight="500"
-              letterSpacing='0rem'
+              letterSpacing="0rem"
             >
               {(props.due - today) / (1000 * 60 * 60 * 24) > 0
                 ? `Days Left:
@@ -295,23 +316,29 @@ const LargeGuage = (props) => {
             </Typography>
           </Box>
 
-          <Box sx={{ width: "12rem" }}>
-            <LinearProgress
-              variant="determinate"
-              value={percentDone}
+          <Box
+            sx={{
+              width: "12rem",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              className="addWater"
               sx={{
-                height: "2rem",
-                borderRadius: "10px",
-                boxShadow: "3px 3px 12px black",
+                color: "black",
               }}
-            />
+              variant="contained"
+              onClick={handleRemove}
+            >
+              Remove
+            </Button>
           </Box>
         </Box>
       ) : null}
     </Box>
   );
-
-            }
-
+};
 
 export default LargeGuage;

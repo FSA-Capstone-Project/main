@@ -3,10 +3,13 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import Calendar from "react-calendar";
 import { auth, app } from "../../firebase";
 import "./Calendar.css";
+import bgImg from "../../illustration/bgImg.png";
+import SmallGuage from "../Guages/SmallGuage";
 
 const InteractiveCalendar = () => {
   const [date, setDate] = useState(new Date());
   const [habits, setHabits] = useState([]);
+  console.log(habits);
 
   const whenChanged = (date) => {
     setDate(date);
@@ -27,6 +30,7 @@ const InteractiveCalendar = () => {
             id: doc.id,
             title: doc.data().title,
             goal: doc.data().goal,
+            progress: doc.data().progress,
             due: doc.data().due.toDate(),
           };
           data.push(habit);
@@ -37,39 +41,84 @@ const InteractiveCalendar = () => {
   // =====================
   return (
     <>
+      {/* TOP WITH CALENDER */}
       <Box
-        className="calendarHolder"
+        height="50%"
+        // style={{ borderRadius: "3rem" }}
         display="flex"
-        justifyContent="center"
         alignItems="center"
-        bgcolor="#1e1e2b"
+        justifyContent="center"
       >
         <Calendar onChange={whenChanged} value={date} calendarType={"US"} />
       </Box>
-      <Box
-        className="calendarHolder"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        {habits.map((singleHabit) => {
-          if (
-            singleHabit.due.toDateString().slice(4, 10) ===
-            date.toDateString().slice(4, 10)
-          ) {
-            return (
-              <Box
-                variant="contained"
-                backgroundColor="black"
-                margin="10px 0px solid white"
-                color="primary.contrastText"
-                borderRadius="10px"
-              >
-                <Typography padding="20px">{singleHabit.title}</Typography>
-              </Box>
-            );
-          }
-        })}
+      {/* BOTTOM WIT DAY INFO */}
+      <Box height="50%" display="flex" flexDirection="column">
+        {/* card */}
+        <Box
+          height="100vh"
+          display="flex"
+          flexDirection="column"
+          margin="2rem auto"
+          overflow='auto'
+          width="100vh"
+          bgcolor="#16161a"
+          borderRadius="3rem"
+        >
+          {/*Date */}
+          <Box>
+            <Typography
+              variant="h1"
+              width="fit-content"
+              margin="auto"
+              height="auto"
+              alignContent="center"
+            >
+              {date.toDateString()}
+            </Typography>
+          </Box>
+          {habits.map((singleHabit) => {
+            if (
+              singleHabit.due.toDateString().slice(4, 10) ===
+              date.toDateString().slice(4, 10)
+            ) {
+              return (
+                // Habit line card
+                <Box
+                  display="flex"
+                  justifyContent='space-around'
+                  key={singleHabit.id}
+                  m="0 auto 9px auto"
+                  borderRadius="1rem"
+                  bgcolor="#26293c"
+                  height="80px"
+                  width="60%"
+                  overflow='auto'
+                >
+                  {/* habit title left */}
+                  <Box
+                    ml="8px"
+                    width="20%"
+                    height="100%"
+
+                  >
+                    <Typography variant="h5" sx={{textAlign:'center', mt: '1.5rem'}}>{singleHabit.title}</Typography>
+                  </Box>
+                  <Box
+                    // bgcolor='purple'
+                    width="20%"
+                    // height="100%"
+                  >
+                     <SmallGuage
+                      habit={singleHabit.id}
+                      progress={singleHabit.progress}
+                      goal={singleHabit.goal}
+                    />
+                  </Box>
+                </Box>
+              );
+            }
+          })}
+        </Box>
       </Box>
     </>
   );
@@ -78,80 +127,59 @@ const InteractiveCalendar = () => {
 export default InteractiveCalendar;
 
 // =======================
+// OLD
 
-// const Calendar = () => {
-//   const classes = useStyles();
-//   const [currentEvents, setCurrentEvents] = useState([]);
+// <Box
+// variant="contained"
+// backgroundColor="black"
+// margin="10px 0px solid white"
+// color="primary.contrastText"
+// borderRadius="10px"
+// >
+// <Typography padding="20px">{singleHabit.title}</Typography>
+// </Box>
 
-//   const handleDateClick = (selected) => {
-//     const title = prompt("Please enter a new title for your event");
-//     const calendarApi = selected.view.calendar;
-//     calendarApi.unselect();
-
-//     if (title) {
-//       calendarApi.addEvent({
-//         id: `${selected.dateStr}-${title}`,
-//         title,
-//         start: selected.dateStr,
-//         end: selected.dateStr,
-//         allDay: selected.allDay,
-//       });
-//     }
-//   };
-
-//   const handleEventClick = (selected) => {
-//     if (
-//       window.confirm(
-//         `Are you sure you want to delete the event ${selected.event.title}`
-//       )
-//     ) {
-//       selected.event.remove();
-//     }
-//   };
-
-//   return (
-//     <Box display="flex" justifyContent="space-between">
-//       <Box className={classes.eventsList}>
-//         <Typography variant="h6">Events</Typography>
-//         <List>
-//           {currentEvents.map((event) => (
-//             <ListItem key={event.id} className={classes.event}>
-//               <ListItemText
-//                 primary={event.title}
-//                 secondary={
-//                   <Typography>
-//                     {formatDate(event.start, {
-//                       year: "numeric",
-//                       month: "short",
-//                       day: "numeric",
-//                     })}
-//                   </Typography>
-//                 }
-//               />
-//             </ListItem>
-//           ))}
-//         </List>
-//       </Box>
-//       <FullCalendar
-//         className={classes.calendar}
-//         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-//         headerToolbar={{
-//           left: "prev,next today",
-//           center: "title",
-//           right: "dayGridMonth,timeGridWeek,timeGridDay,listPlugin"}],
-//             initialView="dayGridMonth"
-//             editable={true}
-//             selectable={true}
-//             selectMirror={true}
-//             dayMaxEvents={true}
-//             select={handleDateClick}
-//             eventClick={handleEventClick}
-//             eventsSet={(events) => setCurrentEvents(events)}
-//           />
+// <Box
+// className="calendarHolder"
+// display="flex"
+// justifyContent="center"
+// alignItems="center"
+// bgcolor="#1e1e2b"
+// sx={{
+//   backgroundImage: `url(${bgImg})`,
+//   width: "100%",
+//   backgroundRepeat: "no-repeat",
+//   flexGrow: 1,
+//   backgroundSize: "cover",
+// }}
+// >
+// {/* <Calendar onChange={whenChanged} value={date} calendarType={"US"} /> */}
+// </Box>
+// <Box
+// className="calendarHolder"
+// display="flex"
+// justifyContent="center"
+// alignItems="center"
+// >
+// {habits.map((singleHabit) => {
+//   if (
+//     singleHabit.due.toDateString().slice(4, 10) ===
+//     date.toDateString().slice(4, 10)
+//   ) {
+//     console.log(singleHabit);
+//     return (
+//       <Box height="100vh" width="100vh" bgcolor="blue">
+//         <Box
+//           variant="contained"
+//           backgroundColor="black"
+//           margin="10px 0px solid white"
+//           color="primary.contrastText"
+//           borderRadius="10px"
+//         >
+//           <Typography padding="20px">{singleHabit.title}</Typography>
 //         </Box>
 //       </Box>
-//     </Box>
-//   );
-// };
-
-// export default Calendar;
+//     );
+//   }
+// })}
+// </Box>

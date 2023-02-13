@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { auth, db } from "../../firebase";
 import { Button, TextField, Box, Typography } from "@mui/material/";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const UpdateHabit = ({ habit, setHabit }) => {
-  const [input, setInput] = useState({ title: habit.title, goal: habit.goal, progress: habit.progress, due: habit.due });
+  const [input, setInput] = useState({
+    title: habit.title,
+    goal: habit.goal,
+    progress: habit.progress,
+    due: habit.due,
+  });
   const [date, setDate] = useState(habit.due);
 
   const handleSubmit = (event) => {
@@ -22,15 +27,18 @@ const UpdateHabit = ({ habit, setHabit }) => {
 
   const updateHabit = async () => {
     const timestamp = date.toDate();
-    const habitRef = db.doc(`users/${auth.currentUser.email}/habits/${habit.id}`);
+    const habitRef = db.doc(
+      `users/${auth.currentUser.email}/habits/${habit.id}`
+    );
     const habitDoc = await habitRef.get();
     if (habitDoc.exists) {
-      habitRef.update({
-        title: input.title,
-        goal: input.goal,
-        progress: input.progress,
-        due: timestamp
-      })
+      habitRef
+        .update({
+          title: input.title,
+          goal: input.goal,
+          progress: input.progress,
+          due: timestamp,
+        })
         .then(() => {
           console.log("Habit updated successfully");
         })
@@ -38,12 +46,13 @@ const UpdateHabit = ({ habit, setHabit }) => {
           console.error("Error updating habit: ", error);
         });
     } else {
-      habitRef.set({
-        title: input.title,
-        goal: input.goal,
-        progress: input.progress,
-        due: timestamp
-      })
+      habitRef
+        .set({
+          title: input.title,
+          goal: input.goal,
+          progress: input.progress,
+          due: timestamp,
+        })
         .then(() => {
           console.log("Habit created successfully");
         })
@@ -70,10 +79,13 @@ const UpdateHabit = ({ habit, setHabit }) => {
           justifyContent="center"
           height="300px"
           width="300px"
-          marginBottom="20px"
+
+          marginBottom="10px"
+          marginTop="10px"
+          marginRight="9px"
         >
           <Typography variant="darktext" sx={{ fontSize: "25px" }}></Typography>
-          <Typography variant="purple" sx={{ fontSize: "2em", margin: "5px"}}>
+          <Typography variant="purple" sx={{ fontSize: "2em", margin: "5px" }}>
             Update Your Habit
           </Typography>
 

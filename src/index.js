@@ -45,7 +45,10 @@ const theme = createTheme({
         },
         h4: {
           color: '#94a1b2'
-        }
+        },
+        h6: {
+          color: '#94a1b2'
+        },
       },
       components:{
         MuiLinearProgress:{
