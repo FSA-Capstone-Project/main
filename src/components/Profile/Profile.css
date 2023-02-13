@@ -1,0 +1,13 @@
+.profileRow{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.profileLabel{
+    margin-left: 100px;
+    font-weight: 800;
+}
+.profileValue{
+    margin-right: 100px;
+}
