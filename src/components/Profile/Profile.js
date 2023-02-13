@@ -15,6 +15,7 @@ import Avatar from "@mui/material/Avatar";
 import ImageUploader from "./ImageUploader";
 import profile from "../../illistration/profile.svg";
 import EmailIcon from "@mui/icons-material/Email";
+import Picture from "../../API/openAi/Picture";
 
 const Profile = () => {
   const user = auth.currentUser;
@@ -89,6 +90,8 @@ const Profile = () => {
   });
 
   return (
+    <>
+    <Picture/>
     <Box
       sx={{
         display: "flex",
@@ -202,6 +205,7 @@ const Profile = () => {
         <img src={profile}></img>
       </Box>
     </Box>
+    </>
   );
 };
 
