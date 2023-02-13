@@ -7,6 +7,7 @@ import {
   FormControl,
   InputAdornment,
   InputLabel,
+  Button,
 } from "@mui/material/";
 import { alpha, styled } from "@mui/material/styles";
 import { auth, app } from "../../firebase";
@@ -135,11 +136,11 @@ const Profile = () => {
           bgcolor="#94a1b2"
           borderRadius="9px"
           height="400px"
-          paddingLeft='2rem'
+          paddingLeft="2rem"
         >
           <Typography variant="h3">{name} </Typography>
-      {/* email */}
-          <FormControl sx={{  width: "50%" }} >
+          {/* email */}
+          <FormControl sx={{ width: "50%" }}>
             <InputLabel htmlFor="outlined-adornment-amount">Email</InputLabel>
             <OutlinedInput
               id="outlined-adornment-amount"
@@ -152,31 +153,41 @@ const Profile = () => {
               label="Amount"
             />
           </FormControl>
-      {/* phone */}
-      <TextField
-      sx={{  width: "50%", mt: '2rem' }}
-          id="outlined-number"
-          label="Phone Number"
-          type="number"
-          placeholder={phone}
-          InputLabelProps={{
-            // shrink: true,
-          }}
-        />
-        {/* age */}
-      <TextField
-      sx={{  width: "25%", mt: '2rem' }}
-          id="outlined-number"
-          label="age"
-          type="number"
-          placeholder={age}
-          InputLabelProps={{
-            // shrink: true,
-          }}
-        />
-        <Typography sx={{color: '#16161a'}} mt='3rem' variant="h5">Date Joined: {(auth.currentUser.metadata.creationTime).slice(0,16)}</Typography>
-
+          {/* phone */}
+          <TextField
+            sx={{ width: "50%", mt: "2rem" }}
+            id="outlined-number"
+            label="Phone Number"
+            type="number"
+            placeholder={phone}
+            InputLabelProps={
+              {
+                // shrink: true,
+              }
+            }
+          />
+          {/* age */}
+          <TextField
+            sx={{ width: "25%", mt: "2rem" }}
+            id="outlined-number"
+            label="age"
+            type="number"
+            placeholder={age}
+            InputLabelProps={
+              {
+                // shrink: true,
+              }
+            }
+          />
+          <Typography sx={{ color: "#16161a" }} mt="3rem" variant="h5">
+            Date Joined: {auth.currentUser.metadata.creationTime.slice(0, 16)}
+          </Typography>
         </Box>
+
+        {/* Chat
+        <Box>
+          <Button>Chat</Button>
+        </Box> */}
       </Box>
 
       <Box

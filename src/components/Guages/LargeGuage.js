@@ -14,7 +14,7 @@ const LargeGuage = (props) => {
   const percentDone = Math.round((props.progress / props.goal) * 100);
   let [prog, setProg] = useState(props.progress)
   const updatProg = props.fn
-  console.log(prog)
+  // console.log(prog)
 
 
 
@@ -44,6 +44,8 @@ const LargeGuage = (props) => {
     setProg(updatedDoc.data().progress);
     updatProg(prog)
   };
+
+
 
 
   useEffect(()=>{
@@ -308,8 +310,8 @@ const LargeGuage = (props) => {
       ) : null}
     </Box>
   );
-};
 
+            }
 
 
 export default LargeGuage;

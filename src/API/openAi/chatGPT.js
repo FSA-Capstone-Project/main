@@ -7,7 +7,8 @@ function Robot (props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3002/", {
+    console.log(message, "message")
+    fetch("http://localhost:3002/text-completion", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
