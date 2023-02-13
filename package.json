@@ -28,6 +28,7 @@
     "@types/node": "^16.18.11",
     "@types/react-dom": "^18.0.10",
     "autoprefixer": "^10.4.13",
+    "babel-node": "^0.0.1-security",
     "cors": "^2.8.5",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
@@ -54,6 +55,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "gpt-server": "node ./src/API/openAi/chatGPTServer",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode=development",
     "watch": "webpack --watch",

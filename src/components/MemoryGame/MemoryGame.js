@@ -51,8 +51,6 @@ const MemoryGame = () => {
       wrongBoxAnimation();
       stopGame();
     }
-    console.log(tempClicks, "tempClicks");
-    console.log(level, "level");
 
     if (tempClicks === level) {
       nextLevelAnimation();
@@ -105,6 +103,17 @@ const MemoryGame = () => {
   return (
     <>
       <Box
+        className="Level"
+        color="white"
+        padding="10px"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        fontSize="30px"
+      >
+        Level: {String(level)}
+      </Box>
+      <Box
         className="Game"
         display="flex"
         justifyContent="center"
@@ -112,7 +121,7 @@ const MemoryGame = () => {
 
       >
         <Box
-          height="100vh"
+          height="90vh"
           width="50vw"
           display="flex"
           justifyContent="center"
@@ -127,31 +136,52 @@ const MemoryGame = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     border: "2px solid black",
-                    width: "15vw",
+                    width: "12vw",
                     height: "15vh",
                     backgroundColor: "blue",
+                    borderRadius: "10px",
                   }}
                   item
                   xs={4}
                   onClick={gameStarted ? clickedBox : null}
-                  // onClick={pingingBoxes ? null : clickedBox}
                   id={String(box)}
                 ></Grid>
               );
             })}
-            {gameStarted ? (
-              <Button className="stopButton" padding="10px" variant="contained" onClick={stopGame}>
-                End Game
-              </Button>
-            ) : (
-              <Button className="startButton" padding="10px" variant="contained" onClick={startGame}>
-                Start Game
-              </Button>
-            )}
-            <Box className="Level" color="white" variant="contained" padding="10px">Level: {String(level)}</Box>
+        <Box
+          // center the button to be in the middle of the grid
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+          height="100%"
+          padding="10px"
+        >
+          {gameStarted ? (
+            <Button
+              className="stopButton"
+              padding="10px"
+              variant="contained"
+              border="3px solid black"
+              onClick={stopGame}
+            >
+              End Game
+            </Button>
+          ) : (
+            <Button
+              className="startButton"
+              padding="10px"
+              variant="contained"
+              border="3px solid black"
+              onClick={startGame}
+            >
+              Start Game
+            </Button>
+          )}
+          </Box>
           </Grid>
-      </Box>
         </Box>
+      </Box>
     </>
   );
 };

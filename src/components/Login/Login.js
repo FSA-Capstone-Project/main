@@ -3,7 +3,7 @@ import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField, Box, Typography, Divider } from "@mui/material/";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
-import login from '../../illistration/login.svg'
+import login from '../../illustration/login.svg'
 
 const styles = {
   paragraph: "#94a1b2",

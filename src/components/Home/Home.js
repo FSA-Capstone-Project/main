@@ -10,7 +10,7 @@ import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import AllHabits from "../AllHabits/AllHabits";
 import Profile from "../Profile/Profile";
-import bgImg from '../../illistration/bgImg.png'
+import bgImg from '../../illustration/bgImg.png'
 
 const Home = () => {
   const [view, setView] = useState("Dashboard");
