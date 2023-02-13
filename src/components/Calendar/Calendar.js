@@ -44,7 +44,7 @@ const InteractiveCalendar = () => {
       {/* TOP WITH CALENDER */}
       <Box
         height="50%"
-        borderRadius="3rem"
+        // style={{ borderRadius: "3rem" }}
         display="flex"
         alignItems="center"
         justifyContent="center"
