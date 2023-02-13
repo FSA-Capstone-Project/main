@@ -4,6 +4,7 @@ import { app, auth } from "../../firebase";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
 import { Grid, Box } from "@mui/material";
+import Picture from '../../API/openAi/Picture'
 
 
 const Dashboard = () => {
@@ -43,7 +44,7 @@ const Dashboard = () => {
             </Grid>
             <Box ml='3rem'>
 
-            <Picture />
+            {/* <Picture /> */}
             </Box>
         {/* Second Row */}
 

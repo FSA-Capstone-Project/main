@@ -51,14 +51,13 @@ const AllHabits = ({ view }) => {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        maxHeight: "100%",
-        overflow: "auto",
+        // overflow: "auto",
       }}
     >
         <Header title={title} />
       <Box display='flex' height='100vh'>
         {/* page left side */}
-        <Box width="50%" display="flex" flexDirection="row">
+        <Box width="50%" height='75%' display="flex" flexDirection="column" sx={{ overflow: "scroll",}}>
           <Grid container direction="column" ml="1rem">
             {habits.length ? (
               habits.map((habit) => (
