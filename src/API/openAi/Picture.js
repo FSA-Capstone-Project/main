@@ -3,20 +3,16 @@ import React, { useState } from "react";
 import { db, app, auth } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
-
 const Picture = () => {
   const [words, setWords] = useState("");
   const [count, setCount] = useState(0);
   const [imageURL, setImageURL] = useState(null);
-
   const storage = getStorage();
   const user = auth.currentUser;
-
   const handleChange = (event) => {
     setWords(event.target.value);
     setCount(event.target.value.split(" ").length);
   };
-
   async function fetchImage() {
     try {
       const response = await fetch("http://localhost:3002/image-generation", {
@@ -29,26 +25,19 @@ const Picture = () => {
       const data = await response.json();
       console.log(data, "data");
         setImageURL(data.data);
-
       const userInfoRef = await db
         .collection("users")
         .doc(`${auth.currentUser.email}`);
       userInfoRef.update({ photo: data.data });
-
-
-
       }
      catch (error) {
       console.error(error);
     }
   }
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchImage();
   };
-
   return (
     <div>
       <h3>Enter 6 words to generate an image</h3>
@@ -64,9 +53,89 @@ const Picture = () => {
     </div>
   );
 };
-
 export default Picture;
-
-
   //     const imageName = data.data.split("/").pop().split("?")[0];
   //     const imageRef = ref(storage, `${auth.currentUser.email}-${imageName}`);
+  //     const responseImage = await fetch(imageURL);
+  //     const blob = await responseImage.blob();
+  //     await imageRef.put(blob);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+  // async function fetchImage() {
+  //   try {
+  //     const response = await fetch("http://localhost:3002/image-generation", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ message: words }),
+  //     });
+  //     const data = await response.json();
+  //     console.log(data, "data");
+  //     setImageURL(data.data);
+  //     const imageName = `${uuidv4()}.png`; // generating a unique name for the image
+  //     const imageBlob = await fetch(imageURL).then((r) => r.blob());
+  //     const imageRef = ref(storage, `${auth.currentUser.email}-profileImage`);
+  //     await imageRef.put(imageBlob, { contentType: "image/png" });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+// async function fetchImage() {
+//   try {
+//     const response = await fetch("http://localhost:3002/image-generation", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ message: words }),
+//     });
+//     const data = await response.json();
+//     console.log(data, "data");
+//     setImageURL(data.data);
+//     // Get the image name
+//     const imageName = `${auth.currentUser.email}-profileImage.png`;
+//     // Get the image data from the URL
+//     const responseImage = await fetch(imageURL, {
+//       mode: "no-cors",
+//       headers: {
+//         "Content-Type": "image/png"
+//       }
+//     });
+//     const imageBlob = await responseImage.blob();
+//     console.log(imageBlob, typeof imageBlob, "imageBlob")
+//     // Upload the image to Firebase Storage
+//     const storageRef = ref(storage, imageName);
+//     const task = storageRef.put(imageBlob);
+//     task.on(
+//       "state_changed",
+//       (snapshot) => {
+//         console.log(snapshot);
+//       },
+//       (error) => {
+//         console.error(error);
+//       },
+//       async () => {
+//         console.log("Upload complete");
+//         const imageURL = await storageRef.getDownloadURL();
+//         console.log(imageURL);
+//         // Update the user profile with the new image URL
+//         const user = auth.currentUser;
+//         user
+//           .updateProfile({
+//             photoURL: imageURL,
+//           })
+//           .then(() => {
+//             console.log("Profile updated");
+//           })
+//           .catch((error) => {
+//             console.error(error);
+//           });
+//       }
+//     );
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }

@@ -10,7 +10,6 @@ function GaugeContainer() {
   const [habits, setHabits] = useState([]);
   const [progress, setProgress] = useState()
 
-
   const updateProgress = (prog)=>{
    setProgress(prog)
   }
@@ -34,9 +33,6 @@ function GaugeContainer() {
           };
           data.push(habit);
           setHabits(data);
-
-
-
         });
       });
   }, [progress]);

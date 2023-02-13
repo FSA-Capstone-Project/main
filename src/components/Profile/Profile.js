@@ -15,6 +15,8 @@ import Avatar from "@mui/material/Avatar";
 import ImageUploader from "./ImageUploader";
 import profile from "../../illustration/profile.svg";
 import EmailIcon from "@mui/icons-material/Email";
+import Picture from "../../API/openAi/Picture";
+import "./Profile.css";
 
 const Profile = () => {
   const user = auth.currentUser;
@@ -27,7 +29,6 @@ const Profile = () => {
 
   useEffect(() => {
     const data = [];
-    console.log("USEEFFECT", auth.currentUser);
     app
       .firestore()
       .collection("users")
@@ -76,8 +77,7 @@ const Profile = () => {
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-
-        border: '1px solid black'
+        border: "1px solid black",
       },
       "&:hover fieldset": {
         borderColor: "yellow",
@@ -89,119 +89,81 @@ const Profile = () => {
   });
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-
-        height: "100vh",
-        width: "100vw",
-
-      }}
-    >
+    <>
       <Box
         sx={{
+          display: "flex",
+
           height: "100vh",
-          width: "50%",
-          // bgcolor:'grey',
-          padding: "4rem",
-          marginLeft: "4rem",
+          width: "100vw",
         }}
       >
-        {/* header */}
-        <Box>
-          <Typography variant="h1"> {name} </Typography>
-          <Typography variant="darktext">
-            {" "}
-            Edit and update your profile{" "}
-          </Typography>
-        </Box>
-        {/* update profile photo */}
         <Box
           sx={{
-            display: "flex",
-            marginTop: "3rem",
-            // bgcolor:'red',
-            alignItems: "center",
+            height: "100vh",
+            width: "50%",
+            // bgcolor:'grey',
+            padding: "4rem",
+            marginLeft: "4rem",
           }}
         >
-          <Avatar src={user.photoURL} sx={{ width: 150, height: 150 }} />
-          <ImageUploader />
+          {/* header */}
+          <Box>
+            <Typography variant="h1"> {name} </Typography>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "80%",
+              alignItems: "center",
+              justifyContent: "space-around",
+              backgroundColor: "rgba(255,255,255,.4)",
+              borderRadius: "10px",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Avatar src={user.photoURL} sx={{ width: 150, height: 150 }} />
+              <ImageUploader />
+            </Box>
+            <div className="profileRow">
+              <div className="profileLabel">Name: </div>
+              <div className="profileValue">{name}</div>
+            </div>
+            <div className="profileRow">
+              <div className="profileLabel">Age: </div>
+              <div className="profileValue">{age}</div>
+            </div>
+            <div className="profileRow">
+              <div className="profileLabel">Email: </div>
+              <div className="profileValue">{auth.currentUser.email}</div>
+            </div>
+            <div className="profileRow">
+              <div className="profileLabel">Phone: </div>
+              <div className="profileValue">{phone}</div>
+            </div>
+            <div className="profileRow">
+              <div className="profileLabel">Habits: </div>
+              <div className="profileValue">{habits.length}</div>
+            </div>
+            <div className="profileRow">
+              <div className="profileLabel">Joined: </div>
+              <div className="profileValue">
+                {auth.currentUser.metadata.creationTime.slice(0, 16)}
+              </div>
+            </div>
+          </Box>
         </Box>
-
-        {/* update profile section */}
-        <Box
-          marginTop="3rem"
-          display="flex"
-          flexDirection="column"
-          bgcolor="#94a1b2"
-          borderRadius="9px"
-          height="400px"
-          paddingLeft="2rem"
-        >
-          <Typography variant="h3">{name} </Typography>
-          {/* email */}
-          <FormControl sx={{ width: "50%" }}>
-            <InputLabel htmlFor="outlined-adornment-amount">Email</InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-amount"
-              placeholder={email}
-              startAdornment={
-                <InputAdornment position="start">
-                  <EmailIcon />
-                </InputAdornment>
-              }
-              label="Amount"
-            />
-          </FormControl>
-          {/* phone */}
-          <TextField
-            sx={{ width: "50%", mt: "2rem" }}
-            id="outlined-number"
-            label="Phone Number"
-            type="number"
-            placeholder={phone}
-            InputLabelProps={
-              {
-                // shrink: true,
-              }
-            }
-          />
-          {/* age */}
-          <TextField
-            sx={{ width: "25%", mt: "2rem" }}
-            id="outlined-number"
-            label="age"
-            type="number"
-            placeholder={age}
-            InputLabelProps={
-              {
-                // shrink: true,
-              }
-            }
-          />
-          <Typography sx={{ color: "#16161a" }} mt="3rem" variant="h5">
-            Date Joined: {auth.currentUser.metadata.creationTime.slice(0, 16)}
-          </Typography>
-        </Box>
-
-        {/* Chat
-        <Box>
-          <Button>Chat</Button>
-        </Box> */}
       </Box>
-
-      <Box
-        sx={{
-          height: "100vh",
-          width: "50%",
-          display: "flex",
-          alignItems: "center",
-          // bgcolor:'orange'
-        }}
-      >
-        <img src={profile}></img>
-      </Box>
-    </Box>
+    </>
   );
 };
 
@@ -232,4 +194,73 @@ export default Profile;
 // <Box>Habits: {habits.length}</Box>
 // <Box>Joined: {(auth.currentUser.metadata.creationTime).slice(0,16)}</Box>
 
+// </Box>
+
+// <Box
+// marginTop="3rem"
+// display="flex"
+// flexDirection="column"
+// bgcolor="#94a1b2"
+// borderRadius="9px"
+// height="400px"
+// paddingLeft="2rem"
+// >
+// <Typography variant="h3">{name} </Typography>
+
+// <FormControl sx={{ width: "50%" }}>
+//   <InputLabel htmlFor="outlined-adornment-amount">Email</InputLabel>
+//   <OutlinedInput
+//     id="outlined-adornment-amount"
+//     placeholder={email}
+//     startAdornment={
+//       <InputAdornment position="start">
+//         <EmailIcon />
+//       </InputAdornment>
+//     }
+//     label="Amount"
+//   />
+// </FormControl>
+
+// <TextField
+//   sx={{ width: "50%", mt: "2rem" }}
+//   id="outlined-number"
+//   label="Phone Number"
+//   type="number"
+//   placeholder={phone}
+//   InputLabelProps={
+//     {
+//       // shrink: true,
+//     }
+//   }
+// />
+
+// <TextField
+//   sx={{ width: "25%", mt: "2rem" }}
+//   id="outlined-number"
+//   label="age"
+//   type="number"
+//   placeholder={age}
+//   InputLabelProps={
+//     {
+//       // shrink: true,
+//     }
+//   }
+// />
+// <Typography sx={{ color: "#16161a" }} mt="3rem" variant="h5">
+//   Date Joined: {auth.currentUser.metadata.creationTime.slice(0, 16)}
+// </Typography>
+// </Box>
+
+// </Box>
+
+// <Box
+// sx={{
+// height: "100vh",
+// width: "50%",
+// display: "flex",
+// alignItems: "center",
+// // bgcolor:'orange'
+// }}
+// >
+// <img src={profile}></img>
 // </Box>
