@@ -127,7 +127,7 @@ const Profile = () => {
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems:'center',
+                alignItems: "center",
                 width: "100%",
               }}
             >
@@ -135,28 +135,30 @@ const Profile = () => {
               <ImageUploader />
             </Box>
             <div className="profileRow">
-            <div className="profileLabel">Name: </div>
-            <div className="profileValue">{name}</div>
+              <div className="profileLabel">Name: </div>
+              <div className="profileValue">{name}</div>
             </div>
             <div className="profileRow">
-            <div className="profileLabel">Age: </div>
-            <div className="profileValue">{age}</div>
+              <div className="profileLabel">Age: </div>
+              <div className="profileValue">{age}</div>
             </div>
             <div className="profileRow">
-            <div className="profileLabel">Email: </div>
-            <div className="profileValue">{auth.currentUser.email}</div>
+              <div className="profileLabel">Email: </div>
+              <div className="profileValue">{auth.currentUser.email}</div>
             </div>
             <div className="profileRow">
-            <div className="profileLabel">Phone: </div>
-            <div className="profileValue">{phone}</div>
+              <div className="profileLabel">Phone: </div>
+              <div className="profileValue">{phone}</div>
             </div>
             <div className="profileRow">
-            <div className="profileLabel">Habits: </div>
-            <div className="profileValue">{habits.length}</div>
+              <div className="profileLabel">Habits: </div>
+              <div className="profileValue">{habits.length}</div>
             </div>
             <div className="profileRow">
-            <div className="profileLabel">Joined: </div>
-            <div className="profileValue">{(auth.currentUser.metadata.creationTime).slice(0,16)}</div>
+              <div className="profileLabel">Joined: </div>
+              <div className="profileValue">
+                {auth.currentUser.metadata.creationTime.slice(0, 16)}
+              </div>
             </div>
           </Box>
         </Box>
