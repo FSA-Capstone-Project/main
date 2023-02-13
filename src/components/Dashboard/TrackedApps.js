@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Box } from "@mui/material";
 import LiquidGuage from "../Guages/LiquidGuage";
 import { useMediaQuery } from "@mui/material/";
-import dashLogo from "../../illistration/dashLogo.svg";
+import dashLogo from "../../illustration/dashLogo.svg";
 
 function TrackedApps() {
   const largeScreen = useMediaQuery((theme) => theme.breakpoints.up("md"));

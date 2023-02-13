@@ -3,7 +3,7 @@ import { auth, db } from "../../firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { Button, TextField, Box, Typography } from "@mui/material/";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
-import signup from "../../illistration/signup.svg"
+import signup from "../../illustration/signup.svg"
 
 
 const SignUp = ({switchForm}) =>{

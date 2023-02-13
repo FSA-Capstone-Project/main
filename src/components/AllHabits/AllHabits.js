@@ -7,7 +7,7 @@ import GaugeContainer from "../Dashboard/GaugeContainer";
 import UpdateHabit from "../UpdateHabit/UpdateHabit";
 import Header from "../Header";
 import SmallGuage from "../Guages/SmallGuage";
-import allHabitsLogo from '../../illistration/allHabitsLogo.svg'
+import allHabitsLogo from '../../illustration/allHabitsLogo.svg'
 
 const AllHabits = ({ view }) => {
   const [habits, setHabits] = useState([]);
