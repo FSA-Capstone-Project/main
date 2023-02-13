@@ -45,8 +45,9 @@ function Voice(props) {
   const [userInfo, setUserInfo] = useState({});
   const [userHabits, setUserHabits] = useState([]);
 
-  const [userSuccessRecord, setUserSuccessRecord] = useState([]);
+  const [userCompletedHabits, setUserCompletedHabits] = useState([]);
   const [userInProgress, setUserInProgress] = useState([]);
+  const [userPastDue, setUserPastDue] = useState([]);
 
   const [messageReceived, setMessageReceived] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -58,6 +59,7 @@ function Voice(props) {
       .doc(`${auth.currentUser.email}`);
     const data = await userInfo.get();
     setUserInfo(data.data());
+    return data.data();
   }
 
   async function fetchUserHabits() {
@@ -74,16 +76,16 @@ function Voice(props) {
         goal: doc.data().goal,
         progress: doc.data().progress,
       };
-      // console.log(habit)
       habits.push(habit);
-      // console.log(habits)
       setUserHabits(habits);
     });
   }
 
   async function userSuccessRecords() {
-    const successHabits = [];
+    const completedHabits = [];
     const inProgressHabits = [];
+    const pastDueHabits = [];
+    const today = new Date();
     const querySnapshot = await db
       .collection("users")
       .doc(`${auth.currentUser.email}`)
@@ -93,16 +95,18 @@ function Voice(props) {
     querySnapshot.forEach((doc) => {
       const habit = doc.data();
       if (habit.progress >= habit.goal) {
-        successHabits.push(habit);
+        completedHabits.push(habit);
+      }
+      if (habit.due.toDate() < today) {
+        pastDueHabits.push(habit);
       } else {
         inProgressHabits.push(habit);
       }
     });
 
-    console.log(successHabits);
-    console.log(inProgressHabits);
-    setUserSuccessRecord(successHabits);
+    setUserCompletedHabits(completedHabits);
     setUserInProgress(inProgressHabits);
+    setUserPastDue(pastDueHabits);
   }
 
   function fetchSeedContent(array) {
@@ -180,9 +184,10 @@ function Voice(props) {
   // }
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(userHabits);
     userSuccessRecords();
-    fetchVoiceOfWisdom()
-    messageDispatch();
+    // fetchVoiceOfWisdom()
+    // messageDispatch();
   };
 
   const handleClick = (mood) => {
@@ -191,8 +196,8 @@ function Voice(props) {
     setLoading(true);
     handleSubmit();
     // console.log(e.target)
-    setMood(mood)
-    console.log(mood)
+    setMood(mood);
+    // console.log(mood)
   };
 
   return (
@@ -221,14 +226,18 @@ function Voice(props) {
             <>
               <button
                 style={active ? styles.disabled : styles.blueButton}
-                onClick={() => { handleClick("nice");}}
+                onClick={() => {
+                  handleClick("nice");
+                }}
                 disabled={active}
               >
                 Nice
               </button>
               <button
                 style={active ? styles.disabled : styles.redButton}
-                onClick={() => {handleClick("mean")}}
+                onClick={() => {
+                  handleClick("mean");
+                }}
                 disabled={active}
               >
                 Mean

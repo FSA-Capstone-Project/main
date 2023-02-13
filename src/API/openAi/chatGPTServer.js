@@ -1,6 +1,7 @@
-
 const OpenAI = require("openai");
 const { Configuration, OpenAIApi } = OpenAI;
+const dotenv = require("dotenv");
+dotenv.config();
 
 const express = require("express");
 const fs = require("fs");
@@ -12,18 +13,13 @@ const morgan = require("morgan");
 // const exif = require('exif-reader')
 // const Jimp = require("jimp");
 
-
-
-
-app.use(morgan("dev"))
-
-const dotenv = require("dotenv");
-dotenv.config();
+app.use(morgan("dev"));
 
 const configuration = new Configuration({
   organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
-  apiKey: "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",
+  apiKey: "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",
 });
+
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
 
@@ -32,40 +28,40 @@ app.use(cors());
 
 app.post("/text-completion", async (req, res) => {
   const { message } = req.body;
-  console.log(message, 'text-completion')
-const response = await openai.createCompletion({
-model: "text-davinci-003",
-prompt: ` ${message}`,
-max_tokens: 1000,
-temperature: 0,
-});
-console.log(response.data);
-if (response.data.choices[0].text) {
-res.json({
-message: response.data.choices[0].text,
-});
-}
+  console.log(message, "text-completion");
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: ` ${message}`,
+    max_tokens: 1000,
+    temperature: 0,
+  });
+  console.log(response.data);
+  if (response.data.choices[0].text) {
+    res.json({
+      message: response.data.choices[0].text,
+    });
+  }
 });
 
 app.post("/image-generation", async (req, res) => {
   const { message } = req.body;
-  const {user} = req.body;
+  const { user } = req.body;
   console.log(message);
 
   try {
     const response = await openai.createImage({
       prompt: message,
       n: 1,
-      size: "256x256",
+      size: "512x512",
     });
     const url = response.data.data[0].url;
     res.json({
       data: url,
     });
     const imgResult = await fetch(url);
-     const blob = await imgResult.blob();
-     const buffer = Buffer.from(await blob.arrayBuffer());
-     fs.writeFileSync(`./img/${user}-profileImage${Date.now()}.png`, buffer);
+    const blob = await imgResult.blob();
+    const buffer = Buffer.from(await blob.arrayBuffer());
+    fs.writeFileSync(`./img/${user}-profileImage${Date.now()}.png`, buffer);
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -74,10 +70,39 @@ app.post("/image-generation", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-console.log(`Server started on port ${port}`);
-});
+// app.post("/image-enhance", async (req, res) => {
+//   const { message } = req.body;
+//   const { user } = req.body;
+//   console.log(message);
 
+//   try {
+//     const response = await openai.createImageVariation({
+//       createReeadStream(``)
+//       prompt: message,
+//       n: 1,
+//       size: "1024x1024",
+//     });
+//     const url = response.data.data[0].url;
+//     res.json({
+//       data: url,
+//     });
+//     const imgResult = await fetch(url);
+//     const blob = await imgResult.blob();
+//     const buffer = Buffer.from(await blob.arrayBuffer());
+//     fs.writeFileSync(`./img/${user}-profileImage${Date.now()}.png`, buffer);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({
+//       message: "An error occurred while generating the image",
+//     });
+//   }
+// });
+
+
+
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
 
 /*
 
@@ -101,7 +126,6 @@ Jimp.read("./static/GFG_IMG.png", function (err, image) {
 });
 
 */
-
 
 /*
 
