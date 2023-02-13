@@ -52,7 +52,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "gpt-server": "node ./src/API/openAi",
+    "gpt-server": "node ./src/API/openAi/chatGPTServer",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode=development",
     "watch": "webpack --watch",
