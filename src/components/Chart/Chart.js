@@ -5,16 +5,14 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material/";
 
 const Chart = (props) => {
+  const [progress, setProgress] = useState(0)
+  const [goal, setGoal] = useState(0)
+  const [percentDone, setPercentDone] = useState(0)
 
-
-    const [progress, setProgress] = useState(0)
-    const [goal, setGoal] = useState(0)
-    const [percentDone, setPercentDone] = useState(0)
-
-    const getData = async () => {
-      const docRef = doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
+  const getData = async () => {
+  const docRef = doc(db, "users", `${auth.currentUser.email}`, "habits", `${props.habit}`);
+  const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
         let runProgress = docSnap.data().progress;
         let goal = docSnap.data().goal;
         setProgress(runProgress)
@@ -23,15 +21,14 @@ const Chart = (props) => {
       }
     }
 
-    getData();
+  getData();
 
-    return (
-        <Box sx={{ height:'25rem', width:'45rem', display: "flex", bgcolor: 'lightgrey', borderRadius:'12px' }}>
-          <CircularProgress variant="determinate" value={percentDone} />
-          <p style={{color:'white'}}>{props.title}</p>
-        </Box>
-
-    )
+  return (
+    <Box sx={{ height:'25rem', width:'45rem', display: "flex", bgcolor: 'lightgrey', borderRadius:'12px' }}>
+      <CircularProgress variant="determinate" value={percentDone} />
+        <p style={{color:'white'}}>{props.title}</p>
+    </Box>
+  );
 }
 
 export default Chart;

@@ -10,7 +10,6 @@ function TrackedApps() {
   return (
     <>
     <Box>
-
       <Grid
         container
         justifyContent="space-around"
@@ -20,7 +19,6 @@ function TrackedApps() {
         margin="auto"
         direction={largeScreen ? "row" : "column"}
         >
-          
         <Grid item xs={6} borderRadius="15px" height="300px">
           <Box marginLeft="5rem">
             <img src={dashLogo} />
@@ -40,7 +38,7 @@ function TrackedApps() {
         </Grid>
       </Grid>
     </Box>
-          </>
+  </>
   );
 }
 

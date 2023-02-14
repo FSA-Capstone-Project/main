@@ -3,19 +3,11 @@ import {
   Box,
   Typography,
   TextField,
-  OutlinedInput,
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  Button,
 } from "@mui/material/";
 import { alpha, styled } from "@mui/material/styles";
 import { auth, app } from "../../firebase";
 import Avatar from "@mui/material/Avatar";
 import ImageUploader from "./ImageUploader";
-import profile from "../../illustration/profile.svg";
-import EmailIcon from "@mui/icons-material/Email";
-import Picture from "../../API/openAi/Picture";
 import "./Profile.css";
 
 const Profile = () => {
@@ -93,7 +85,6 @@ const Profile = () => {
       <Box
         sx={{
           display: "flex",
-
           height: "100vh",
           width: "100vw",
         }}
@@ -102,12 +93,11 @@ const Profile = () => {
           sx={{
             height: "100vh",
             width: "50%",
-            // bgcolor:'grey',
             padding: "4rem",
             marginLeft: "4rem",
           }}
         >
-          {/* header */}
+          {/* Header */}
           <Box>
             <Typography variant="h1"> {name} </Typography>
           </Box>
@@ -168,99 +158,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-// <Box
-// sx={{
-//   display: "flex",
-//   flexDirection: "column",
-//   bgcolor: "white",
-//   border: "2px solid grey",
-//   borderRadius: "15px",
-//   alignItems: "center",
-//   justifyContent: "space-around",
-//   height: "40rem",
-//   width: "60rem",
-//   backgroundImage: "linear-gradient(20deg, #2087f7 0%, #3358f4 100%)",
-//   boxShadow: "3px 3px 20px black",
-// }}
-// >
-
-// <Avatar src={user.photoURL} sx={{ width: 150, height: 150 }} />
-// <ImageUploader />
-// <Box>Name: {name}</Box>
-// <Box>Age: {age}</Box>
-// <Box>Phone: {phone}</Box>
-// <Box>Email: {auth.currentUser.email}</Box>
-// <Box>Habits: {habits.length}</Box>
-// <Box>Joined: {(auth.currentUser.metadata.creationTime).slice(0,16)}</Box>
-
-// </Box>
-
-// <Box
-// marginTop="3rem"
-// display="flex"
-// flexDirection="column"
-// bgcolor="#94a1b2"
-// borderRadius="9px"
-// height="400px"
-// paddingLeft="2rem"
-// >
-// <Typography variant="h3">{name} </Typography>
-
-// <FormControl sx={{ width: "50%" }}>
-//   <InputLabel htmlFor="outlined-adornment-amount">Email</InputLabel>
-//   <OutlinedInput
-//     id="outlined-adornment-amount"
-//     placeholder={email}
-//     startAdornment={
-//       <InputAdornment position="start">
-//         <EmailIcon />
-//       </InputAdornment>
-//     }
-//     label="Amount"
-//   />
-// </FormControl>
-
-// <TextField
-//   sx={{ width: "50%", mt: "2rem" }}
-//   id="outlined-number"
-//   label="Phone Number"
-//   type="number"
-//   placeholder={phone}
-//   InputLabelProps={
-//     {
-//       // shrink: true,
-//     }
-//   }
-// />
-
-// <TextField
-//   sx={{ width: "25%", mt: "2rem" }}
-//   id="outlined-number"
-//   label="age"
-//   type="number"
-//   placeholder={age}
-//   InputLabelProps={
-//     {
-//       // shrink: true,
-//     }
-//   }
-// />
-// <Typography sx={{ color: "#16161a" }} mt="3rem" variant="h5">
-//   Date Joined: {auth.currentUser.metadata.creationTime.slice(0, 16)}
-// </Typography>
-// </Box>
-
-// </Box>
-
-// <Box
-// sx={{
-// height: "100vh",
-// width: "50%",
-// display: "flex",
-// alignItems: "center",
-// // bgcolor:'orange'
-// }}
-// >
-// <img src={profile}></img>
-// </Box>

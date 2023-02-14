@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { auth, app } from "../../firebase";
 import Grid from "@mui/material/Grid";
-import { AddHabit } from "../../components";
 import { Button, Box, Typography } from "@mui/material";
-import GaugeContainer from "../Dashboard/GaugeContainer";
 import UpdateHabit from "../UpdateHabit/UpdateHabit";
 import Header from "../Header";
 import SmallGuage from "../Guages/SmallGuage";
@@ -11,11 +9,10 @@ import allHabitsLogo from '../../illustration/allHabitsLogo.svg'
 
 const AllHabits = ({ view }) => {
   const [habits, setHabits] = useState([]);
-  const [showForm, setShowForm] = useState(false);
   const [selectedHabit, setSelectedHabit] = useState({});
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const title = "All Habit";
-  // console.log(setShowUpdateForm, showUpdateForm)
+
   useEffect(() => {
     const data = [];
     app
@@ -36,7 +33,7 @@ const AllHabits = ({ view }) => {
           setHabits(data);
         });
       });
-  }, []);
+  }, [habits]);
 
   const changeHabit = (habit) => {
     setSelectedHabit(habit);
@@ -51,7 +48,6 @@ const AllHabits = ({ view }) => {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        // overflow: "auto",
       }}
     >
         <Header title={title} />
@@ -85,7 +81,6 @@ const AllHabits = ({ view }) => {
                       goal={habit.goal}
                     />
                   </Box>
-                    {/* {console.log(habit)} */}
                     <Button
                       size="small"
                       variant="contained"
@@ -117,7 +112,7 @@ const AllHabits = ({ view }) => {
         {/* page right side */}
         <Box width="50%" position='fixed' right='0px' top='300px' >
           <img src={allHabitsLogo} alt="" />
-          {/* <Typography variant="h1" position='absolute'>right</Typography> */}
+        {/* <Typography variant="h1" position='absolute'>right</Typography> */}
         </Box>
       </Box>
     </Box>

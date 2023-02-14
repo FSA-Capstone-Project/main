@@ -31,9 +31,8 @@ const AddHabit = () => {
   };
 
   return (
-    <Box // login-card
+    <Box
       display="flex"
-      // flexDirection="column"
       alignItems="center"
       justifyContent="center"
     >
@@ -61,7 +60,6 @@ const AddHabit = () => {
           type="text"
           onChange={handleChange}
           value={input.title}
-          // inputProps={{ type: "text", value: input.title }}
         />
 
         <LocalizationProvider dateAdapter={AdapterDayjs} style={{ backgroundColor: "#fffffe"}}>
@@ -78,9 +76,7 @@ const AddHabit = () => {
                 sx={{
                   bgcolor: "#fffffe",
                   borderRadius: "9px",
-
                   input: { color: '#fff' },
-                  // input: { color },
                   label: { color: 'white'  },
                 }}
                 {...params}
@@ -98,7 +94,6 @@ const AddHabit = () => {
           type="number"
           onChange={handleChange}
           value={input.goal}
-          // inputProps={{ type: "number", value: input.goal }}
         />
 
         <TextField
@@ -110,7 +105,6 @@ const AddHabit = () => {
           onChange={handleChange}
           value={input.progress}
           type="number"
-          // inputProps={{ type: "number", value: input.progress }}
         />
 
         <Button

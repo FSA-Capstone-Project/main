@@ -18,7 +18,6 @@ const Login = ({ switchForm }) => {
   // SIGN UP ==========
   const handleSignUp = (e) => {
     e.preventDefault();
-    console.log("form switched");
     switchForm();
   };
 
@@ -37,7 +36,6 @@ const Login = ({ switchForm }) => {
       .signInWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        console.log(`Logged in with: ${user.email}`);
         navigate("/home");
       })
       .catch((error) => alert(error.message));
@@ -59,7 +57,6 @@ const Login = ({ switchForm }) => {
         bgcolor="#16161a"
         borderRadius="15px"
         alignItems="center"
-        // justifyContent="center"
         height="550px"
         width="900px"
       >
@@ -91,7 +88,6 @@ const Login = ({ switchForm }) => {
         />
 
         <TextField //password
-          // color="primary"
           variant="outlined"
           size="small"
           sx={{ margin: 1, bgcolor: "#fffffe", borderRadius: "9px" }}
@@ -111,7 +107,6 @@ const Login = ({ switchForm }) => {
           Login
         </Button>
         <Box
-          // bgcolor='red'
           display="flex"
         >
           <Typography variant="darktext" sx={{ fontSize: "15px" }}>

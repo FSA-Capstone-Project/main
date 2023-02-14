@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Grid } from "@mui/material/";
 
 const MemoryGame = () => {
-  // const [order, setOrder] = useState([]);
   const [clicks, setClicks] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
   const [level, setLevel] = useState(1);
   const [gameOver, setGameOver] = useState(true);
   const [order, setOrder] = useState({});
-  // const [pingingBoxes, setPingingBoxes] = useState(true);
 
   useEffect(() => {
     if (gameStarted) {
@@ -17,15 +15,12 @@ const MemoryGame = () => {
   }, [gameStarted]);
 
   const startGame = () => {
-    // setPingingBoxes(true);
     setGameStarted(true);
     setGameOver(false);
     order[0] = Math.floor(Math.random() * 9);
-    console.log(order, "STARTGAMEorder");
   };
 
   const stopGame = () => {
-    // setPingingBoxes(false);
     setGameStarted(false);
     setGameOver(true);
     setOrder({});
@@ -149,7 +144,6 @@ const MemoryGame = () => {
               );
             })}
         <Box
-          // center the button to be in the middle of the grid
           display="flex"
           justifyContent="center"
           alignItems="center"
