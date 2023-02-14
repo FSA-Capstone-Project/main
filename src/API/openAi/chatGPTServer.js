@@ -1,7 +1,7 @@
 const OpenAI = require("openai");
 const { Configuration, OpenAIApi } = OpenAI;
-const dotenv = require("dotenv");
-dotenv.config();
+// const dotenv = require("dotenv");
+// dotenv.config();
 
 const express = require("express");
 const fs = require("fs");
@@ -17,7 +17,7 @@ app.use(morgan("dev"));
 
 const configuration = new Configuration({
   organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
@@ -25,12 +25,15 @@ const openai = new OpenAIApi(configuration);
 app.use(bodyParser.json());
 app.use(cors());
 app.post("/text-completion", async (req, res) => {
-  const { message } = req.body;
-  console.log(message, "text-completion");
+  // const { message } = req.body;
+  const { habitStr, usedPhrases } = req.body;
+  // console.log(message, "text-completion");
+  console.log(habitStr, "habitStr-SERVER");
+  console.log(usedPhrases, "usedPhrases-SERVER");
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: ` ${message}`,
-    max_tokens: 1000,
+    prompt: `1: look at this json string, 2: read these usedPhrases= ${usedPhrases}, 3: read these user's habits = ${habitStr}, 4: write a sentence that: a) starts with a greeting (OpenAi,  use current time to determine if it is morning or afternoon, and conjugate verbs apropiately so the sentence is in corrgrect gramatical English), b) is at least 30% differente from the usedPhrases, c)  The sentence should congratrulates the user for its progress (OpenAi be especific wiht the title of the goal with the greates progress), and if there is any tittle with a due date greather than today, notifiy the user that they need to work on that specific tittle.`,
+    max_tokens: 100,
     temperature: 0,
   });
   console.log(response.data);
@@ -40,6 +43,7 @@ app.post("/text-completion", async (req, res) => {
     });
   }
 });
+
 app.post("/image-generation", async (req, res) => {
   const { message } = req.body;
   const { user } = req.body;
