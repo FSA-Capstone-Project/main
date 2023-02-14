@@ -7,8 +7,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const UpdateHabit = ({ habit, setHabit, setShowUpdateForm, showUpdateForm }) => {
-  console.log(setShowUpdateForm)
-  console.log(showUpdateForm)
   const [input, setInput] = useState({
     title: habit.title,
     goal: habit.goal,
@@ -16,7 +14,6 @@ const UpdateHabit = ({ habit, setHabit, setShowUpdateForm, showUpdateForm }) => 
     due: habit.due,
   });
   const [date, setDate] = useState(habit.due);
-  // console.log(date)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -68,9 +65,8 @@ const UpdateHabit = ({ habit, setHabit, setShowUpdateForm, showUpdateForm }) => 
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box // login-card
+      <Box
         display="flex"
-        // flexDirection="column"
         alignItems="center"
         justifyContent="center"
         >
@@ -138,7 +134,6 @@ const UpdateHabit = ({ habit, setHabit, setShowUpdateForm, showUpdateForm }) => 
               style: {color: "#7f5af0" },
             }}
             onChange={(newValue) => {
-              // console.log(newValue.$d)
               setDate(newValue.$d);
 
             }}

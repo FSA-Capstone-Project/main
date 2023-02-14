@@ -39,7 +39,6 @@ const Navbar = ({setDisplay}) => {
   return (
     <Box sx={{display:'flex' , backgroundImage:"linear-gradient(20deg, #2087f7 0%, #3358f4 100%)"}}>
     <Sidebar
-        // borderRadius='3rem'
       defaultCollapsed="true"
 
       onMouseOver={() => collapseSidebar(setSidebarIsOpen(true))}
@@ -58,10 +57,8 @@ const Navbar = ({setDisplay}) => {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          // do a media query based on the sidebar being collapsed??
           height={sidebarIsOpen === true ? "12.5rem" : "4.5rem"}
           width={sidebarIsOpen === true ? "12.5rem" : "4.5rem"}
-
           bgcolor="#3358f4"
           boxShadow="0px 0px 12px #94a1b2"
         >

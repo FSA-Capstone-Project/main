@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-//this gives a css starter for mui
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { ProSidebarProvider } from "react-pro-sidebar";
 
@@ -68,12 +67,8 @@ const theme = createTheme({
           }
         }
       }
-
     }
-
-
 });
-
 
 
 root.render(

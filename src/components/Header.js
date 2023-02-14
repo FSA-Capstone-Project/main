@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { auth, app } from "../firebase";
-// import Robot from "../API/openAi/chatGPT";
 import {useMediaQuery} from "@mui/material/";
 import { AddHabit } from "../components";
 import { Modal, Button } from "@mui/material";
@@ -11,8 +10,6 @@ const Header = ({title}) => {
   const [name, setName] = useState("");
   const largeScreen = useMediaQuery(theme => theme.breakpoints.up('md'));
   const [showForm, setShowForm] = useState(false);
-  // const [habits, setHabits] = useState([]);
-
 
   useEffect(() => {
     app

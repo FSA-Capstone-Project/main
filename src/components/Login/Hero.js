@@ -1,9 +1,10 @@
 import React from 'react'
-import { Box, Typography, Card, CardMedia, Paper } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import backgroundimg from '../../illustration/backgroundimg.png'
 import herologo from '../../illustration/herologo.svg'
 
 function Hero() {
+
   return (
   <Box
   bgcolor="#16161a"
@@ -12,16 +13,11 @@ function Hero() {
    width='100vw'
     sx={{backgroundImage: `url(${backgroundimg})`, width:'100%'}}
    >
-
-
-
-
     {/* left side */}
       <Box
         width='50%'
         marginTop='3rem'
       >
-
         <Typography variant='h1'
          margin='auto'
          marginTop='3rem'
@@ -35,8 +31,6 @@ function Hero() {
           variant='h2'
           >Your goals shape your actions, and you actions shape your future</Typography>
 
-
-
         <Typography
         sx={{color: "#16161a"}}
         variant='h5'
@@ -44,7 +38,6 @@ function Hero() {
         marginTop='2rem'
         width='75%'
         > MindMaster provides the goal tracking you need to help to help you achive the life you want</Typography>
-
 
       </Box>
     {/* right side */}
@@ -57,7 +50,7 @@ function Hero() {
           <img src={herologo} alt="" />
          </Box>
   </Box>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

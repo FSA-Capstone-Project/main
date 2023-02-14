@@ -3,9 +3,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Box, Typography } from "@mui/material/";
 
 const SmallGuage = (props) => {
-  // const [progress, setProgress] = useState(0);
-  // const [goal, setGoal] = useState(0);
-  // const [percentDone, setPercentDone] = useState(0);
   const today = new Date();
 
   return (
@@ -53,7 +50,6 @@ const SmallGuage = (props) => {
           component="div"
           color="white"
         >
-
         </Typography>
       </Box>
     </Box>

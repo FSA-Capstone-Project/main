@@ -20,9 +20,6 @@ const LoginForm = () => {
     setLoginForm(!toggleLoginForm);
   };
 
-  //for styling.. the whole dom needs a bg color and each componentent will
-  // be colored to give contrast
-
   return (
     <>
       <Box bgcolor="#1e1e2b" height='200vh'>
@@ -31,7 +28,6 @@ const LoginForm = () => {
         ) : (
           <SignUp switchForm={switchForm} />
         )}
-        {/*  */}
         <Hero />
       </Box>
     </>

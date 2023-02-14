@@ -17,7 +17,6 @@ const LiquidGuage = () => {
     const unsub = onSnapshot(
       doc(db, "users", `${auth.currentUser.email}`, "habits", "Water"),
       (doc) => {
-        // console.log("Current data: ", doc.data());
         setProg(doc.data().progress);
         setGoal(doc.data().goal);
         setPercentDone((prog / goal) * 100);

@@ -5,10 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { AuthProvider } from "./components/Auth";
-// import AllHabits from "./components/AllHabits/AllHabits";
 
 const AppRoutes = () => {
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,8 +22,6 @@ const AppRoutes = () => {
 
 
   return (
-
-
       <AuthProvider>
         {auth && auth.currentUser ? (
           <Routes>
@@ -37,8 +33,6 @@ const AppRoutes = () => {
           </Routes>
         )}
       </AuthProvider>
-
-
   );
 };
 
