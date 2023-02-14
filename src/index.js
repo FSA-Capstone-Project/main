@@ -59,6 +59,14 @@ const theme = createTheme({
 
           }
         }
+      },
+      MuiInputBase: {
+        styleOverrides: {
+          determinate:{
+            color: 'red',
+
+          }
+        }
       }
 
     }
