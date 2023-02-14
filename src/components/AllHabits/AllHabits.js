@@ -15,7 +15,7 @@ const AllHabits = ({ view }) => {
   const [selectedHabit, setSelectedHabit] = useState({});
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const title = "All Habit";
-
+  // console.log(setShowUpdateForm, showUpdateForm)
   useEffect(() => {
     const data = [];
     app
@@ -102,7 +102,7 @@ const AllHabits = ({ view }) => {
                     Update
                     {/* {`${Math.round((habit.progress / habit.goal) * 100)}%`} */}
                   </Button>
-                    {showUpdateForm && selectedHabit === habit && <UpdateHabit habit={selectedHabit} />}
+                    {showUpdateForm && selectedHabit === habit && <UpdateHabit habit={selectedHabit} setShowUpdateForm={setShowUpdateForm} showUpdateForm={showUpdateForm} />}
                   </Grid>
               ))
             ) : (
