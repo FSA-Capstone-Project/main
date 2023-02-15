@@ -14,7 +14,6 @@ import bgImg from '../../illustration/bgImg.png'
 
 const Home = () => {
   const [view, setView] = useState("Dashboard");
-
   const { collapseSidebar, collapsed, defaultCollapsed } = useProSidebar();
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
@@ -45,15 +44,12 @@ const Home = () => {
 
         {view === "Dashboard" ? (
           <Box  width='100vw' height='100vh'>
-
             <Dashboard />
           </Box>
         ) : null}
 
         {view === "Allhabits" ? (
-          // <Box>
             <AllHabits />
-          // </Box>
         ) : null}
 
         {view === "Calendar" ? (

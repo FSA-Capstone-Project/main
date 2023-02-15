@@ -12,7 +12,7 @@ function GaugeContainer() {
 
   const updateProgress = (prog)=>{
    setProgress(prog)
-  }
+  };
 
   useEffect(() => {
     const data = [];
@@ -41,7 +41,6 @@ function GaugeContainer() {
     <Box>
       <Grid
         container
-        // justifyContent="space-around"
         spacing={2}
         xs={12}
         md={10}
@@ -79,7 +78,7 @@ function GaugeContainer() {
             <Box>
               Welcome! We've started you off with your first Habit to the right!
               Here, you can track your water intake throughout the day. When you
-              get to 100%, reset the guage and start again tomorrow!
+              get to 100%, reset the gauge and start again tomorrow!
             </Box>
           </Box>
         )}

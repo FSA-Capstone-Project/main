@@ -13,7 +13,6 @@ const LargeGuage = (props) => {
   const percentDone = Math.round((props.progress / props.goal) * 100);
   let [prog, setProg] = useState(props.progress);
   const updatProg = props.fn;
-  // console.log(prog)
 
   const handleAdd = async () => {
     const docRef = app

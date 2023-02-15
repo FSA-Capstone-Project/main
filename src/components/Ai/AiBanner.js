@@ -1,45 +1,74 @@
-// create a react component that will render a div with class name "AiBanner", and then render the AiBanner component inside of it. this will use mateiral ui to render the banner using a <Box></Box>.
-
 import React from "react";
-import { Box, LinearProgress } from "@mui/material";
-import { db, app, auth } from "../../firebase";
+import { db, auth } from "../../firebase";
 import { useEffect, useState } from "react";
-import textAiCall from "../../API/openAi/aICall";
+import { Button } from "@mui/material";
 
 const AiBanner = () => {
   const [response, setResponse] = useState("");
-    const [userInfo, setUserInfo] = useState({});
-    const [messageAi, setMessageAi] = useState("");
+  const [userInfo, setUserInfo] = useState({});
+  const [userHabits, setUserHabits] = useState([]);
 
-  const [loading, setLoading] = useState(true);
+  const [pastResponses, setPastResponses] = useState([]);
 
   async function fetchUserInfo() {
-    const userInfo = db
-      .collection("users")
-      .doc(`${auth.currentUser.email}`);
+    const userInfo = db.collection("users").doc(`${auth.currentUser.email}`);
     const data = await userInfo.get();
     setUserInfo(data.data());
   }
 
+  async function fetchUserHabits() {
+    const habits = [];
+    const userHabits = await db
+      .collection("users")
+      .doc(`${auth.currentUser.email}`)
+      .collection("habits");
+    const data = await userHabits.get();
+    data.forEach((doc) => {
+      let habit = {
+        id: doc.id,
+        title: doc.data().title,
+        goal: doc.data().goal,
+        progress: doc.data().progress,
+      };
+      habits.push(habit);
+      setUserHabits(habits);
+    });
+  }
+
+  async function aIBannerLine() {
+    const habitStr = JSON.stringify(userHabits);
+    const usedPhrases = JSON.stringify(pastResponses);
+    const user = JSON.stringify(userInfo.name);
+    fetch("http://localhost:3002/text-completion", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ habitStr, usedPhrases, user }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setResponse(data.message);
+        setPastResponses([...pastResponses, data.message]);
+      });
+  }
+
   useEffect(() => {
     fetchUserInfo();
+    fetchUserHabits();
   }, []);
 
   useEffect(() => {
-    setLoading(false);
-  }, [userInfo]);
+    aIBannerLine();
+  }, [userHabits]);
 
-  return (
-    <Box>
-      {loading ? (
-        <Box sx={{ width: "10%" }}>
-          <LinearProgress />
-        </Box>
-      ) : (
-        <h2 style={{ color: "blue" }}>{userInfo.name}</h2>
-      )}
-    </Box>
-  );
+  const handleRefresh = (e) => {
+    e.preventDefault();
+
+    aIBannerLine();
+  };
+
+  return <Button onClick={handleRefresh}>{response}</Button>;
 };
 
 export default AiBanner;

@@ -1,4 +1,4 @@
-button{
+  button{
     display:flex;
     justify-content: center;
     align-items: center;
@@ -13,11 +13,11 @@ button{
     transition-duration: 0.4s;
     -webkit-transition-duration: 0.4s; /* Safari */
   }
-  
+
   button:hover {
     transition-duration: 0.1s;
   }
-  
+
   button:after {
     display:flex;
     justify-content: center;
@@ -32,7 +32,7 @@ button{
     transition: all 0.5s;
     box-shadow: 0 0 10px 40px white;
   }
-  
+
   button:active:after {
     display:flex;
     justify-content: center;
@@ -45,7 +45,7 @@ button{
     opacity: 1;
     transition: 0s;
   }
-  
+
   button:active {
     top: 1px;
   }
@@ -65,11 +65,11 @@ button{
     transition-duration: 0.4s;
     -webkit-transition-duration: 0.4s; /* Safari */
   }
-  
+
   .addWater:hover {
     transition-duration: 0.1s;
   }
-  
+
   .addWater:after {
     display:flex;
     justify-content: center;
@@ -84,7 +84,7 @@ button{
     transition: all 0.5s;
     box-shadow: 0 0 10px 40px white;
   }
-  
+
   .addWater:active:after {
     display:flex;
     justify-content: center;
@@ -97,7 +97,7 @@ button{
     opacity: 1;
     transition: 0s;
   }
-  
+
   .addWater:active {
     top: 1px;
   }
