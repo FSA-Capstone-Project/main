@@ -17,22 +17,24 @@ app.use(morgan("dev"));
 
 const configuration = new Configuration({
   organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
-  apiKey: "API KEY HERE",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
 app.use(bodyParser.json());
 app.use(cors());
+const time = new Date();
 app.post("/text-completion", async (req, res) => {
   // const { message } = req.body;
   const { habitStr, usedPhrases, user } = req.body;
   // console.log(message, "text-completion");
   console.log(habitStr, "habitStr-SERVER");
   console.log(usedPhrases, "usedPhrases-SERVER");
+  console.log(time, "time-SERVER");
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: `1: look at this json string, 2: read these usedPhrases= ${usedPhrases}, 3: read these user's habits = ${habitStr}, 4: write a sentence that: a) starts with a greeting addressed to ${user}(OpenAi,  use current time to determine if it is morning or afternoon, and conjugate verbs apropiately so the sentence is in corrgrect gramatical English), b) is at least 30% differente from the usedPhrases, c)  The sentence should congratrulates the user for its progress (OpenAi be especific wiht the title of the goal with the greates progress), and if there is any tittle with a due date greather than today, notifiy the user that they need to work on that specific tittle, d) does not exceed 140 characters in lenght (OpenAi, dont use "[]" or "{}" in the sentence)`,
+    prompt: `1: look at this json string, 2: read these usedPhrases= ${usedPhrases}, 3: read these user's habits = ${habitStr}, 4: write a sentence that: a) starts with a greeting addressed to ${user}(OpenAi,  use this timestam:${time} adjusted to US East Coast Time, to determine if it is morning or afternoon, and conjugate verbs apropiately so the sentence is in corrgrect gramatical English), b) is at least 30% differente from the usedPhrases, c)  The sentence should congratrulates the user for its progress (OpenAi be especific wiht the title of the goal with the greates progress), and if there is any tittle with a due date greather than today, notifiy the user that they need to work on that specific tittle, d) does not exceed 140 characters in lenght (OpenAi, dont use "[]" or "{}" in the sentence)`,
     max_tokens: 80,
     temperature: 0,
   });
