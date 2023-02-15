@@ -17,7 +17,7 @@ app.use(morgan("dev"));
 
 const configuration = new Configuration({
   organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
-  apiKey: "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",
+  apiKey: "KEY HERE",
 });
 
 const openai = new OpenAIApi(configuration);
@@ -45,9 +45,6 @@ app.post("/text-completion", async (req, res) => {
     });
   }
 });
-
-
-
 
 app.post("/image-generation", async (req, res) => {
   const { message } = req.body;
@@ -104,8 +101,6 @@ app.post("/image-generation", async (req, res) => {
 //     });
 //   }
 // });
-
-
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
