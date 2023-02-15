@@ -3,9 +3,7 @@ import Header from "../Header";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
 import { Grid, Box } from "@mui/material";
-import Picture from '../../API/openAi/Picture'
-import Voice from '../../API/openAi/aIServices'
-import AiBanner from '../Ai/AiBanner'
+import Picture from "../../../src/API/openAi/Picture.js"
 
 
 const Dashboard = () => {
@@ -17,13 +15,8 @@ const Dashboard = () => {
         {/* First Row */}
             <Grid item xs={12} md={12} >
           <Header title={title} zIndex='100' />
-          <Voice />
-          <Picture />
-          <AiBanner/>
             </Grid>
             <Box ml='3rem'>
-
-            {/* <Picture /> */}
             </Box>
         {/* Second Row */}
         <Grid item xs={12} md={12}>

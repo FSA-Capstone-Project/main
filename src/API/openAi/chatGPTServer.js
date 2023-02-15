@@ -17,7 +17,7 @@ app.use(morgan("dev"));
 
 const configuration = new Configuration({
   organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
-  apiKey: "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",
+  apiKey: "API KEY HERE",
 });
 
 const openai = new OpenAIApi(configuration);
@@ -50,21 +50,23 @@ app.post("/text-completion", async (req, res) => {
 app.post("/image-generation", async (req, res) => {
   const { message } = req.body;
   const { user } = req.body;
+  const photoName = `${user}-profileImage${Date.now()}.png`;
   console.log(message);
   try {
     const response = await openai.createImage({
       prompt: message,
       n: 1,
-      size: "512x512",
+      size: "256x256",
     });
     const url = response.data.data[0].url;
     res.json({
       data: url,
+      photoName: photoName,
     });
     const imgResult = await fetch(url);
     const blob = await imgResult.blob();
     const buffer = Buffer.from(await blob.arrayBuffer());
-    fs.writeFileSync(`./img/${user}-profileImage${Date.now()}.png`, buffer);
+    fs.writeFileSync(`./img/${photoName}`, buffer);
   } catch (error) {
     console.error(error);
     res.status(500).json({

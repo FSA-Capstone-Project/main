@@ -68,7 +68,20 @@ const AiBanner = () => {
     aIBannerLine();
   };
 
-  return <Button onClick={handleRefresh}>{response}</Button>;
+  return (
+    <Button
+      onClick={handleRefresh}
+      style={{
+        maxWidth: "1200px",
+        maxHeight: "100px",
+        minWidth: "600px",
+        minHeight: "30px",
+        color: "white"
+      }}
+    >
+      {response}
+    </Button>
+  );
 };
 
 export default AiBanner;
