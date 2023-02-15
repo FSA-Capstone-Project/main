@@ -3,7 +3,8 @@ import Header from "../Header";
 import TrackedApps from "./TrackedApps";
 import GaugeContainer from "./GaugeContainer";
 import { Grid, Box } from "@mui/material";
-import Picture from '../../API/openAi/Picture'
+import Picture from "../../../src/API/openAi/Picture.js"
+
 
 const Dashboard = () => {
   const title = 'Analytics'
@@ -12,12 +13,11 @@ const Dashboard = () => {
     <>
       <Grid container spacing={2}  width='100%' >
         {/* First Row */}
-        <Grid item xs={12} md={12} >
-          <Header title={title} zIndex='100'/>
-        </Grid>
-        <Box ml='3rem'>
-          {/* <Picture /> */}
-        </Box>
+            <Grid item xs={12} md={12} >
+          <Header title={title} zIndex='100' />
+            </Grid>
+            <Box ml='3rem'>
+            </Box>
         {/* Second Row */}
         <Grid item xs={12} md={12}>
           <TrackedApps />

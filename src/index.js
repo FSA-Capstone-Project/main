@@ -7,7 +7,6 @@ import App from "./App";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { ProSidebarProvider } from "react-pro-sidebar";
 
-
 const root = ReactDOM.createRoot(
   document.getElementById("root")
 );

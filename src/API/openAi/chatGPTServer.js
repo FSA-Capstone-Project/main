@@ -1,5 +1,8 @@
 const OpenAI = require("openai");
 const { Configuration, OpenAIApi } = OpenAI;
+// const dotenv = require("dotenv");
+// dotenv.config();
+
 const express = require("express");
 const fs = require("fs");
 const bodyParser = require("body-parser");
@@ -9,39 +12,45 @@ const port = 3002;
 const morgan = require("morgan");
 // const exif = require('exif-reader')
 // const Jimp = require("jimp");
-app.use(morgan("dev"))
-const dotenv = require("dotenv");
-dotenv.config();
+
+app.use(morgan("dev"));
+
 const configuration = new Configuration({
-
-
-organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
-apiKey: "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",
-
+  organization: "org-F8gnCWqLm2Z0XnvRXdVzLGTx",
+  apiKey: "API KEY HERE",
 });
+
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
 app.use(bodyParser.json());
 app.use(cors());
 app.post("/text-completion", async (req, res) => {
-  const { message } = req.body;
-  console.log(message, 'text-completion')
-const response = await openai.createCompletion({
-model: "text-davinci-003",
-prompt: `return this text the same way you receive it: ${message}`,
-max_tokens: 100,
-temperature: 0,
+  // const { message } = req.body;
+  const { habitStr, usedPhrases, user } = req.body;
+  // console.log(message, "text-completion");
+  console.log(habitStr, "habitStr-SERVER");
+  console.log(usedPhrases, "usedPhrases-SERVER");
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: `1: look at this json string, 2: read these usedPhrases= ${usedPhrases}, 3: read these user's habits = ${habitStr}, 4: write a sentence that: a) starts with a greeting addressed to ${user}(OpenAi,  use current time to determine if it is morning or afternoon, and conjugate verbs apropiately so the sentence is in corrgrect gramatical English), b) is at least 30% differente from the usedPhrases, c)  The sentence should congratrulates the user for its progress (OpenAi be especific wiht the title of the goal with the greates progress), and if there is any tittle with a due date greather than today, notifiy the user that they need to work on that specific tittle, d) does not exceed 140 characters in lenght (OpenAi, dont use "[]" or "{}" in the sentence)`,
+    max_tokens: 80,
+    temperature: 0,
+  });
+  console.log(response.data);
+  if (response.data.choices[0].text) {
+    res.json({
+      message: response.data.choices[0].text,
+    });
+  }
 });
-console.log(response.data);
-if (response.data.choices[0].text) {
-res.json({
-message: response.data.choices[0].text,
-});
-}
-});
+
+
+
+
 app.post("/image-generation", async (req, res) => {
   const { message } = req.body;
-  const {user} = req.body;
+  const { user } = req.body;
+  const photoName = `${user}-profileImage${Date.now()}.png`;
   console.log(message);
   try {
     const response = await openai.createImage({
@@ -52,11 +61,12 @@ app.post("/image-generation", async (req, res) => {
     const url = response.data.data[0].url;
     res.json({
       data: url,
+      photoName: photoName,
     });
     const imgResult = await fetch(url);
-     const blob = await imgResult.blob();
-     const buffer = Buffer.from(await blob.arrayBuffer());
-     fs.writeFileSync(`./img/${user}-profileImage${Date.now()}.png`, buffer);
+    const blob = await imgResult.blob();
+    const buffer = Buffer.from(await blob.arrayBuffer());
+    fs.writeFileSync(`./img/${photoName}`, buffer);
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -64,9 +74,41 @@ app.post("/image-generation", async (req, res) => {
     });
   }
 });
+
+// app.post("/image-enhance", async (req, res) => {
+//   const { message } = req.body;
+//   const { user } = req.body;
+//   console.log(message);
+
+//   try {
+//     const response = await openai.createImageVariation({
+//       createReeadStream(``)
+//       prompt: message,
+//       n: 1,
+//       size: "1024x1024",
+//     });
+//     const url = response.data.data[0].url;
+//     res.json({
+//       data: url,
+//     });
+//     const imgResult = await fetch(url);
+//     const blob = await imgResult.blob();
+//     const buffer = Buffer.from(await blob.arrayBuffer());
+//     fs.writeFileSync(`./img/${user}-profileImage${Date.now()}.png`, buffer);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({
+//       message: "An error occurred while generating the image",
+//     });
+//   }
+// });
+
+
+
 app.listen(port, () => {
-console.log(`Server started on port ${port}`);
+  console.log(`Server started on port ${port}`);
 });
+
 /*
 To convert PNG to JPEG
 const Jimp = require("jimp");
@@ -82,6 +124,7 @@ Jimp.read("./static/GFG_IMG.png", function (err, image) {
     image.write("./output/out.jpg");
 });
 */
+
 /*
 To read and write EXIF data
 const fs = require("fs");

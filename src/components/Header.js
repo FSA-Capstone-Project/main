@@ -5,6 +5,8 @@ import {useMediaQuery} from "@mui/material/";
 import { AddHabit } from "../components";
 import { Modal, Button } from "@mui/material";
 
+import AiBanner from "./Ai/AiBanner";
+
 
 const Header = ({title}) => {
   const [name, setName] = useState("");
@@ -48,7 +50,8 @@ const Header = ({title}) => {
         <Grid item xs={6} p="2rem">
           <Typography variant="h3" color="whitesmoke">{title} DashBoard</Typography>
           <Typography variant="darktext">
-            Welcome back, {name}. We've missed you!
+            {/* Welcome back, {name}. We've missed you! */}
+            <AiBanner />
           </Typography>
         </Grid>
         <Grid item xs={5} style={{ display: 'flex', justifyContent: 'flex-end' }}>
